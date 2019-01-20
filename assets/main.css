@@ -51,7 +51,7 @@ li {
 input[type='submit'],
 input[type='reset'],
 input[type='button'],
-button {
+button:not(.submit-message-button) {
   background: none;
   border: 0;
   color: inherit;
@@ -71,7 +71,7 @@ button::-moz-focus-inner {
   padding: 0;
 }
 
-button {
+button:not(.submit-message-button) {
   padding: 10px 30px;
   font-size: 13px;
   font-weight: 600;

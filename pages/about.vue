@@ -73,47 +73,61 @@
           <nuxt-link to="/sale" class="link-to-shop">Оставить заявку</nuxt-link>
         </div>
       </section>
-
       <footer>
         <section class="contact-us">
           <div class="contact-form">
             <h4>Напишите нам</h4>
-            <form action="../../libs/mail/telegram.php" method="POST">
+            <form action="../../libs/mail/telegram.php" method="POST" class="feedback-form">
               <div class="form-group">
                 <label>
                   <input type="text" class="form-control message-poiter-hidden" style="display: none" name="user_model" value="Armchairs">
                 </label>
               </div>
+
               <div class="form-group">
-                <label>
-                  <p>Name</p>
-                  <input type="text" class="form-control" id="" name="user_name" placeholder="Например, Иван">
-                </label>
+                <label for="user_name"></label>
+                  <input type="text" class="form-control" name="user_name" placeholder="Имя">
               </div>
               <div class="form-group">
-                <label>
-                  <p>Telephone number</p>
-                  <input type="text" class="form-control" id="" name="user_phone" placeholder="+38 (067) 99 99 999">
-                </label>
+                <label for="user_phone"></label>
+                  <input type="text" class="form-control" name="user_phone" placeholder="Номер телефона">
+
               </div>
               <div class="form-group">
-                <label>
-                  <p>Email</p>
-                  <input type="text" class="form-control" id="" name="user_email" placeholder="mail@mail.ru">
-                </label>
+                <label for="user_email"></label>
+                  <input type="text" class="form-control" name="user_email" placeholder="E-mail">
+
               </div>
               <div class="form-group">
-                <label for="">
-                  <p>Comment</p>
-                  <input type="text" class="form-control" id="" name="user_comment" placeholder="comment">
-                </label>
+                <label for="user_comment"></label>
+                  <input type="text" class="form-control" name="user_comment" placeholder="Комментарий">
               </div>
-              <button type="submit" class="btn btn-primary">Send</button>
+              <button type="submit" class="submit-message-button">Отправить</button>
 					  </form>
           </div>
-
           <div class="contacts">
-
+            <h4>Контакты</h4>
+            <div class="maps-location">
+              <h5>
+                <img src="../images/icons/map-point.svg" alt="Иконка номера для звонка">
+                Адрес
+              </h5>
+              <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2746.4951061720544!2d30.7215689!3d46.4983091!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c631c509279f4d%3A0xbf52593bac3bc3ba!2z0YPQuy4g0KfQtdGA0L3QvtC80L7RgNGB0LrQvtCz0L4g0JrQsNC30LDRh9C10YHRgtCy0LAsIDQsINCe0LTQtdGB0YHQsCwg0J7QtNC10YHRgdC60LDRjyDQvtCx0LvQsNGB0YLRjCwgNjUwMDA!5e0!3m2!1sru!2sua!4v1548017707196" width="100%" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </div>
+            <ul class="contacts-list">
+              <li class="contact-item">
+                <img src="../images/icons/telephone-call.svg" alt="Иконка номера для звонка">
+                +380 63–333–99–93
+              </li>
+              <li class="contact-item">
+                <img src="../images/icons/clock.svg" alt="Иконка рабочих часов">
+                Ежедневно 09:00 - 19:00
+              </li>
+              <li class="contact-item">
+                <img src="../images/icons/inst.svg" alt="Иконка связи в инстаграмм">
+                service.mobile_od
+              </li>
+            </ul>
           </div>
 
         </section>
@@ -230,21 +244,26 @@
 }
 
 .content-about h2 {
-  margin-bottom: 0.5em;
+  margin-bottom: 0.7em;
 }
 
 .content-about h3 {
   margin-bottom: 2.75em;
 }
 
-.link-to-shop {
+.content-about .link-to-shop {
   display: inline-block;
   padding: 10px 70px 10px 36px;
   font-size: 0.875em;
+  min-width: 50px;
   border-radius: 20px;
   border: 2px solid white;
   background: url(../images/icons/arrow-right-link.svg) no-repeat 90% 50%;
   background-color: rgba(255, 255, 255, 0.05);
+}
+
+.content-about .link-to-shop:hover {
+  border: 2px solid #ffc636;
 }
 
 .promo-section .mouse-scroll-down {
@@ -277,14 +296,101 @@
 
 footer {
   margin: 0 calc(65px+1.3em) 0 13%;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
   border-radius: 20px;
   border: 5px solid #181818;
+  padding: 1.875em 0 2.813em;
+  border-bottom: none;
 }
 
 footer .contact-us h4 {
   text-transform: none;
   font-weight: normal;
   font-size: 2em;
+  margin-bottom: 1em;
+}
+
+.contact-us .contact-form {
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+  display: inline-block;
+}
+
+.contact-form .form-control {
+  height: 1.875em;
+  margin-bottom: 5px;
+  padding: 15px 13px;
+  width: 300px;
+  color: white;
+  font-size: 1em;
+  font-family: 'Roboto', sans-serif;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.035);
+  border: 1px solid #707070;
+}
+
+.feedback-form .submit-message-button[type="submit"] {
+  display: inline-block;
+  padding: 10px 100px 10px 36px;
+  margin-top: 1.875em;
+  font-size: 0.875em;
+  border-radius: 20px;
+  color: white;
+  font-weight: 300;
+  min-width: 50px;
+  border: 2px solid white;
+  background: url(../images/icons/arrow-right-link.svg) no-repeat 90% 50%;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.feedback-form .submit-message-button:hover {
+  color: #d6d6d6;
+  border: 2px solid #ffc636;
+  cursor: pointer;
+}
+
+.contact-us .contacts {
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+  display: inline-block;
+}
+
+.contacts .contacts-list {
+  display: inline-block;
+  list-style: none;
+  text-align-last: left;
+  width: 50%;
+  padding-left: 10px;
+}
+
+.contacts-list .contact-item {
+  margin: 1.375em;
+}
+
+.contacts-list img {
+  width: 1.375em;
+}
+
+.contacts h5 {
+  font-size: 1.313em;
+  text-align: center;
+  font-weight: normal;
+  margin-bottom: 1.25em;
+}
+
+.contact-us .maps-location {
+  width: 50%;
+}
+
+.maps-location iframe {
+  float: left;
+}
+
+.maps-location img {
+  margin-bottom: -5px;
 }
 
 </style>

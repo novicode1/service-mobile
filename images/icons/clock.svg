@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="21.999" height="21.999" viewBox="0 0 21.999 21.999">
+  <g id="circular-wall-clock" transform="translate(0 0)">
+    <g id="Group_92" data-name="Group 92">
+      <path id="Path_165" data-name="Path 165" d="M11,22A11,11,0,1,0,0,11,11.007,11.007,0,0,0,11,22ZM11,1.73A9.269,9.269,0,1,1,1.73,11,9.281,9.281,0,0,1,11,1.73Z" fill="#ffb500"/>
+      <path id="Path_166" data-name="Path 166" d="M182.515,105.069l3.7,2.883a.922.922,0,0,0,.533.187.84.84,0,0,0,.678-.332.856.856,0,0,0-.159-1.211l-3.359-2.624V98.048a.865.865,0,0,0-1.73,0v6.343A.861.861,0,0,0,182.515,105.069Z" transform="translate(-172.913 -92.238)" fill="#ffb500"/>
+    </g>
+  </g>
+</svg>
