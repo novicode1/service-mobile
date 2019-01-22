@@ -108,11 +108,8 @@
           <div class="contacts">
             <h4>Контакты</h4>
             <div class="maps-location">
-              <h5>
-                <img src="../images/icons/map-point.svg" alt="Иконка номера для звонка">
-                Адрес
-              </h5>
-              <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2746.4951061720544!2d30.7215689!3d46.4983091!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c631c509279f4d%3A0xbf52593bac3bc3ba!2z0YPQuy4g0KfQtdGA0L3QvtC80L7RgNGB0LrQvtCz0L4g0JrQsNC30LDRh9C10YHRgtCy0LAsIDQsINCe0LTQtdGB0YHQsCwg0J7QtNC10YHRgdC60LDRjyDQvtCx0LvQsNGB0YLRjCwgNjUwMDA!5e0!3m2!1sru!2sua!4v1548017707196" width="100%" height="200" frameborder="0" style="border:0" allowfullscreen></iframe>
+              <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2746.4951061720544!2d30.7215689!3d46.4983091!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c631c509279f4d%3A0xbf52593bac3bc3ba!2z0YPQuy4g0KfQtdGA0L3QvtC80L7RgNGB0LrQvtCz0L4g0JrQsNC30LDRh9C10YHRgtCy0LAsIDQsINCe0LTQtdGB0YHQsCwg0J7QtNC10YHRgdC60LDRjyDQvtCx0LvQsNGB0YLRjCwgNjUwMDA!5e0!3m2!1sru!2sua!4v1548017707196" width="100%" height="150" frameborder="0" style="border:0" allowfullscreen></iframe>
+              ул. Черноморского Казачества, 4 Одесса,Одесская область
             </div>
             <ul class="contacts-list">
               <li class="contact-item">
@@ -213,7 +210,7 @@
 
 .content-about .promo-section {
   background: url(../images/main-monkey.png) no-repeat 90% 100%;
-  background-size: auto 80%;
+  background-size: 80% auto;
   box-shadow: #FFB500;
   margin-left: 13%;
 }
@@ -285,13 +282,13 @@
   justify-content: flex-end;
   margin-right: 13%;
   background: url(../images/telephone-monkey.png) no-repeat 30% 50%;
-  background-size: auto 60%;
+  background-size: 60% auto;
 }
 
 .devices-repair {
   margin-left: 13%;
   background: url(../images/laptop-monkey.png) no-repeat 75% 50%;
-  background-size: auto 60%;
+  background-size: 60% auto;
 }
 
 footer {
@@ -301,7 +298,6 @@ footer {
   border-radius: 20px;
   border: 5px solid #181818;
   padding: 1.875em 0 2.813em;
-  border-bottom: none;
 }
 
 footer .contact-us h4 {
@@ -312,10 +308,11 @@ footer .contact-us h4 {
 }
 
 .contact-us .contact-form {
-  width: 50%;
+  width: 45%;
   margin: 0 auto;
   text-align: center;
   display: inline-block;
+  vertical-align: top;
 }
 
 .contact-form .form-control {
@@ -352,45 +349,48 @@ footer .contact-us h4 {
 }
 
 .contact-us .contacts {
-  width: 50%;
+  width: 55%;
   margin: 0 auto;
   text-align: center;
   display: inline-block;
+  vertical-align: top;
 }
 
 .contacts .contacts-list {
-  display: inline-block;
   list-style: none;
-  text-align-last: left;
-  width: 50%;
+  text-align: left;
+  width: 40%;
   padding-left: 10px;
+  display: inline-block;
+  vertical-align: top;
 }
 
 .contacts-list .contact-item {
-  margin: 1.375em;
+  margin: 1em 0 0 1em;
+  line-height: 1.8em;
 }
 
 .contacts-list img {
   width: 1.375em;
+  vertical-align: middle;
 }
 
 .contacts h5 {
   font-size: 1.313em;
   text-align: center;
-  font-weight: normal;
-  margin-bottom: 1.25em;
 }
 
 .contact-us .maps-location {
-  width: 50%;
+  width: 40%;
+  display: inline-block;
+  line-height: 1.5em;
 }
 
-.maps-location iframe {
-  float: left;
-}
-
-.maps-location img {
-  margin-bottom: -5px;
+.contact-us .maps-location h5 {
+  display: inline-block;
+  font-weight: 300;
+  margin-left: 7px;
+  margin-bottom: 10px;
 }
 
 </style>
