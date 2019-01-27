@@ -1,10 +1,10 @@
 <template>
   <div class="item">
-    <p>{{ item.name }}</p>
     <span class="salepill" v-if="item.sale">Sale</span>
-    <img :src="`/${item.img}`" :alt="`Image of ${item.name}`">
+    <img :src="`/${item.img}`" :alt="`Image of ${item.name}`" class="item-image">
+    <p>{{ item.name }}</p>
     <p>{{ item.price | usdollar }}</p>
-    <button class="add" @click="addItem">Add Item</button>
+    <button class="item-add" @click="addItem">Add Item</button>
   </div>
 </template>
 
@@ -34,22 +34,30 @@ export default {
 </script>
 
 <style scoped>
+
 .item {
-  border-radius: 5px;
+  margin-bottom: 60px;
+  border-radius: 10px;
   padding: 20px;
   background: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;
+  float: left;
+  margin-right: 15px;
+  margin-left: 15px;
+  width: 225px;
+  height: 350px;
 }
 
-.salepill {
+.item .item-image {
+  display: block;
+  margin: 0 auto;
+  max-width: 175px;
+  max-height: 165px;
+}
+
+.item .salepill {
   background: rgb(232, 35, 25);
   color: white;
   font-family: 'Barlow', sans-serif;
-  position: absolute;
   right: 30px;
   top: 60px;
   padding: 2px 10px 4px;

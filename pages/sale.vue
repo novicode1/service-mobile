@@ -1,9 +1,6 @@
 <template>
   <main class="capsule wrapper">
     <app-navigation />
-    <div class="saleimg">
-      <app-masthead img="bk-sale" title="Sale" bkcolor="#1ba079"/>
-    </div>
     <div class="contain">
       <app-sidebar :pricerange.sync="highprice" :sale="true"/>
       <transition-group name="items" tag="section" class="content">

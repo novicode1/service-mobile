@@ -75,11 +75,11 @@ jspm_packages
 .nuxt
 .cache
 
-# # Dist folder
-# dist
+# Dist folder
+dist
 
-# # Dist example generation
-# examples/**/dist
+# Dist example generation
+examples/**/dist
 
 # Coverage support
 coverage

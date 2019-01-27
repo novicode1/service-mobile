@@ -28,6 +28,10 @@ body {
   clear: both;
 }
 
+.capsule {
+  color: black;
+}
+
 /* sticky footer stuff */
 .wrapper {
   min-height: 100vh;

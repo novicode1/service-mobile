@@ -7,6 +7,7 @@ html {
   font-size: 16px;
   word-spacing: 1px;
   font-weight: 300;
+  background-color: #121212;
   color: #ffffff;
   cursor: default;
   -ms-text-size-adjust: 100%;
@@ -101,7 +102,6 @@ button:hover {
 
 .capsule {
   width: 100%;
-  max-width: 1100px;
   margin: 0 auto;
 }
 
@@ -124,21 +124,19 @@ input:-moz-placeholder {
 
 /* ---- items layout ---- */
 
-/* no grid support */
-aside {
-  float: left;
-  width: 19.1489%;
-}
 
 .content {
-  /*no grid support*/
+  /* no grid support */
   float: right;
   width: 79.7872%;
   /* grid */
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 10px;
-  padding: 0 !important;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+aside {
+  float: left;
+  width: 19.1489%;
 }
 
 @supports (display: grid) {
@@ -292,11 +290,6 @@ input[type='range'].slider:focus::-ms-fill-upper {
   aside {
     width: 100% !important;
     margin-bottom: 10px !important;
-  }
-
-  .content {
-    width: 100% !important;
-    grid-template-columns: 1fr !important;
   }
 
   nav li {

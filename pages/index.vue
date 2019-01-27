@@ -1,7 +1,6 @@
 <template>
   <main class="capsule wrapper">
     <app-navigation />
-    <app-masthead/>
     <div class="contain">
       <app-sidebar :pricerange.sync="highprice"/>
       <transition-group name="items" tag="section" class="content">
@@ -62,11 +61,6 @@ aside {
   /*no grid support*/
   float: right;
   width: 79.7872%;
-  /* grid */
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 10px;
-  padding: 0 !important;
 }
 
 

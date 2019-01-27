@@ -1,7 +1,6 @@
 <template>
   <main class="capsule wrapper">
     <app-navigation />
-    <app-masthead img="banner-ppl-women" title="Women's" bkcolor="#e82319"/>
     <div class="contain">
       <app-sidebar :pricerange.sync="highprice"/>
       <transition-group name="items" tag="section" class="content">

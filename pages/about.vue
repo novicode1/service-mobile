@@ -1,9 +1,9 @@
 <template>
   <main class="wrapper">
     <header class="header">
-      <a class="logo" href="index.html">
+      <nuxt-link exact to="/" class="logo">
         <img src="../images/icons/about-logo.svg" alt="Логотип Service Mobile">
-      </a>
+      </nuxt-link>
       <nav class="mainmenu">
         <ul class="menu-list">
           <li class="menu-item">
@@ -209,8 +209,8 @@
 }
 
 .content-about .promo-section {
-  background: url(../images/main-monkey.png) no-repeat 90% 100%;
-  background-size: 80% auto;
+  background: url(../images/main-monkey.png) no-repeat 80% 100%;
+  background-size: 70% auto;
   box-shadow: #FFB500;
   margin-left: 13%;
 }
@@ -392,5 +392,12 @@ footer .contact-us h4 {
   margin-left: 7px;
   margin-bottom: 10px;
 }
+
+@media (max-device-width: 1024px) {
+  .header .mainmenu {
+    display: none;
+  }
+}
+
 
 </style>
