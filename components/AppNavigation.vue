@@ -3,7 +3,7 @@
     <nav>
       <div class="capsule header">
         <nuxt-link exact to="/" class="logo">
-          <img src="../images/icons/about-logo.svg" alt="Логотип Service Mobile">
+          <img src="../images/icons/store-logo.png" alt="Логотип Service Mobile">
         </nuxt-link>
         <nav class="mainmenu">
           <ul class="menu-list">
@@ -17,13 +17,13 @@
               <nuxt-link to="/about">О нас</nuxt-link>
             </li>
             <li class="menu-item">
-              <nuxt-link to="/women">Услуги</nuxt-link>
+              <nuxt-link to="/about#services">Услуги</nuxt-link>
             </li>
             <li class="menu-item">
-              <nuxt-link to="/men">Контакты</nuxt-link>
+              <nuxt-link to="/about#contacts">Контакты</nuxt-link>
             </li>
             <li class="menu-item">
-              <nuxt-link to="/sale" class="shop-link">Купить<img src="../images/icons/shopping-cart.svg" alt="Иконка номера для звонка"></nuxt-link>
+              <nuxt-link to="/" class="shop-link">Купить<img src="../images/icons/shopping-cart.svg" alt="Иконка номера для звонка"></nuxt-link>
             </li>
           </ul>
         </nav>
@@ -43,6 +43,7 @@ export default {
 </script>
 
 <style scoped>
+
 .navarea {
   overflow: hidden;
 }
@@ -52,7 +53,7 @@ export default {
   width: 100%;
   line-height: 4.375em;
   padding: 0 4.375em 0 1.563em;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: #232323;
   margin-bottom: 60px;
 }
 

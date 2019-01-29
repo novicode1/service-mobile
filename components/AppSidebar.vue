@@ -1,7 +1,7 @@
 <template>
   <aside>
     <div class="sidearea">
-      <label for="pricerange">Highest Price: <span>${{ pricerange }}</span></label>
+      <label for="pricerange">Максимальная цена: <span>${{ pricerange }}</span></label>
       <input
         class="slider"
         id="pricerange"
@@ -17,12 +17,7 @@
     </div>
     <app-switch v-if="!sale" />
     <div class="sidearea callout">
-      <h4>Special Sale!</h4>
-      <p>Shop now because half our items are greatly reduced</p>
-    </div>
-    <div class="sidearea callout">
-      <h4>Contact Us</h4>
-      <p>Questions? Call us at 1-888-555-SHOP, we're happy to be of service.</p>
+      Not ready
     </div>
   </aside>
 </template>
@@ -38,13 +33,13 @@ export default {
     },
     pricerange: {
       type: [Number, String],
-      default: 300
+      default: 1700
     }
   },
   data() {
     return {
       min: 0,
-      max: 400
+      max: 3000
     };
   },
   components: {
@@ -55,13 +50,15 @@ export default {
 
 <style lang="scss" scoped>
 aside {
-  background: white;
+  color: #FFFFFF;
+  background: #1C1C1C;
   float: left;
   padding: 20px;
+  border-radius: 0px 10px 10px 0px;
 }
 
 .sidearea {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #3F3F3F;
   &:last-of-type {
     border: none;
   }

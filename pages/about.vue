@@ -1,28 +1,28 @@
 <template>
-  <main class="wrapper">
+  <main class="wrapper" id="start">
     <header class="header">
-      <nuxt-link exact to="/" class="logo">
-        <img src="../images/icons/about-logo.svg" alt="Логотип Service Mobile">
+      <nuxt-link exact to="/about#start" class="logo">
+        <img src="../images/icons/about-logo.png" alt="Логотип Service Mobile">
       </nuxt-link>
       <nav class="mainmenu">
         <ul class="menu-list">
           <li class="menu-item">
             <a href="tel:096-866-73-32" class="tel-call-link">
-              <img src="../images/icons/telephone-call.svg" alt="Иконка номера для звонка">
+              <img src="../images/icons/telephone-call.svg" alt="Номер обратной связи">
               +38 063-333-99-93
             </a>
           </li>
           <li class="menu-item">
-            <nuxt-link to="/about">О нас</nuxt-link>
+            <nuxt-link to="/about#start">О нас</nuxt-link>
           </li>
           <li class="menu-item">
-            <nuxt-link to="/women">Услуги</nuxt-link>
+            <nuxt-link to="/about#services">Услуги</nuxt-link>
           </li>
           <li class="menu-item">
-            <nuxt-link to="/men">Контакты</nuxt-link>
+            <nuxt-link to="/about#contacts">Контакты</nuxt-link>
           </li>
           <li class="menu-item">
-            <nuxt-link to="/sale" class="shop-link">Купить<img src="../images/icons/shopping-cart.svg" alt="Иконка номера для звонка"></nuxt-link>
+            <nuxt-link to="/" class="shop-link">Купить<img src="../images/icons/shopping-cart.svg" alt="перейти в магазин"></nuxt-link>
           </li>
         </ul>
       </nav>
@@ -34,27 +34,28 @@
         <div class="section-center-wrapper">
           <h1>Service Mobile</h1>
           <ul class="services-list">
-            <li class="service-item">Продажа новой и б/у техники.</li>
-            <li class="service-item">Продажа аксессуаров и комплектующих </li>
-            <li class="service-item">Ремонт техники. </li>
-            <li class="service-item">Выезд мастера на дом.</li>
-            <li class="service-item">Доставка курьером.</li>
+            <li class="service-item">Продажа новой и б/у техники</li>
+            <li class="service-item">Продажа аксессуаров и комплектующих</li>
+            <li class="service-item">Ремонт техники</li>
+            <li class="service-item">Выезд мастера на дом</li>
+            <li class="service-item">Доставка курьером</li>
           </ul>
           <h3>Мы с Вами уже более 10 лет!</h3>
-          <nuxt-link to="/sale" class="link-to-shop">Перейти к покупкам</nuxt-link>
+          <nuxt-link to="/" class="link-to-shop">Перейти к покупкам</nuxt-link>
           <img src="../images/icons/mouse-down.svg" class="mouse-scroll-down" alt="Перейти ниже">
         </div>
       </section>
 
-      <section class="our-services">
+      <section class="our-services" id="services">
         <div class="section-center-wrapper">
           <h2>Наши Услуги</h2>
           <ul class="services-list">
-            <li class="service-item">Продажа новой и б/у техники.</li>
-            <li class="service-item">Продажа аксессуаров и комплектующих </li>
-            <li class="service-item">Ремонт техники. </li>
-            <li class="service-item">Выезд мастера на дом.</li>
-            <li class="service-item">Доставка курьером.</li>
+            <li class="service-item">Подбор и продажа новой техники</li>
+            <li class="service-item">Продажа и обмен б/у техники</li>
+            <li class="service-item">Гарантия для новой и б/у техники</li>
+            <li class="service-item">Продажа аксессуаров</li>
+            <li class="service-item">Подарочные сертификаты</li>
+            <li class="service-item">Выезд курьера</li>
           </ul>
           <nuxt-link to="/sale" class="link-to-shop">Оставить заявку</nuxt-link>
         </div>
@@ -62,19 +63,20 @@
 
       <section class="devices-repair">
         <div class="section-center-wrapper">
-          <h2>Наши Услуги</h2>
+          <h2>Ремонт Техники</h2>
           <ul class="services-list">
-            <li class="service-item">Продажа новой и б/у техники.</li>
-            <li class="service-item">Продажа аксессуаров и комплектующих </li>
-            <li class="service-item">Ремонт техники. </li>
-            <li class="service-item">Выезд мастера на дом.</li>
-            <li class="service-item">Доставка курьером.</li>
+            <li class="service-item">Замена экрана</li>
+            <li class="service-item">Замена батареи</li>
+            <li class="service-item">Ремонт ноутбуков</li>
+            <li class="service-item">Восстановление потерянной информации</li>
+            <li class="service-item">Предоставление гарантии</li>
+            <li class="service-item">Перенос информации</li>
           </ul>
           <nuxt-link to="/sale" class="link-to-shop">Оставить заявку</nuxt-link>
         </div>
       </section>
       <footer>
-        <section class="contact-us">
+        <section class="contact-us" id="contacts">
           <div class="contact-form">
             <h4>Напишите нам</h4>
             <form action="../../libs/mail/telegram.php" method="POST" class="feedback-form">
@@ -113,15 +115,15 @@
             </div>
             <ul class="contacts-list">
               <li class="contact-item">
-                <img src="../images/icons/telephone-call.svg" alt="Иконка номера для звонка">
+                <img src="../images/icons/telephone-call.svg" alt="Обратная связь">
                 +380 63–333–99–93
               </li>
               <li class="contact-item">
-                <img src="../images/icons/clock.svg" alt="Иконка рабочих часов">
+                <img src="../images/icons/clock.svg" alt="Рабочие часы">
                 Ежедневно 09:00 - 19:00
               </li>
               <li class="contact-item">
-                <img src="../images/icons/inst.svg" alt="Иконка связи в инстаграмм">
+                <img src="../images/icons/inst.svg" alt="Мы в инстаграмме">
                 service.mobile_od
               </li>
             </ul>
@@ -225,6 +227,7 @@
 }
 
 .content-about .services-list {
+  max-width: 25em;
   line-height: 2em;
   list-style: none;
   margin-bottom: 2em;
@@ -392,12 +395,12 @@ footer .contact-us h4 {
   margin-left: 7px;
   margin-bottom: 10px;
 }
-
+/*
 @media (max-device-width: 1024px) {
   .header .mainmenu {
     display: none;
   }
-}
+} */
 
 
 </style>

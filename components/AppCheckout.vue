@@ -144,10 +144,6 @@ label {
 button[disabled] {
   color: #ccc;
   border-color: #ccc;
-  &:hover {
-    background: white;
-    color: #ccc;
-  }
 }
 .loadcontain {
   text-align: center;
