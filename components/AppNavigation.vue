@@ -49,7 +49,6 @@ export default {
 }
 
 .header {
-  font-size: 14px;
   width: 100%;
   line-height: 4.375em;
   padding: 0 4.375em 0 1.563em;

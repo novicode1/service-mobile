@@ -33,7 +33,6 @@
 </template>
 
 <script>
-
 export default {
   props: {
     item: {
@@ -67,7 +66,6 @@ export default {
   line-height: 20px;
   background: white;
   float: left;
-  font-size: 14px;
   margin-right: 15px;
   margin-left: 15px;
   width: 225px;

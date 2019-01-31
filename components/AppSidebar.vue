@@ -1,106 +1,161 @@
 <template>
   <aside>
     <div class="sidearea">
-      <label for="pricerange">Максимальная цена: <span>${{ pricerange }}</span></label>
-      <input
-        class="slider"
-        id="pricerange"
-        type="range"
-        :value="pricerange"
-        :min="min"
-        :max="max"
-        step="0.1"
-        @input="$emit('update:pricerange', $event.target.value)"
-      />
-      <span class="min">${{ min }}</span>
-      <span class="max">${{ max }}</span>
-    </div>
-    <app-switch v-if="!sale" />
-    <div class="sidearea callout">
-      Not ready
+      <div class="nav-hidden">
+        <div class="nav-header">
+          <img src="./../images/icons/nav-arrow-down.svg" alt="развернуть">
+          Каталог товаров
+          <img src="./../images/icons/nav-arrow-down.svg" alt="развернуть">
+        </div>
+        <ul class="items-list">
+          <nuxt-link to="/women">
+            <li class="list-item">
+            iPhone
+            </li>
+          </nuxt-link>
+
+          <nuxt-link to="/men">
+            <li class="list-item">
+              Samsung
+            </li>
+          </nuxt-link>
+
+          <nuxt-link to="/women">
+            <li class="list-item">
+              Meizu
+            </li>
+          </nuxt-link>
+
+          <nuxt-link to="/sale">
+            <li class="list-item">
+              Ноутбуки
+            </li>
+          </nuxt-link>
+
+          <nuxt-link to="/sale">
+            <li class="list-item">
+              Аудио
+            </li>
+          </nuxt-link>
+
+          <nuxt-link to="/sale">
+            <li class="list-item">
+              Компьютеры и периферия
+            </li>
+          </nuxt-link>
+
+          <nuxt-link to="/sale">
+            <li class="list-item">
+              Гироскутеры
+            </li>
+          </nuxt-link>
+
+          <nuxt-link to="/sale">
+            <li class="list-item">
+              Гаджеты
+            </li>
+          </nuxt-link>
+
+          <nuxt-link to="/sale">
+            <li class="list-item">
+              Аксессуары
+            </li>
+          </nuxt-link>
+
+          <nuxt-link to="/sale">
+            <li class="list-item">
+              Ремонт и услуги
+            </li>
+          </nuxt-link>
+
+          <nuxt-link to="/sale">
+            <li class="list-item">
+              Б/у техника
+            </li>
+          </nuxt-link>
+        </ul>
+      </div>
     </div>
   </aside>
 </template>
 
-<script>
-import AppSwitch from './AppSwitch.vue';
-
-export default {
-  props: {
-    sale: {
-      type: Boolean,
-      default: false
-    },
-    pricerange: {
-      type: [Number, String],
-      default: 1700
-    }
-  },
-  data() {
-    return {
-      min: 0,
-      max: 3000
-    };
-  },
-  components: {
-    AppSwitch
-  }
-};
-</script>
-
 <style lang="scss" scoped>
 aside {
-  color: #FFFFFF;
-  background: #1C1C1C;
-  float: left;
-  padding: 20px;
-  border-radius: 0px 10px 10px 0px;
+  display: block;
+  margin-bottom: 30px;
+  color: white;
 }
 
-.sidearea {
-  border-bottom: 1px solid #3F3F3F;
-  &:last-of-type {
-    border: none;
+.nav-hidden {
+  background-color: #272828;
+  border-radius: 0 10px 10px 0;
+
+  img {
+    margin: 0 10px;
+  }
+
+  .nav-header {
+    text-align: center;
+    padding: 17px 0;
   }
 }
 
-.callout {
-  padding: 20px 0;
-  h4 {
-    padding-bottom: 10px;
+.items-list {
+  background-color: #1C1C1C;
+  transition: .4s ease-in-out;
+	transition-timing-function: cubic-bezier(0, 1, 0.1, 1);
+  list-style: none;
+  padding: 0px 25px;
+  border-radius: 0 0 10px 0;
+
+  * {
+    height: 0;
+    display: none;
+  }
+
+  .list-item {
+    border-bottom: 1px solid #252626;
+    line-height: 32px;
+    position: relative;
+  }
+
+  .list-item:after {
+    position: absolute;
+    content: " ";
+    background-image: url("./../images/icons/nav-item-arrow-right.svg");
+    background-repeat: no-repeat;
+    width: 7px;
+    top: 10px;
+    right: 1px;
+    height: 13px;
   }
 }
 
-label {
-  font-family: 'Roboto', sans-serif;
-  padding: 15px 0;
-  text-align: center;
+.store-navigation.hidden {
+  .items-list {
+    padding: 7px 25px 25px;
+  }
+
+  .items-list * {
+    height: auto;
+    display: block;
+  }
 }
 
-/*--input range--*/
-.sidearea:first-of-type {
-  padding-bottom: 40px;
+.store-navigation:hover .items-list {
+  height: auto;
+  opacity: 1;
+  padding: 7px 25px 25px;
 }
 
-label {
-  font-family: 'Roboto', sans-serif;
-  padding: 15px 0;
-  text-align: center;
+.store-navigation:hover .items-list * {
+  height: auto;
+  display: block;
 }
 
-span {
-  font-family: 'Roboto', sans-serif;
+.store-navigation:hover .nav-hidden {
+  border-radius: 0 10px 10px 0;
 }
 
-.max {
-  font-size: 12px;
-  float: right;
-  color: #565656;
-}
 
-.min {
-  float: left;
-  font-size: 12px;
-  color: #565656;
-}
 </style>

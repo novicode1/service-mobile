@@ -29,7 +29,6 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 14px;
   font-weight: 300;
   padding: 0 40px;
   background: black;

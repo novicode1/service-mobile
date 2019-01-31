@@ -2,7 +2,10 @@
   <main class="capsule wrapper">
     <app-navigation />
     <div class="contain">
-      <app-sidebar :pricerange.sync="highprice" :sale="true"/>
+      <div class="side-block">
+        <app-sidebar class="store-navigation"/>
+        <app-filter :pricerange.sync="highprice" :sale="true"/>
+      </div>
       <transition-group name="items" tag="section" class="content">
         <app-item
           v-for="(item, index) in sProducts"
@@ -21,6 +24,7 @@
 <script>
 import AppFooter from './../components/AppFooter.vue';
 import AppNavigation from './../components/AppNavigation.vue';
+import AppFilter from './../components/AppFilter.vue';
 import AppSidebar from './../components/AppSidebar.vue';
 import AppMasthead from './../components/AppMasthead.vue';
 import AppItem from './../components/AppItem.vue';
@@ -30,12 +34,13 @@ export default {
     AppFooter,
     AppNavigation,
     AppSidebar,
+    AppFilter,
     AppMasthead,
     AppItem
   },
   data() {
     return {
-      highprice: 300
+      highprice: 2700
     };
   },
   computed: {

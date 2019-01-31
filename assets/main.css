@@ -4,7 +4,7 @@ body,
 html {
   padding: 0;
   margin: 0;
-  font-size: 16px;
+  font-size: 14px;
   word-spacing: 1px;
   font-weight: 300;
   background-color: #121212;
@@ -24,6 +24,11 @@ html {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: white;
+}
+
+.side-block {
+  float: left;
+  width: 19.1489%;
 }
 
 a {
@@ -124,19 +129,6 @@ input:-moz-placeholder {
 /* ---- items layout ---- */
 
 
-.content {
-  /* no grid support */
-  float: right;
-  width: 79.7872%;
-  /* grid */
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-}
-
-aside {
-  float: left;
-  width: 19.1489%;
-}
 
 @supports (display: grid) {
   .capsule > * {

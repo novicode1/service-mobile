@@ -2,8 +2,11 @@
   <main class="capsule wrapper">
     <app-navigation />
     <div class="contain">
-      <app-sidebar :pricerange.sync="highprice"/>
-      <transition-group name="items" tag="section" class="content">
+      <div class="side-block">
+        <app-sidebar class="store-navigation hidden"/>
+        <app-filter :pricerange.sync="highprice" class="store-filter"/>
+      </div>
+        <transition-group name="items" tag="section" class="content">
         <app-item
           v-for="(item, index) in products"
           :key="item"
@@ -21,6 +24,7 @@
 <script>
 import AppFooter from './../components/AppFooter.vue';
 import AppNavigation from './../components/AppNavigation.vue';
+import AppFilter from './../components/AppFilter.vue';
 import AppSidebar from './../components/AppSidebar.vue';
 import AppMasthead from './../components/AppMasthead.vue';
 import AppItem from './../components/AppItem.vue';
@@ -29,13 +33,15 @@ export default {
   components: {
     AppFooter,
     AppNavigation,
+
     AppSidebar,
+    AppFilter,
     AppMasthead,
     AppItem
   },
   data() {
     return {
-      highprice: 300
+      highprice: 2700 
     };
   },
   computed: {
@@ -51,14 +57,8 @@ export default {
 </script>
 
 <style>
-/* no grid support */
-aside {
-  float: left;
-  width: 19.1489%;
-}
 
 .content {
-  /*no grid support*/
   float: right;
   width: 79.7872%;
 }
@@ -76,6 +76,9 @@ aside {
   margin-top: 10px;
 }
 
+/* .items-list {
+  height: auto !important;
+}*/
 
 
 @supports (display: grid) {
