@@ -21,7 +21,7 @@
         <img src="../images/icons/not-in-stock.svg" alt="Нет в наличии">
         В наличии
       </div> -->
-
+      <button class="add" @click="addItem">Add Item</button>
       <span class="item-code">
         Код: 44013
       </span>

@@ -23,7 +23,7 @@
               <nuxt-link to="/about#contacts">Контакты</nuxt-link>
             </li>
             <li class="menu-item">
-              <nuxt-link to="/" class="shop-link">Купить<img src="../images/icons/shopping-cart.svg" alt="Иконка номера для звонка"></nuxt-link>
+              <nuxt-link to="/cart" class="shop-link">Корзина<img src="../images/icons/shopping-cart.svg" alt="Иконка номера для звонка"></nuxt-link>
             </li>
           </ul>
         </nav>
