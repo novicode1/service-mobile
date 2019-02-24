@@ -3,12 +3,11 @@
     <span class="salepill" v-if="item.sale">Б/у</span>
 
     <div class="item-image-wrapper">
-      <img :src="`/${item.img}`" :alt="`Image of ${item.name}`" class="item-image">
+      <img :src="`/${item.img}`" :alt="`Image of ${item.name}`" class="item-image" @click="addItem">
     </div>
 
-    <p class="item-name">{{ item.name | truncate(44, ' ...')}}</p>
-    <p class="item-price">{{ item.price | usdollar }}</p><div class="block">
-</div>
+    <p class="item-name" @click="addItem">{{ item.name | truncate(44, ' ...')}}</p>
+    <p class="item-price">{{ item.price | usdollar }}</p>
 
     <div class="item-stock">
       <div class="in-stock">
@@ -21,7 +20,8 @@
         <img src="../images/icons/not-in-stock.svg" alt="Нет в наличии">
         В наличии
       </div> -->
-      <button class="add" @click="addItem">Add Item</button>
+
+      <!-- <button class="add" @click="addItem">Add Item</button> -->
       <span class="item-code">
         Код: 44013
       </span>
@@ -91,6 +91,10 @@ export default {
   max-height: 90%;
 }
 
+.item .item-image:hover {
+  cursor: pointer;
+}
+
 .item .salepill {
   position: absolute;
   background-color: #0070C9;
@@ -108,6 +112,11 @@ export default {
   color: #0070C9;
   height: 40px;
   position: relative;
+}
+
+.item .item-name:hover {
+  color: #1c99ff;
+  cursor: pointer;
 }
 
 .item .item-price {

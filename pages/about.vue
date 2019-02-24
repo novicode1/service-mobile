@@ -80,11 +80,11 @@
           <div class="contact-form">
             <h4>Напишите нам</h4>
             <form action="../../libs/mail/telegram.php" method="POST" class="feedback-form">
-              <div class="form-group">
+              <!-- <div class="form-group">
                 <label>
                   <input type="text" class="form-control message-poiter-hidden" style="display: none" name="user_model" value="Armchairs">
                 </label>
-              </div>
+              </div> -->
 
               <div class="form-group">
                 <label for="user_name"></label>
@@ -93,7 +93,6 @@
               <div class="form-group">
                 <label for="user_phone"></label>
                   <input type="text" class="form-control" name="user_phone" placeholder="Номер телефона">
-
               </div>
               <div class="form-group">
                 <label for="user_email"></label>
@@ -111,7 +110,7 @@
             <h4>Контакты</h4>
             <div class="maps-location">
               <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2746.4951061720544!2d30.7215689!3d46.4983091!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40c631c509279f4d%3A0xbf52593bac3bc3ba!2z0YPQuy4g0KfQtdGA0L3QvtC80L7RgNGB0LrQvtCz0L4g0JrQsNC30LDRh9C10YHRgtCy0LAsIDQsINCe0LTQtdGB0YHQsCwg0J7QtNC10YHRgdC60LDRjyDQvtCx0LvQsNGB0YLRjCwgNjUwMDA!5e0!3m2!1sru!2sua!4v1548017707196" width="100%" height="150" frameborder="0" style="border:0" allowfullscreen></iframe>
-              ул. Черноморского Казачества, 4 Одесса,Одесская область
+              ул. Черноморского Казачества, 4 Одесса, Одесская область
             </div>
             <ul class="contacts-list">
               <li class="contact-item">
@@ -138,6 +137,8 @@
 <style scoped>
 .wrapper {
   background-color: black;
+
+  --wrapper-margin: 13%;
 }
 
 .content-about h2 {
@@ -214,7 +215,7 @@
   background: url(../images/main-monkey.png) no-repeat 80% 100%;
   background-size: 70% auto;
   box-shadow: #FFB500;
-  margin-left: 13%;
+  margin-left: var(--wrapper-margin);
 }
 
 .content-about h1 {
@@ -223,7 +224,6 @@
   font-weight: bold;
   letter-spacing: normal;
   text-transform: uppercase;
-  white-space: nowrap;
 }
 
 .content-about .services-list {
@@ -258,6 +258,7 @@
   min-width: 50px;
   border-radius: 20px;
   border: 2px solid white;
+  background: #000;
   background: url(../images/icons/arrow-right-link.svg) no-repeat 90% 50%;
   background-color: rgba(255, 255, 255, 0.05);
 }
@@ -283,19 +284,19 @@
 
 .content-about .our-services {
   justify-content: flex-end;
-  margin-right: 13%;
+  margin-right: var(--wrapper-margin);
   background: url(../images/telephone-monkey.png) no-repeat 30% 50%;
   background-size: 60% auto;
 }
 
 .devices-repair {
-  margin-left: 13%;
+  margin-left: var(--wrapper-margin);
   background: url(../images/laptop-monkey.png) no-repeat 75% 50%;
   background-size: 60% auto;
 }
 
 footer {
-  margin: 0 calc(65px+1.3em) 0 13%;
+  margin: 0 calc(65px+1.3em) 0 var(--wrapper-margin);
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
   border-radius: 20px;
@@ -363,7 +364,7 @@ footer .contact-us h4 {
   list-style: none;
   text-align: left;
   width: 40%;
-  padding-left: 10px;
+  padding-left: 0px;
   display: inline-block;
   vertical-align: top;
 }
@@ -385,6 +386,7 @@ footer .contact-us h4 {
 
 .contact-us .maps-location {
   width: 40%;
+  min-width: 200px;
   display: inline-block;
   line-height: 1.5em;
 }
@@ -395,12 +397,139 @@ footer .contact-us h4 {
   margin-left: 7px;
   margin-bottom: 10px;
 }
-/*
-@media (max-device-width: 1024px) {
-  .header .mainmenu {
-    display: none;
+
+  @media (max-device-width: 1024px) {
+    .header .mainmenu {
+      display: none;
+    }
+
+    .promo-section {
+      margin-bottom: 200px;
+    }
+
+    .content-about .our-services {
+      height: auto;
+      padding-bottom: 200px;
+    }
+
+    .content-about .devices-repair {
+      height: auto;
+      padding-bottom: 200px;
+    }
+
+    .contact-us .contacts {
+      width: 100%;
+      margin: 0 auto;
+      display: block;
+    }
+
+    .contact-us .contact-form {
+      display: block;
+      margin-bottom: 60px;
+    }
+
+    .contact-form .form-control {
+      width: 60%;
+      min-width: 240px;
+    }
+
+    .contact-us .contact-form {
+      width: 100%;
+      max-width: 500px
+    }
+
+    .content-about .our-services {
+      background-size: 400px auto;
+    }
+
+    .content-about .devices-repair {
+      background-size: 400px auto;
+      background-position: 90% 50%;
+    }
+
+    .contacts-list .contact-item {
+      margin: 10px auto;
+    }
   }
-} */
 
+  @media (max-device-width: 768px) {
+    .wrapper {
+      --wrapper-margin: 8%;
+    }
 
+    .content-about .promo-section {
+      background: none;
+    }
+
+    .promo-section .mouse-scroll-down {
+      position: static;
+      margin-top: 40px;
+      display: block;
+    }
+
+    .content-about .our-services {
+      background-size: 300px auto;
+      background-position: 110% 40%;
+      justify-content: start;
+      margin-left: var(--wrapper-margin);
+    }
+
+    .content-about .devices-repair {
+      background-size: 250px auto;
+      background-position: 90% 50%;
+    }
+
+    .contacts .contacts-list {
+      display: block;
+      width: auto;
+      text-align: center;
+    }
+
+    .maps-location {
+      margin-bottom: 40px;
+    }
+
+    .promo-section:before {
+      border-right: 0px;
+    }
+
+    footer {
+      margin: 6%;
+    }
+
+    @media (max-device-width: 610px) {
+      .wrapper .content-about {
+        padding-top: 20vh;
+      }
+      .content-about .promo-section {
+        height: auto;
+        margin-bottom: 200px;
+      }
+
+      .content-about .our-services {
+        background-size: 300px auto;
+        background-position: 60% 85%;
+        justify-content: flex-start;
+        margin-left: var(--wrapper-margin);
+      }
+
+      .content-about .devices-repair {
+        background-size: 250px auto;
+        background-position: 40% 90%;
+      }
+
+      .content-about .our-services {
+        padding-bottom: 300px;
+      }
+
+      .content-about .devices-repair {
+        padding-bottom: 300px;
+      }
+
+      .content-about h1 {
+        font-size: 2.5em;
+      }
+    }
+
+  }
 </style>
