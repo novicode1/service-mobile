@@ -7,7 +7,7 @@
         <label for="email">Email</label>
         <input id="email" type="email" v-model="stripeEmail" placeholder="name@example.com"/>
         <label for="card">Credit Card</label>
-        <p>Test using this credit card: <span class="cc-number">4242 4242 4242 4242</span>, and enter any 5 digits for the zip code</p>
+        <p><strong>Test using this credit card: <span class="cc-number">4242 4242 4242 4242</span>, and enter any 5 digits for the zip code</strong></p>
         <card class='stripe-card'
           id="card"
           :class='{ complete }'
@@ -117,7 +117,7 @@ export default {
 
 <style scoped>
 .payment {
-  border: 1px solid #ccc;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 10px 20px, rgba(0, 0, 0, 0.2) 0px 0px 1px;
   color: black;
   width: 500px;
   padding: 50px;

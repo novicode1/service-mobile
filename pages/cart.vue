@@ -1,18 +1,19 @@
 <template>
+<div>
+  <app-navigation />
   <div class="capsule cart">
-
     <div v-if="cartTotal > 0">
-      <h1>Cart</h1>
+      <h1>Корзина</h1>
       <div class="cartitems" v-for="item in cart" :key="item">
         <div class="carttext">
           <h4>{{ item.name }}</h4>
           <p>{{ item.price | usdollar }} x {{ item.count }}</p>
-          <p>Total for this item: <strong>{{ item.price * item.count }}</strong></p>
+          <p>Цена: <strong>{{ item.price * item.count | usdollar }}</strong></p>
         </div>
         <img class="cartimg" :src="`/${item.img}`" :alt="`Image of ${item.name}`">
       </div>
       <div class="total">
-        <h3>Total: {{ total | usdollar }}</h3>
+        <h3>Сумма: <strong>{{ total | usdollar }}</strong></h3>
       </div>
       <app-checkout :total="total" @successSubmit="success = true"></app-checkout>
     </div>
@@ -28,13 +29,16 @@
       <h2>Success!</h2>
       <p>Your order has been processed, it will be delivered shortly.</p>
     </div>
-
   </div>
+  <app-footer class="footer"/>
+</div>
 </template>
 
 <script>
 import AppCheckout from './../components/AppCheckout.vue';
+import AppFooter from './../components/AppFooter.vue';
 import AppSuccess from './../components/AppSuccess.vue';
+import AppNavigation from './../components/AppNavigation'
 
 export default {
   data() {
@@ -44,7 +48,10 @@ export default {
   },
   components: {
     AppCheckout,
-    AppSuccess
+    AppSuccess,
+
+    AppNavigation,
+    AppFooter,
   },
   computed: {
     cart() {
@@ -81,6 +88,10 @@ export default {
   padding-bottom: 80px;
 }
 
+.cart h1 {
+  margin-bottom: 15px;
+}
+
 .cart.empty h1,
 .cart.empty h3 {
   margin-bottom: 15px;
@@ -88,7 +99,7 @@ export default {
 
 .cartitems {
   padding: 30px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px #D1D1D1 solid;
   width: 500px;
 }
 
@@ -104,11 +115,10 @@ export default {
 
 .cartimg {
   width: 100px;
-  border: 1px solid #ccc;
   float: right;
 }
 
 .total {
-  margin: 20px 0;
+  margin: 20px;
 }
 </style>

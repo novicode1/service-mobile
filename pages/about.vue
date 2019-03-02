@@ -499,7 +499,7 @@ footer .contact-us h4 {
 
     @media (max-device-width: 610px) {
       .wrapper .content-about {
-        padding-top: 20vh;
+        padding-top: 25vh;
       }
       .content-about .promo-section {
         height: auto;
