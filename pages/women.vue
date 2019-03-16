@@ -7,7 +7,7 @@
         <app-filter :pricerange.sync="highprice"/>
       </div>
       <transition-group name="items" tag="section" class="content">
-        <app-item
+        <app-item-card
           v-for="(item, index) in wProducts"
           :key="item"
           :item="item"
@@ -27,7 +27,7 @@ import AppNavigation from './../components/AppNavigation.vue';
 import AppFilter from './../components/AppFilter.vue';
 import AppSidebar from './../components/AppSidebar.vue';
 import AppMasthead from './../components/AppMasthead.vue';
-import AppItem from './../components/AppItem.vue';
+import AppItemCard from './../components/AppItemCard.vue';
 
 export default {
   components: {
@@ -36,7 +36,7 @@ export default {
     AppFilter,
     AppSidebar,
     AppMasthead,
-    AppItem
+    AppItemCard
   },
   data() {
     return {

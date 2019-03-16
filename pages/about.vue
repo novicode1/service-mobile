@@ -79,7 +79,7 @@
         <section class="contact-us" id="contacts">
           <div class="contact-form">
             <h4>Напишите нам</h4>
-            <form action="../../libs/mail/telegram.php" method="POST" class="feedback-form">
+            <form action="../plugins/telegram-form/send-message-to-telegram.php" method="POST" class="feedback-form">
               <!-- <div class="form-group">
                 <label>
                   <input type="text" class="form-control message-poiter-hidden" style="display: none" name="user_model" value="Armchairs">
@@ -87,21 +87,24 @@
               </div> -->
 
               <div class="form-group">
-                <label for="user_name"></label>
-                  <input type="text" class="form-control" name="user_name" placeholder="Имя">
+                <label>
+                  <input type="text" class="form-control" name="user_name" placeholder="Имя" required>
+                </label>
               </div>
               <div class="form-group">
-                <label for="user_phone"></label>
-                  <input type="text" class="form-control" name="user_phone" placeholder="Номер телефона">
+                <label>
+                  <input type="text" class="form-control" name="user_phone" placeholder="Номер телефона" required>
+                </label>
               </div>
               <div class="form-group">
-                <label for="user_email"></label>
-                  <input type="text" class="form-control" name="user_email" placeholder="E-mail">
-
+                <label>
+                  <input type="email" class="form-control" name="user_email" placeholder="E-mail" required>
+                </label>
               </div>
               <div class="form-group">
-                <label for="user_comment"></label>
-                  <input type="text" class="form-control" name="user_comment" placeholder="Комментарий">
+                <label>
+                  <input type="text" class="form-control" name="user_comment" placeholder="Комментарий" required>
+                </label>
               </div>
               <button type="submit" class="submit-message-button">Отправить</button>
 					  </form>

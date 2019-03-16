@@ -105,7 +105,7 @@ aside {
   transition: .4s ease-in-out;
 	transition-timing-function: cubic-bezier(0, 1, 0.1, 1);
   list-style: none;
-  padding: 0px 25px;
+  padding: 0px 24px;
   border-radius: 0 0 10px 0;
 
   * {
@@ -133,7 +133,7 @@ aside {
 
 .store-navigation.hidden {
   .items-list {
-    padding: 7px 25px 25px;
+    padding: 8px 24px 24px;
   }
 
   .items-list * {
@@ -145,7 +145,7 @@ aside {
 .store-navigation:hover .items-list {
   height: auto;
   opacity: 1;
-  padding: 7px 25px 25px;
+  padding: 8px 24px 24px;
 }
 
 .store-navigation:hover .items-list * {
