@@ -26,6 +26,29 @@
           </li>
         </ul>
       </nav>
+
+      <responsive-nav class="nav-hidden">
+        <ul class="menu-list">
+          <li class="menu-item">
+            <a href="tel:096-866-73-32" class="tel-call-link">
+              <img src="../images/icons/telephone-call.svg" alt="Номер обратной связи">
+              +38 063-333-99-93
+            </a>
+          </li>
+          <li class="menu-item">
+            <nuxt-link to="/about#start">О нас</nuxt-link>
+          </li>
+          <li class="menu-item">
+            <nuxt-link to="/about#services">Услуги</nuxt-link>
+          </li>
+          <li class="menu-item">
+            <nuxt-link to="/about#contacts">Контакты</nuxt-link>
+          </li>
+          <li class="menu-item">
+            <nuxt-link to="/" class="shop-link">Купить<img src="../images/icons/shopping-cart-black.svg" alt="перейти в магазин"></nuxt-link>
+          </li>
+        </ul>
+      </responsive-nav>
     </header>
 
     <main class="content-about">
@@ -79,33 +102,20 @@
         <section class="contact-us" id="contacts">
           <div class="contact-form">
             <h4>Напишите нам</h4>
-            <form action="../plugins/telegram-form/send-message-to-telegram.php" method="POST" class="feedback-form">
-              <!-- <div class="form-group">
-                <label>
-                  <input type="text" class="form-control message-poiter-hidden" style="display: none" name="user_model" value="Armchairs">
-                </label>
-              </div> -->
+            <form v-on:submit.prevent="onSubmit" method="POST" class="feedback-form">
 
-              <div class="form-group">
-                <label>
-                  <input type="text" class="form-control" name="user_name" placeholder="Имя" required>
-                </label>
-              </div>
-              <div class="form-group">
-                <label>
-                  <input type="text" class="form-control" name="user_phone" placeholder="Номер телефона" required>
-                </label>
-              </div>
-              <div class="form-group">
-                <label>
-                  <input type="email" class="form-control" name="user_email" placeholder="E-mail" required>
-                </label>
-              </div>
-              <div class="form-group">
-                <label>
-                  <input type="text" class="form-control" name="user_comment" placeholder="Комментарий" required>
-                </label>
-              </div>
+              <!-- <label>
+                <input type="text" class="form-control message-poiter-hidden" style="display: none" name="user_model" value="Armchairs">
+              </label> -->
+
+                <input type="text" class="form-control" name="user_name" placeholder="Имя" v-model="name" required>
+
+                <input type="text" class="form-control" name="user_phone" placeholder="Номер телефона" v-model="phone" required>
+
+                <input type="email" class="form-control" name="user_email" placeholder="E-mail" v-model="email" required>
+
+                <input type="text" class="form-control" name="user_comment" placeholder="Комментарий" v-model="comment" required>
+
               <button type="submit" class="submit-message-button">Отправить</button>
 					  </form>
           </div>
@@ -137,10 +147,49 @@
   </main>
 </template>
 
+<script>
+import axios from 'axios';
+import ResponsiveNav from './../components/AppResponsiveNavigationAbout.vue';
+
+export default {
+  components: {
+    ResponsiveNav
+  },
+  data() {
+    return {
+      name: '',
+      phone: '',
+      email: '',
+      comment: ''
+    };
+  },
+  methods: {
+    onSubmit () {
+      axios.post('../php/post.php', {
+                'name': this.name,
+                'email': this.email,
+                'comment': this.comment,
+                'phone': this.phone
+        }).then(response => {
+            event.preventDefault();
+            if (response.data.error) {
+                    console.log('error', response.data.error)
+           } else {
+                this.postStatus = true
+                console.log('success', response.data.message)
+           }
+        }).catch(error => {
+              console.log(error.response)
+     });
+    }
+  }
+};
+</script>
+
 <style scoped>
+
 .wrapper {
   background-color: black;
-
   --wrapper-margin: 13%;
 }
 
@@ -158,6 +207,10 @@
   line-height: 4.375em;
   padding: 0 4.375em 0 1.563em;
   background-color: rgba(0, 0, 0, 0.9);
+}
+
+header .nav-hidden {
+  display: none;
 }
 
 .header .logo {
@@ -182,11 +235,11 @@
   margin: 0 5px -2px 0;
 }
 
-.menu-list li + li {
+.mainmenu .menu-list li + li {
   margin-left: 3.125em;
 }
 
-.mainmenu .shop-link {
+.menu-item .shop-link {
   border-bottom: 1px solid #FFB500;
   -webkit-transition: all .15s ease-in-out;
   -moz-transition: all .15s ease-in-out;
@@ -196,11 +249,11 @@
   padding-bottom: 3px;
 }
 
-.mainmenu .shop-link:hover {
+.header .shop-link:hover {
   border-bottom:rgba(255, 183, 0, 0);
 }
 
-.mainmenu .shop-link img {
+.header .shop-link img {
   margin-left: 10px;
   height: .9em;
 }
@@ -336,7 +389,8 @@ footer .contact-us h4 {
 }
 
 .feedback-form .submit-message-button[type="submit"] {
-  display: inline-block;
+  display: block;
+  margin: 0 auto;
   padding: 10px 100px 10px 36px;
   margin-top: 1.875em;
   font-size: 0.875em;
@@ -404,6 +458,14 @@ footer .contact-us h4 {
   @media (max-device-width: 1024px) {
     .header .mainmenu {
       display: none;
+    }
+
+    .promo-section:before {
+      border-right: 0px;
+    }
+
+    .header .nav-hidden {
+      display: block;
     }
 
     .promo-section {
@@ -492,18 +554,19 @@ footer .contact-us h4 {
       margin-bottom: 40px;
     }
 
-    .promo-section:before {
-      border-right: 0px;
-    }
-
     footer {
       margin: 6%;
     }
 
     @media (max-device-width: 610px) {
+      .header .logo {
+        display: none;
+      }
+
       .wrapper .content-about {
         padding-top: 25vh;
       }
+
       .content-about .promo-section {
         height: auto;
         margin-bottom: 200px;

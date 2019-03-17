@@ -29,6 +29,7 @@ html {
 .side-block {
   float: left;
   width: 19.1489%;
+  min-width: 200px;
 }
 
 a {
@@ -308,8 +309,13 @@ input[type='range'].slider:focus::-ms-fill-upper {
   }
 }
 
-@media (min-width: 601px) and (max-width: 900px) {
+@media (min-width: 601px) and (max-width: 992px) {
   .content {
     grid-template-columns: repeat(2, 1fr) !important;
+  }
+  
+  .content {
+    float: none;
+    width: 100%;
   }
 }

@@ -42,4 +42,10 @@ body {
   height: 50px;
   margin-top: 10px;
 }
+
+  @media (max-device-width: 1024px) {
+    .contain {
+      padding-top: 80px;
+    }
+  }
 </style>

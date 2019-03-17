@@ -57,13 +57,6 @@ export default {
 </script>
 
 <style>
-
-.content {
-  float: right;
-  width: 79.7872%;
-}
-
-
 /* sticky footer stuff */
 .wrapper {
   min-height: 100vh;

@@ -40,7 +40,7 @@
 
           <nuxt-link to="/sale">
             <li class="list-item">
-              Компьютеры и периферия
+              Компьютеры
             </li>
           </nuxt-link>
 
@@ -84,6 +84,7 @@ aside {
   display: block;
   margin-bottom: 30px;
   color: white;
+  overflow: hidden;
 }
 
 .nav-hidden {
