@@ -2,12 +2,12 @@
   <aside>
     <div class="sidearea">
       <div class="nav-hidden">
-        <div class="nav-header">
+        <div class="nav-header" @click="isActive = !isActive">
           <img src="./../images/icons/nav-arrow-down.svg" alt="развернуть">
           Каталог товаров
           <img src="./../images/icons/nav-arrow-down.svg" alt="развернуть">
         </div>
-        <ul class="items-list">
+        <ul class="items-list" v-bind:style='{"display": (isActive? "none" : "block" ), "height": (isActive? "0" : "auto" )}'>
           <nuxt-link to="/women">
             <li class="list-item">
             iPhone
@@ -79,6 +79,29 @@
   </aside>
 </template>
 
+<script>
+export default {
+    data() {
+      return {
+        isActive: true
+      };
+  },
+
+  methods: {
+    toggleClass: function(event){
+       // Check value
+       if(this.isActive){
+         this.isActive = false;
+       }else{
+         this.isActive = true;
+       }
+
+    }
+  }
+}
+</script>
+
+
 <style lang="scss" scoped>
 aside {
   display: block;
@@ -139,7 +162,6 @@ aside {
 
   .items-list * {
     height: auto;
-    display: block;
   }
 }
 
@@ -158,5 +180,10 @@ aside {
   border-radius: 0 10px 10px 0;
 }
 
+@media (max-width: 816px) {
+  .nav-hidden img {
+    margin: 0 !important;
+  }
+}
 
 </style>

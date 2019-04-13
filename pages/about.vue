@@ -28,6 +28,11 @@
       </nav>
 
       <responsive-nav class="nav-hidden">
+        <div class="menu-header">
+            <nuxt-link exact to="/" class="menu-logo">
+              <img src="../images/icons/store-logo.png" alt="Логотип Service Mobile">
+            </nuxt-link>
+          </div>
         <ul class="menu-list">
           <li class="menu-item">
             <a href="tel:096-866-73-32" class="tel-call-link">
@@ -45,7 +50,7 @@
             <nuxt-link to="/about#contacts">Контакты</nuxt-link>
           </li>
           <li class="menu-item">
-            <nuxt-link to="/" class="shop-link">Купить<img src="../images/icons/shopping-cart-black.svg" alt="перейти в магазин"></nuxt-link>
+            <nuxt-link to="/" class="shop-link">Купить<img src="../images/icons/shopping-cart.svg" alt="перейти в магазин"></nuxt-link>
           </li>
         </ul>
       </responsive-nav>
@@ -165,22 +170,7 @@ export default {
   },
   methods: {
     onSubmit () {
-      axios.post('../php/post.php', {
-                'name': this.name,
-                'email': this.email,
-                'comment': this.comment,
-                'phone': this.phone
-        }).then(response => {
-            event.preventDefault();
-            if (response.data.error) {
-                    console.log('error', response.data.error)
-           } else {
-                this.postStatus = true
-                console.log('success', response.data.message)
-           }
-        }).catch(error => {
-              console.log(error.response)
-     });
+
     }
   }
 };
@@ -188,6 +178,33 @@ export default {
 
 <style scoped>
 
+.nav-hidden .menu-header {
+  background-color: #232323;
+  width: 320px;
+  padding: 20px;
+}
+
+.nav-hidden .menu-logo img {
+  width: 200px;
+  margin: 0 auto;
+  display: block;
+}
+
+.nav-hidden .shop-link img {
+  margin-left: 4px;
+}
+
+.nav-hidden .menu-footer {
+  display: block;
+  width: 100%;
+  color: #fff;
+  text-align: center;
+  line-height: 22px;
+}
+
+.nav-hidden .menu-footer div {
+  margin-bottom: 12px;
+}
 .wrapper {
   background-color: black;
   --wrapper-margin: 13%;

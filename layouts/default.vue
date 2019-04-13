@@ -1,9 +1,7 @@
 <template>
   <div>
     <div class="wrapper">
-      <nuxt/>
-      <div class="clear"></div>
-      <div class="push"></div>
+      <nuxt class="site-content"/>
     </div>
   </div>
 </template>
@@ -19,12 +17,24 @@ export default {
 <style>
 html,
 body {
+    display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   height: 100%;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-.clear {
-  clear: both;
+footer {
+  margin: auto auto 0 auto;
+}
+
+.wrapper {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
 .capsule {

@@ -23,11 +23,10 @@
         В наличии
       </div> -->
 
-      <span class="item-code">
-        Код: 44013
-      </span>
-
     </div>
+    <span class="item-code">
+      Код: 44013
+    </span>
   </div>
 </template>
 
@@ -59,16 +58,37 @@ export default {
 <style scoped>
 
 .item {
-  margin-bottom: 60px;
+  flex-basis: 22%;
   border-radius: 10px;
-  padding: 20px;
+  padding: 20px 16px;
   line-height: 20px;
   background: white;
   float: left;
-  margin-right: 15px;
-  margin-left: 15px;
-  width: 225px;
+  margin: 0 1% 60px;
+  min-width: 100px;
   position: relative;
+}
+
+@media(max-width: 1333px) {
+  .item {
+    flex-basis: 23%;
+  }
+}
+@media(max-width: 1073px) {
+   .item {
+    flex-basis: 23%;
+  }
+}
+@media(max-width: 815px) {
+  .item {
+    flex-basis: 31.3%;
+  }
+}
+@media(max-width: 555px) {
+  .item {
+    flex-basis: 48%;
+    margin: 0 1% 12px;
+  }
 }
 
 .item .item-image-wrapper {
@@ -78,7 +98,7 @@ export default {
   position: relative;
 }
 
-.item .item-image {
+.item .member-image-wrapper {
   left: 50%;
   position: absolute;
   top: 50%;
@@ -106,11 +126,10 @@ export default {
 }
 
 .item .item-name {
-  min-height: 40px;
   font-weight: 500;
   color: #0070C9;
-  height: 40px;
   position: relative;
+  display: inline-block;
 }
 
 .item .item-name:hover {
@@ -138,15 +157,10 @@ export default {
   font-size: 12px;
   color: #2E4058;
   display: inline-block;
-  display: flex;
-  justify-content: space-between;
-  text-align: justify;
-  margin-bottom: 5px;
+}
 
-  /* ie 7*/
-  *width: 100%;
-  *-ms-text-justify: distribute-all-lines;
-  *text-justify: distribute-all-lines;
+.item-stock > div {
+  margin-right: 48px;
 }
 
 .item-stock img {
@@ -157,11 +171,9 @@ export default {
 .item-code {
   display: inline-block;
   vertical-align: baseline;
-
-  /* ie 7*/
-  *display: inline;
-  *zoom:1;
-  *text-align: right;
+  font-weight: normal;
+  font-size: 12px;
+  color: #2E4058;
 }
 
 </style>

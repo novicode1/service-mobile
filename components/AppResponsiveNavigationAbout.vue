@@ -24,17 +24,23 @@ export default {
 
 <style scoped>
 
+.menu-header {
+  width: 100%;
+  z-index: 4;
+}
+
+
+
 .nav-hidden .menu-list {
-  padding: 16px;
+  font-weight: 300;
+  padding: 32px 32px;
   list-style: none;
   position: absolute;
-  background-color: #fff;
+  background-color: #393939;
   width: 320px;
-  border-radius: 4px 0 0 4px;
+  border-radius: 0 0 0 4px;
   z-index: 3;
-  -webkit-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.5);
-  -moz-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.5);
-  box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.5);
+
 }
 
 .menu-item .shop-link {
@@ -58,16 +64,17 @@ export default {
 }
 
 .nav-hidden .menu-item a {
-  color: black;
+  color: #fff;
 }
+
 
 .responsive-nav {
   float: right;
   width: 258px;
-  background: #fff;
   transition: margin 0.2s ease-out;
   position: relative;
 }
+
 
 .responsive-nav.collapsed {
   margin-right: -324px;

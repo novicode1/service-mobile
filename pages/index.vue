@@ -3,7 +3,7 @@
     <app-navigation />
     <div class="contain">
       <div class="side-block">
-        <app-sidebar class="store-navigation hidden"/>
+        <app-sidebar class="store-navigation"/>
         <app-filter :pricerange.sync="highprice" class="store-filter"/>
       </div>
         <transition-group name="items" tag="section" class="content">

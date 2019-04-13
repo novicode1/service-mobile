@@ -29,27 +29,48 @@
         </nav>
 
         <responsive-nav class="nav-hidden">
-        <ul class="menu-list">
-          <li class="menu-item">
-            <a href="tel:096-866-73-32" class="tel-call-link">
-              <img src="../images/icons/telephone-call.svg" alt="Номер обратной связи">
-              +38 063-333-99-93
-            </a>
-          </li>
-          <li class="menu-item">
-            <nuxt-link to="/about#start">О нас</nuxt-link>
-          </li>
-          <li class="menu-item">
-            <nuxt-link to="/about#services">Услуги</nuxt-link>
-          </li>
-          <li class="menu-item">
-            <nuxt-link to="/about#contacts">Контакты</nuxt-link>
-          </li>
-          <li class="menu-item">
-            <nuxt-link to="/" class="shop-link">Купить<img src="../images/icons/shopping-cart-black.svg" alt="перейти в магазин"></nuxt-link>
-          </li>
-        </ul>
-      </responsive-nav>
+          <div class="menu-header">
+            <nuxt-link exact to="/" class="menu-logo">
+              <img src="../images/icons/store-logo.png" alt="Логотип Service Mobile">
+            </nuxt-link>
+          </div>
+          <ul class="menu-list">
+            <li class="menu-item">
+              <a href="tel:096-866-73-32" class="tel-call-link">
+                Главная
+              </a>
+            </li>
+            <li class="menu-item">
+              <nuxt-link to="/about#start">О нас</nuxt-link>
+            </li>
+            <li class="menu-item">
+              <nuxt-link to="/about#services">Услуги</nuxt-link>
+            </li>
+            <li class="menu-item">
+              <nuxt-link to="/about#contacts">Контакты</nuxt-link>
+            </li>
+
+            <div class="menu-footer">
+
+              <div class="location">
+                <img src="../images/icons/map-point.svg" alt="Геолокация">
+                <div class="location-text-wrapper">ул. Черноморского Казачества, 4<br> Одесса, Одесская область</div>
+              </div>
+
+              <div class="working-hours">
+                <img src="../images/icons/clock.svg" alt="Рабочие часы">
+                Ежедневно 09:00 - 10:00
+              </div>
+
+              <div class="telephone-number">
+                <img src="../images/icons/telephone-call.svg" alt="Рабочие часы">
+                +380 63–333–99–93
+              </div>
+
+            </div>
+          </ul>
+
+        </responsive-nav>
       </div>
     </nav>
   </div>
@@ -72,6 +93,39 @@ export default {
 
 <style scoped>
 
+.nav-hidden .menu-header {
+  background-color: #232323;
+  width: 320px;
+  padding: 20px;
+}
+
+.nav-hidden .menu-logo img {
+  width: 200px;
+  margin: 0 auto;
+  display: block;
+}
+
+.nav-hidden .shop-link img {
+  margin-left: 4px;
+}
+
+.nav-hidden .menu-footer {
+  display: block;
+  width: 100%;
+  color: #fff;
+  text-align: center;
+  line-height: 22px;
+}
+
+
+.menu-footer .telephone-number img {
+  width: 18px;
+}
+
+.nav-hidden .menu-footer div {
+  margin-bottom: 12px;
+}
+
 .header {
   width: 100%;
   height: 60px;
@@ -80,6 +134,7 @@ export default {
   background-color: #232323;
   margin-bottom: 60px;
   z-index: 6;
+  border-radius: 4px 0 0 0;
 }
 
 .header .logo {
@@ -131,23 +186,24 @@ export default {
   height: .9em;
 }
 
-  @media (max-device-width: 1024px) {
-    .mainmenu {
-      display: none;
-    }
 
-    .header {
-      position: fixed;
-    }
-
-    .nav-hidden {
-      display: block;
-    }
+@media (max-device-width: 1024px) {
+  .mainmenu {
+    display: none;
   }
 
-  @media (max-device-width: 610px) {
-    .logo {
-      display: none !important;
-    }
+  .header {
+    position: fixed;
   }
+
+  .nav-hidden {
+    display: block;
+  }
+}
+
+@media (max-device-width: 610px) {
+  .logo {
+    display: none !important;
+  }
+}
 </style>

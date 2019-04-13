@@ -1,9 +1,6 @@
 <template>
   <footer>
-    <div class="copyright">
-      © 2019 Service Mobile. All rights reserved.
-    </div>
-
+    <img src="../images/icons/store-logo.png" alt="Логотип Service Mobile" class="footer-logo">
     <div class="working-hours">
       <img src="../images/icons/clock.svg" alt="Рабочие часы">
       Ежедневно 09:00 - 10:00
@@ -17,6 +14,10 @@
     <div class="location">
       <img src="../images/icons/map-point.svg" alt="Геолокация">
       <div class="location-text-wrapper">ул. Черноморского Казачества, 4<br> Одесса, Одесская область</div>
+    </div>
+
+    <div class="copyright">
+      © 2019 Service Mobile. All rights reserved.
     </div>
 
   </footer>
@@ -35,8 +36,13 @@ footer {
   color: white;
   margin-top: 10px;
   width: 100%;
-  height: 100px;
+  height: auto;
+  padding: 20px;
   text-align: right;
+}
+
+footer .footer-logo {
+  display: none;
 }
 
 footer > div {
@@ -56,8 +62,31 @@ footer img {
 }
 
 footer .copyright {
-
   justify-content: flex-start;
 }
 
+
+@media (max-device-width: 610px) {
+  footer .footer-logo {
+    display: block;
+    height: 2.5em;
+    margin: auto;
+  }
+
+  footer {
+    text-align: initial;
+    display: initial;
+    height: auto;
+    width: auto;
+    background: transparent;
+  }
+
+  footer .location {
+    margin: 16px 0;
+  }
+
+  footer > div {
+    margin: 16px 0;
+  }
+}
 </style>
