@@ -1,60 +1,6 @@
 <template>
   <main class="wrapper" id="start">
-    <header class="header">
-      <nuxt-link exact to="/about#start" class="logo">
-        <img src="../images/icons/about-logo.png" alt="Логотип Service Mobile">
-      </nuxt-link>
-      <nav class="mainmenu">
-        <ul class="menu-list">
-          <li class="menu-item">
-            <a href="tel:096-866-73-32" class="tel-call-link">
-              <img src="../images/icons/telephone-call.svg" alt="Номер обратной связи">
-              +38 063-333-99-93
-            </a>
-          </li>
-          <li class="menu-item">
-            <nuxt-link to="/about#start">О нас</nuxt-link>
-          </li>
-          <li class="menu-item">
-            <nuxt-link to="/about#services">Услуги</nuxt-link>
-          </li>
-          <li class="menu-item">
-            <nuxt-link to="/about#contacts">Контакты</nuxt-link>
-          </li>
-          <li class="menu-item">
-            <nuxt-link to="/" class="shop-link">Купить<img src="../images/icons/shopping-cart.svg" alt="перейти в магазин"></nuxt-link>
-          </li>
-        </ul>
-      </nav>
-
-      <responsive-nav class="nav-hidden">
-        <div class="menu-header">
-            <nuxt-link exact to="/" class="menu-logo">
-              <img src="../images/icons/store-logo.png" alt="Логотип Service Mobile">
-            </nuxt-link>
-          </div>
-        <ul class="menu-list">
-          <li class="menu-item">
-            <a href="tel:096-866-73-32" class="tel-call-link">
-              <img src="../images/icons/telephone-call.svg" alt="Номер обратной связи">
-              +38 063-333-99-93
-            </a>
-          </li>
-          <li class="menu-item">
-            <nuxt-link to="/about#start">О нас</nuxt-link>
-          </li>
-          <li class="menu-item">
-            <nuxt-link to="/about#services">Услуги</nuxt-link>
-          </li>
-          <li class="menu-item">
-            <nuxt-link to="/about#contacts">Контакты</nuxt-link>
-          </li>
-          <li class="menu-item">
-            <nuxt-link to="/" class="shop-link">Купить<img src="../images/icons/shopping-cart.svg" alt="перейти в магазин"></nuxt-link>
-          </li>
-        </ul>
-      </responsive-nav>
-    </header>
+    <app-navigation page="aboutUs"/>
 
     <main class="content-about">
 
@@ -154,10 +100,11 @@
 
 <script>
 import axios from 'axios';
+import AppNavigation from './../components/AppNavigation.vue';
 
 export default {
   components: {
-    ResponsiveNav
+    AppNavigation,
   },
   data() {
     return {
@@ -166,22 +113,11 @@ export default {
       email: '',
       comment: ''
     };
-  },
-  methods: {
-    onSubmit () {
-
-    }
   }
-};
+}
 </script>
 
 <style scoped>
-
-.nav-hidden .menu-header {
-  background-color: #232323;
-  width: 320px;
-  padding: 20px;
-}
 
 .nav-hidden .menu-logo img {
   width: 200px;
@@ -216,63 +152,6 @@ export default {
   margin-bottom: 1.875em;
 }
 
-.header {
-  font-size: 14px;
-  width: 100%;
-  position: fixed;
-  line-height: 4.375em;
-  padding: 0 4.375em 0 1.563em;
-  background-color: rgba(0, 0, 0, 0.9);
-}
-
-header .nav-hidden {
-  display: none;
-}
-
-.header .logo {
-  display: inline-block;
-}
-
-.header .logo img {
-  height: 2.5em;
-  vertical-align: middle;
-}
-
-.mainmenu {
-  float: right;
-}
-
-.mainmenu .menu-item {
-  display: inline-block;
-}
-
-.mainmenu .tel-call-link img {
-  height: 1.1em;
-  margin: 0 5px -2px 0;
-}
-
-.mainmenu .menu-list li + li {
-  margin-left: 3.125em;
-}
-
-.menu-item .shop-link {
-  border-bottom: 1px solid #FFB500;
-  -webkit-transition: all .15s ease-in-out;
-  -moz-transition: all .15s ease-in-out;
-  -ms-transition: all .15s ease-in-out;
-  -o-transition: all .15s ease-in-out;
-  transition: all .15s ease-in-out;
-  padding-bottom: 3px;
-}
-
-.header .shop-link:hover {
-  border-bottom:rgba(255, 183, 0, 0);
-}
-
-.header .shop-link img {
-  margin-left: 10px;
-  height: .9em;
-}
 
 .content-about > section {
   height: 100vh;

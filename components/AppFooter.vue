@@ -3,17 +3,21 @@
     <img src="../images/icons/store-logo.png" alt="Логотип Service Mobile" class="footer-logo">
     <div class="working-hours">
       <img src="../images/icons/clock.svg" alt="Рабочие часы">
-      Ежедневно 09:00 - 10:00
+      Ежедневно 09:00 - 19:00
     </div>
 
     <div class="telephone-number">
-      <img src="../images/icons/telephone-call.svg" alt="Рабочие часы">
-      +380 63–333–99–93
+      <a href="tel:096-866-73-32" class="tel-call-link">
+        <img src="../images/icons/telephone-call.svg" alt="Рабочие часы">
+        +380 63–333–99–93
+      </a>
     </div>
 
     <div class="location">
-      <img src="../images/icons/map-point.svg" alt="Геолокация">
-      <div class="location-text-wrapper">ул. Черноморского Казачества, 4<br> Одесса, Одесская область</div>
+      <a href="https://goo.gl/maps/36rHrnit9aKGfDUK9" class="tel-call-link">
+        <img src="../images/icons/map-point.svg" alt="Геолокация">
+        <div class="location-text-wrapper">ул. Черноморского Казачества, 4<br> Одесса, Одесская область</div>
+      </a>
     </div>
 
     <div class="copyright">

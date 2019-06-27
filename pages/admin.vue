@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import AppAddProductForm from './../components/form/Form.vue'
+import AppAddProductForm from './../components/form/AddProductForm.vue'
 import AppFooter from './../components/AppFooter.vue'
 import AppNavigation from './../components/AppNavigation'
 
@@ -28,7 +28,4 @@ export default {
 </script>
 
 <style scoped>
-.content-wrapper {
-    padding: 0 100px;
-}
 </style>

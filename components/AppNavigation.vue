@@ -1,46 +1,53 @@
 <template>
-  <div class="navarea">
-    <nav>
-      <div class="capsule header">
-        <nuxt-link exact to="/" class="logo">
-          <img src="../images/icons/store-logo.png" alt="Логотип Service Mobile">
-        </nuxt-link>
+  <header class="header">
+    <nuxt-link exact to="/" class="logo">
+      <img src="../images/icons/store-logo.png" class="main-logo" alt="Логотип Service Mobile">
+      <img src="../images/icons/about-logo.svg" class="small-logo" alt="Логотип Service Mobile" width="40">
+    </nuxt-link>
 
-        <nav class="mainmenu " :class="{ 'responsive' : isActive }">
-          <ul class="menu-list">
-            <li class="menu-item">
-              <a href="tel:096-866-73-32" class="tel-call-link">
-                <img src="../images/icons/telephone-call.svg" alt="Иконка номера для звонка">
-                +38 063-333-99-93
-              </a>
-            </li>
-            <li class="menu-item">
-              <nuxt-link to="/about">О нас</nuxt-link>
-            </li>
-            <li class="menu-item">
-              <nuxt-link to="/about#services">Услуги</nuxt-link>
-            </li>
-            <li class="menu-item">
-              <nuxt-link to="/about#contacts">Контакты</nuxt-link>
-            </li>
-            <li class="menu-item">
-              <nuxt-link to="/cart" class="shop-link">Корзина<img src="../images/icons/shopping-cart.svg" alt="Иконка номера для звонка"></nuxt-link>
-            </li>
-          </ul>
+    <nav class="mainmenu " :class="{ 'responsive' : isActive }">
+      <ul class="menu-list">
+        <li class="menu-item telephone">
+          <a href="tel:096-866-73-32" class="tel-call-link">
+            <img src="../images/icons/telephone-call.svg" alt="Иконка номера для звонка">
+            +38 063-333-99-93
+          </a>
+        </li>
+        <li class="menu-item">
+          <nuxt-link to="/about">О нас</nuxt-link>
+        </li>
+        <li class="menu-item">
+          <nuxt-link to="/about#services">Услуги</nuxt-link>
+        </li>
+        <li class="menu-item">
+          <nuxt-link to="/about#contacts">Контакты</nuxt-link>
+        </li>
 
-          <div role="button" @click="changeMenuState" aria-label="Menu" id="main-nav-toggle">
-            Menu
-            <span className="dropdown-icon"></span>
-          </div>
-        </nav>
+        <li class="menu-item">
+          <nuxt-link to="/" class="shop-link" v-if="page">
+            Магазин
+            <img src="../images/icons/shopping-cart.svg" alt="Иконка номера для звонка">
+          </nuxt-link>
 
+          <nuxt-link to="/cart" class="shop-link" v-if="!page">
+            Корзина
+            <img src="../images/icons/shopping-cart.svg" alt="Иконка номера для звонка">
+          </nuxt-link>
+        </li>
+      </ul>
+
+      <div role="button" @click="changeMenuState" aria-label="Menu" id="main-nav-toggle">
+        Меню
+        <span class="dropdown-icon"></span>
       </div>
     </nav>
-  </div>
+  </header>
 </template>
 
 <script>
+
 export default {
+  props: ['page'],
   data() {
     return {
       isActive: true
@@ -66,13 +73,17 @@ export default {
   line-height: 4.375em;
   padding: 0 4.375em 0 1.563em;
   background-color: #232323;
-  margin-bottom: 60px;
   z-index: 6;
   border-radius: 4px 0 0 0;
+  box-sizing: border-box;
 }
 
 .header .logo {
   display: inline-block;
+}
+
+.header .small-logo {
+  display: none;
 }
 
 .header .logo img {
@@ -140,21 +151,21 @@ export default {
   display: none;
   top: 0;
   color: #fff;
-  font-weight: 500;
-  font-size: 1.125em;
-  line-height: 2.9em;
+  font-weight: 400;
+  font-size: 1em;
+  line-height: 48px;
+  box-sizing: border-box;
   overflow: hidden;
   margin: 0;
-  padding: 2px 2px 0;
+  padding: 0 3px 0 0;
   background: transparent;
   border: 0;
 }
 
 .mainmenu .dropdown-icon {
-  content: "";
   display: inline-block;
-  width: 5px;
-  height: 5px;
+  width: 8px;
+  height: 8px;
   margin-bottom: 3px;
   margin-left: 3px;
   vertical-align: baseline;
@@ -164,12 +175,23 @@ export default {
   transition: transform .3s;
 }
 
-@media (max-device-width: 900px) { 
-  .page-header .logo {
+@media (max-device-width: 900px) {
+  .header {
+    height: auto;
+    padding: 0;
+    overflow: auto;
+    box-sizing: border-box;
+    line-height: initial;
+  }
+
+  .header .logo {
+    line-height: 48px;
     display: inline-block;
-    position: initial;
-    margin-top: 8px;
-    margin-left: 32px;
+    padding-left: 32px;
+  }
+
+  .header .logo img {
+    height: 2em;
   }
 
   #main-nav-toggle {
@@ -177,12 +199,18 @@ export default {
     display: block;
   }
 
+  .mainmenu {
+    float: none;
+  }
+
   .mainmenu .menu-item {
     display: none;
+    line-height: 48px;
   }
 
   .mainmenu .menu-item a {
     display: block;
+    line-height: inherit;
   }
 
   .mainmenu.responsive .menu-item {
@@ -217,11 +245,19 @@ export default {
 
   .mainmenu.responsive .menu-list {
     background-color: #272727;
-    padding: 2px 0;
+    padding: 40px 0;
   }
 
   .mainmenu.responsive .menu-item + .menu-item {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .mainmenu .shop-link {
+    padding-bottom: 3px;
+  }
+
+  .mainmenu .shop-link::before {
+    width: 6em;
   }
 
   #main-nav-toggle {
@@ -229,7 +265,25 @@ export default {
     display: block;
     position: absolute;
   }
+
+  .mainmenu.responsive .telephone a::after {
+    display: none;
+  }
 }
 
+
+@media (max-device-width: 900px) {
+  .header .small-logo {
+    display: block;
+  }
+
+  .header .logo {
+    padding: 10px 0 10px 32px;
+  }
+
+  .header .main-logo {
+    display: none;
+  }
+}
 
 </style>

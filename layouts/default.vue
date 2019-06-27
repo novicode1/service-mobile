@@ -22,14 +22,13 @@ export default {
 <style>
 html,
 body {
-    display: flex;
-  flex-direction: column;
-  min-height: 100vh;
   height: 100%;
   margin: 0;
+}
+
+body {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
 }
 
 footer {
@@ -46,16 +45,13 @@ footer {
   color: black;
 }
 
-/* sticky footer stuff */
-.wrapper {
-  min-height: 100vh;
-  margin-bottom: -60px;
-}
-
 .footer,
 .push {
   height: 50px;
   margin-top: 10px;
+}
+.contain {
+  padding-top: 80px;
 }
 
   @media (max-device-width: 1024px) {

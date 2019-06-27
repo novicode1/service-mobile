@@ -47,6 +47,8 @@ module.exports = {
   plugins: [
     { ssr: false, src: '~plugins/string-cut' },
     '~/plugins/firebase',
-    {src: '~/plugins/vuelidate'}
+    {src: '~/plugins/vuelidate'},
+    {src: '~/plugins/telegram/telegram-form-contact.js'},
+    {src: '~/plugins/telegram/telegram-form-order.js'}
   ]
 }

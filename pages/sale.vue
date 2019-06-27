@@ -51,21 +51,3 @@ export default {
 };
 </script>
 
-<style>
-.saleimg .ppl-banner {
-  height: 105%;
-}
-</style>
-<style>
-/* sticky footer stuff */
-.wrapper {
-  min-height: 100vh;
-  margin-bottom: -60px;
-}
-
-.footer,
-.push {
-  height: 50px;
-  margin-top: 10px;
-}
-</style>
