@@ -38,7 +38,7 @@
 import AppCheckout from './../components/AppCheckout.vue';
 import AppFooter from './../components/AppFooter.vue';
 import AppSuccess from './../components/AppSuccess.vue';
-import AppNavigation from './../components/AppNavigation'
+import AppNavigation from './../components/AppNavigation';
 
 export default {
   data() {

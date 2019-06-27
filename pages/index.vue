@@ -6,7 +6,7 @@
         <app-sidebar class="store-navigation"/>
         <app-filter :pricerange.sync="highprice" class="store-filter"/>
       </div>
-        <transition-group name="items" tag="section" class="content">
+      <transition-group name="items" tag="section" class="content">
         <app-item-card
           v-for="(item, index) in products"
           :key="item"
@@ -26,7 +26,6 @@ import AppFooter from './../components/AppFooter.vue';
 import AppNavigation from './../components/AppNavigation.vue';
 import AppFilter from './../components/AppFilter.vue';
 import AppSidebar from './../components/AppSidebar.vue';
-import AppMasthead from './../components/AppMasthead.vue';
 import AppItemCard from './../components/AppItemCard.vue';
 
 export default {
@@ -36,7 +35,6 @@ export default {
 
     AppSidebar,
     AppFilter,
-    AppMasthead,
     AppItemCard
   },
   data() {

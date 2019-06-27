@@ -154,7 +154,6 @@
 
 <script>
 import axios from 'axios';
-import ResponsiveNav from './../components/AppResponsiveNavigationAbout.vue';
 
 export default {
   components: {

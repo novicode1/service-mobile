@@ -45,6 +45,8 @@ module.exports = {
     }
   },
   plugins: [
-    { ssr: false, src: '~plugins/string-cut' }
+    { ssr: false, src: '~plugins/string-cut' },
+    '~/plugins/firebase',
+    {src: '~/plugins/vuelidate'}
   ]
 }

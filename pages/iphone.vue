@@ -8,7 +8,7 @@
       </div>
       <transition-group name="items" tag="section" class="content">
         <app-item-card
-          v-for="(item, index) in mProducts"
+          v-for="(item, index) in wProducts"
           :key="item"
           :item="item"
           :index="index"
@@ -31,9 +31,9 @@ import AppItemCard from './../components/AppItemCard.vue';
 
 export default {
   components: {
-    AppFilter,
     AppFooter,
     AppNavigation,
+    AppFilter,
     AppSidebar,
     AppMasthead,
     AppItemCard
@@ -44,8 +44,8 @@ export default {
     };
   },
   computed: {
-    mProducts() {
-      return this.$store.getters.men.filter(el =>
+    wProducts() {
+      return this.$store.getters.iphone.filter(el =>
         this.$store.state.sale
           ? el.price < this.highprice && el.sale
           : el.price < this.highprice
@@ -54,7 +54,6 @@ export default {
   }
 };
 </script>
-
 <style>
 /* sticky footer stuff */
 .wrapper {

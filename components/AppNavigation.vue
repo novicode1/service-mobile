@@ -5,7 +5,8 @@
         <nuxt-link exact to="/" class="logo">
           <img src="../images/icons/store-logo.png" alt="Логотип Service Mobile">
         </nuxt-link>
-        <nav class="mainmenu">
+
+        <nav class="mainmenu " :class="{ 'responsive' : isActive }">
           <ul class="menu-list">
             <li class="menu-item">
               <a href="tel:096-866-73-32" class="tel-call-link">
@@ -26,106 +27,39 @@
               <nuxt-link to="/cart" class="shop-link">Корзина<img src="../images/icons/shopping-cart.svg" alt="Иконка номера для звонка"></nuxt-link>
             </li>
           </ul>
+
+          <div role="button" @click="changeMenuState" aria-label="Menu" id="main-nav-toggle">
+            Menu
+            <span className="dropdown-icon"></span>
+          </div>
         </nav>
 
-        <responsive-nav class="nav-hidden">
-          <div class="menu-header">
-            <nuxt-link exact to="/" class="menu-logo">
-              <img src="../images/icons/store-logo.png" alt="Логотип Service Mobile">
-            </nuxt-link>
-          </div>
-          <ul class="menu-list">
-            <li class="menu-item">
-              <a href="tel:096-866-73-32" class="tel-call-link">
-                Главная
-              </a>
-            </li>
-            <li class="menu-item">
-              <nuxt-link to="/about#start">О нас</nuxt-link>
-            </li>
-            <li class="menu-item">
-              <nuxt-link to="/about#services">Услуги</nuxt-link>
-            </li>
-            <li class="menu-item">
-              <nuxt-link to="/about#contacts">Контакты</nuxt-link>
-            </li>
-
-            <div class="menu-footer">
-
-              <div class="location">
-                <img src="../images/icons/map-point.svg" alt="Геолокация">
-                <div class="location-text-wrapper">ул. Черноморского Казачества, 4<br> Одесса, Одесская область</div>
-              </div>
-
-              <div class="working-hours">
-                <img src="../images/icons/clock.svg" alt="Рабочие часы">
-                Ежедневно 09:00 - 10:00
-              </div>
-
-              <div class="telephone-number">
-                <img src="../images/icons/telephone-call.svg" alt="Рабочие часы">
-                +380 63–333–99–93
-              </div>
-
-            </div>
-          </ul>
-
-        </responsive-nav>
       </div>
     </nav>
   </div>
 </template>
 
 <script>
-import ResponsiveNav from './../components/AppResponsiveNavigationAbout.vue';
-
 export default {
-  components: {
-    ResponsiveNav
+  data() {
+    return {
+      isActive: true
+    }
   },
   computed: {
     cartTotal() {
-      return this.$store.state.cartTotal;
+      return this.$store.state.cartTotal
+    }
+  },
+  methods: {
+    changeMenuState() {
+      this.isActive = !this.isActive
     }
   }
 };
 </script>
 
 <style scoped>
-
-.nav-hidden .menu-header {
-  background-color: #232323;
-  width: 320px;
-  padding: 20px;
-}
-
-.nav-hidden .menu-logo img {
-  width: 200px;
-  margin: 0 auto;
-  display: block;
-}
-
-.nav-hidden .shop-link img {
-  margin-left: 4px;
-}
-
-.nav-hidden .menu-footer {
-  display: block;
-  width: 100%;
-  color: #fff;
-  text-align: center;
-  line-height: 22px;
-}
-
-
-.menu-footer .telephone-number img {
-  width: 18px;
-}
-
-.nav-hidden .menu-footer div {
-  margin-bottom: 12px;
-}
-
 .header {
   width: 100%;
   height: 60px;
@@ -141,10 +75,6 @@ export default {
   display: inline-block;
 }
 
-.nav-hidden {
-  display: none;
-}
-
 .header .logo img {
   height: 2.5em;
   vertical-align: middle;
@@ -158,6 +88,11 @@ export default {
   display: inline-block;
 }
 
+.mainmenu .menu-item a {
+  line-height: 60px;
+  display: block;
+}
+
 .mainmenu .tel-call-link img {
   height: 1.1em;
   margin: 0 5px -2px 0;
@@ -168,13 +103,18 @@ export default {
 }
 
 .mainmenu .shop-link {
-  border-bottom: 1px solid #FFB500;
-  -webkit-transition: all .15s ease-in-out;
-  -moz-transition: all .15s ease-in-out;
-  -ms-transition: all .15s ease-in-out;
-  -o-transition: all .15s ease-in-out;
   transition: all .15s ease-in-out;
-  padding-bottom: 3px;
+  position: relative;
+}
+
+.mainmenu .shop-link::before {
+  bottom: 15px;
+  background-color: #FFB500;
+  content: '';
+  height: 1px;
+  display: block;
+  width: 100%;
+  position: absolute;
 }
 
 .mainmenu .shop-link:hover {
@@ -187,23 +127,109 @@ export default {
 }
 
 
-@media (max-device-width: 1024px) {
-  .mainmenu {
+
+
+.mainmenu .menu-item a:hover {
+  color: #a6a6a6;
+  transition: color 0.12s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+
+#main-nav-toggle {
+  position: absolute;
+  right: 32px;
+  display: none;
+  top: 0;
+  color: #fff;
+  font-weight: 500;
+  font-size: 1.125em;
+  line-height: 2.9em;
+  overflow: hidden;
+  margin: 0;
+  padding: 2px 2px 0;
+  background: transparent;
+  border: 0;
+}
+
+.mainmenu .dropdown-icon {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-bottom: 3px;
+  margin-left: 3px;
+  vertical-align: baseline;
+  border-top: 1.5px solid #fff;
+  border-right: 1.5px solid #fff;
+  transform: rotate(135deg);
+  transition: transform .3s;
+}
+
+@media (max-device-width: 900px) { 
+  .page-header .logo {
+    display: inline-block;
+    position: initial;
+    margin-top: 8px;
+    margin-left: 32px;
+  }
+
+  #main-nav-toggle {
+    position: relative;
+    display: block;
+  }
+
+  .mainmenu .menu-item {
     display: none;
   }
 
-  .header {
-    position: fixed;
-  }
-
-  .nav-hidden {
+  .mainmenu .menu-item a {
     display: block;
   }
-}
 
-@media (max-device-width: 610px) {
-  .logo {
-    display: none !important;
+  .mainmenu.responsive .menu-item {
+    display: block;
+    text-align: left;
+    padding: 0;
+    margin: 0 28px;
+    font-weight: 500;
+  }
+
+  .mainmenu.responsive .menu-item a::after {
+    content: "";
+    display: block;
+    float: right;
+    margin-top: 22px;
+    width: 5px;
+    height: 5px;
+    margin-bottom: 3px;
+    margin-left: 3px;
+    border-top: 1.2px solid rgba(255, 255, 255, 0.2);
+    border-right: 1.2px solid rgba(255, 255, 255, 0.2);
+    transform: rotate(45deg);
+    transition: transform .3s;
+  }
+
+  .mainmenu.responsive .dropdown-icon {
+    transform: rotate(-45deg);
+    margin-left: 4px;
+    margin-bottom: -1.5px;
+    transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
+  .mainmenu.responsive .menu-list {
+    background-color: #272727;
+    padding: 2px 0;
+  }
+
+  .mainmenu.responsive .menu-item + .menu-item {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  #main-nav-toggle {
+    float: right;
+    display: block;
+    position: absolute;
   }
 }
+
+
 </style>

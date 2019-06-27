@@ -8,6 +8,11 @@
 
 <script>
 export default {
+  created() {
+    this.$store.dispatch("loadProducts").then(() => {
+      console.log("Successful dispatch")
+    })
+  },
   components: {
     name: "footer"
   }

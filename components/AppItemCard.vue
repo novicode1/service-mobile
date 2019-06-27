@@ -3,29 +3,31 @@
     <span class="salepill" v-if="item.sale">Б/у</span>
 
     <div class="item-image-wrapper">
-      <nuxt-link to="/item">
-        <img :src="`/${item.img}`" :alt="`Image of ${item.name}`" class="item-image">
+      <nuxt-link :to="{ name: 'product-item', query: { id: item.id }}">
+        <img :src="`${item.imageUrl}`" :alt="`Image of ${item.name}`" class="item-image">
       </nuxt-link>
     </div>
 
-    <p class="item-name">{{ item.name | truncate(44, ' ...')}}</p>
+    <nuxt-link :to="{ name: 'product-item', query: { id: item.id }}">
+      <p class="item-name">{{ item.name | truncate(44, ' ...')}}</p>
+    </nuxt-link>
     <p class="item-price">{{ item.price | usdollar }}</p>
 
     <div class="item-stock">
-      <div class="in-stock">
+      <div class="in-stock" v-if="item.inStock === true">
         <img src="../images/icons/in-stock.svg" alt="В наличии">
         В наличии
       </div>
 
 
-      <!-- <div class="not-in-stock">
+      <div class="not-in-stock" v-if="item.inStock === false">
         <img src="../images/icons/not-in-stock.svg" alt="Нет в наличии">
-        В наличии
-      </div> -->
+        Нет в наличии
+      </div>
 
     </div>
     <span class="item-code">
-      Код: 44013
+      Код: {{ item.code }}
     </span>
   </div>
 </template>
@@ -98,13 +100,10 @@ export default {
   position: relative;
 }
 
-.item .member-image-wrapper {
+.item-image-wrapper img {
   left: 50%;
   position: absolute;
   top: 50%;
-  -ms-transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   max-width: 90%;
   max-height: 90%;
@@ -127,6 +126,7 @@ export default {
 
 .item .item-name {
   font-weight: 500;
+  height: 3em;
   color: #0070C9;
   position: relative;
   display: inline-block;
@@ -156,7 +156,7 @@ export default {
   font-weight: normal;
   font-size: 12px;
   color: #2E4058;
-  display: inline-block;
+  float: left;
 }
 
 .item-stock > div {
@@ -169,7 +169,7 @@ export default {
 }
 
 .item-code {
-  display: inline-block;
+  float: right;
   vertical-align: baseline;
   font-weight: normal;
   font-size: 12px;

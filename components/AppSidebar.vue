@@ -8,71 +8,73 @@
           <img src="./../images/icons/nav-arrow-down.svg" alt="развернуть">
         </div>
         <ul class="items-list" v-bind:style='{"display": (isActive? "none" : "block" ), "height": (isActive? "0" : "auto" )}'>
-          <nuxt-link to="/women">
-            <li class="list-item">
-            iPhone
-            </li>
-          </nuxt-link>
 
-          <nuxt-link to="/men">
-            <li class="list-item">
+          <li class="list-item">
+            <nuxt-link to="/iphone">
+              iPhone
+            </nuxt-link>
+          </li>
+
+          <li class="list-item">
+            <nuxt-link to="/macbook">
+              Macbook
+            </nuxt-link>
+          </li>
+
+          <li class="list-item">
+            <nuxt-link to="/men">
               Samsung
-            </li>
-          </nuxt-link>
+            </nuxt-link>
+          </li>
 
-          <nuxt-link to="/women">
-            <li class="list-item">
+          <li class="list-item">
+            <nuxt-link to="/women">
               Meizu
-            </li>
-          </nuxt-link>
+            </nuxt-link>
+          </li>
 
-          <nuxt-link to="/sale">
-            <li class="list-item">
-              Ноутбуки
-            </li>
-          </nuxt-link>
-
-          <nuxt-link to="/sale">
-            <li class="list-item">
+          <li class="list-item">
+            <nuxt-link to="/sale">
               Аудио
-            </li>
-          </nuxt-link>
+            </nuxt-link>
+          </li>
 
-          <nuxt-link to="/sale">
-            <li class="list-item">
+          <li class="list-item">
+            <nuxt-link to="/sale">
               Компьютеры
-            </li>
-          </nuxt-link>
+            </nuxt-link>
+          </li>
 
-          <nuxt-link to="/sale">
-            <li class="list-item">
+          <li class="list-item">
+            <nuxt-link to="/sale">
               Гироскутеры
-            </li>
-          </nuxt-link>
+            </nuxt-link>
+          </li>
 
-          <nuxt-link to="/sale">
-            <li class="list-item">
-              Гаджеты
-            </li>
-          </nuxt-link>
 
-          <nuxt-link to="/sale">
-            <li class="list-item">
-              Аксессуары
-            </li>
-          </nuxt-link>
+          <li class="list-item">
+            <nuxt-link to="/sale">
+            Гаджеты
+            </nuxt-link>
+          </li>
 
-          <nuxt-link to="/sale">
-            <li class="list-item">
+          <li class="list-item">
+            <nuxt-link to="/sale">
+            Аксессуары
+            </nuxt-link>
+          </li>
+
+          <li class="list-item">
+            <nuxt-link to="/sale">
               Ремонт и услуги
-            </li>
-          </nuxt-link>
+            </nuxt-link>
+          </li>
 
-          <nuxt-link to="/sale">
-            <li class="list-item">
+          <li class="list-item">
+            <nuxt-link to="/sale">
               Б/у техника
-            </li>
-          </nuxt-link>
+            </nuxt-link>
+          </li>
         </ul>
       </div>
     </div>
@@ -165,18 +167,18 @@ aside {
   }
 }
 
-.store-navigation:hover .items-list {
+.store-navigation .items-list {
   height: auto;
   opacity: 1;
   padding: 8px 24px 24px;
 }
 
-.store-navigation:hover .items-list * {
+.store-navigation .items-list * {
   height: auto;
   display: block;
 }
 
-.store-navigation:hover .nav-hidden {
+.store-navigation .nav-hidden {
   border-radius: 0 10px 10px 0;
 }
 
