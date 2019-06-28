@@ -31,7 +31,7 @@ input::-moz-focus-inner {
 input:focus,
 textarea:focus,
 select:focus {
-    outline: 1px dashed #888; /* border: ....... */
+    outline: 1px dashed #888;
 }
 
 textarea {
@@ -246,8 +246,7 @@ button::-moz-focus-inner {
     background-color: #76bbe4;
 }
 
-.input-type-file input[type="file"]:hover ~ button,
-button:hover {
+.input-type-file input[type="file"]:hover ~ button {
     background-color: #76bbe4;
     background-image: none;
 }

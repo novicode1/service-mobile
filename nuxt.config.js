@@ -2,6 +2,9 @@ module.exports = {
   /*
   ** Headers of the page
   */
+  build: {
+    vendor: ['axios']
+  },
   head: {
     title: 'Service Mobile',
     script: [{ src: 'https://js.stripe.com/v3/' }],
@@ -48,7 +51,14 @@ module.exports = {
     { ssr: false, src: '~plugins/string-cut' },
     '~/plugins/firebase',
     {src: '~/plugins/vuelidate'},
-    {src: '~/plugins/telegram/telegram-form-contact.js'},
-    {src: '~/plugins/telegram/telegram-form-order.js'}
-  ]
+    {src: '~/plugins/axios'}
+  ],
+  axios: {
+    /* set API_URL environment variable to configure access to the API
+    */
+    baseURL: process.env.API_URL || 'http://localhost:3000/',
+    redirectError: {
+      404: '/notfound'
+    }
+  }
 }

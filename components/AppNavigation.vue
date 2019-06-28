@@ -5,7 +5,7 @@
       <img src="../images/icons/about-logo.svg" class="small-logo" alt="Логотип Service Mobile" width="40">
     </nuxt-link>
 
-    <nav class="mainmenu " :class="{ 'responsive' : isActive }">
+    <nav class="mainmenu " :class="{ 'responsive' : isActive }" role="nav">
       <ul class="menu-list">
         <li class="menu-item telephone">
           <a href="tel:096-866-73-32" class="tel-call-link">

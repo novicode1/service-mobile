@@ -191,7 +191,7 @@ export default {
             }
 
             this.$store.dispatch('createProduct', productData)
-            alert("Добавлено")
+            alert("Товар добавлен")
         },
     }
 }
@@ -237,7 +237,7 @@ h1 {
         text-align: left;
     }
 
-    .add-product-form .submit-button {
+    .add-product-form .pmsubmit-button {
         margin: 0 auto;
         display: block;
     }

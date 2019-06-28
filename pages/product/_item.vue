@@ -44,23 +44,11 @@
                         </div>
                     </div>
 
-                    <form action="plugins/form.php" method="POST" class="contact-form">
-                        <label>
-                            Имя
-                            <input type="text" placeholder="Например, Даниил" name="name" required>
-                        </label>
+                    <app-order-form :code="product.code" />
 
-                        <label>
-                            Номер телефона
-                            <input type="tel" placeholder="0976665544" name="phone" required>
-                        </label>
-
-                        <button type="submit" class="primary-button">Быстрый заказ</button>
-                    </form>
-
-                    <div class="guarantees">
+                    <!-- <div class="guarantees">
                         <img src="../../images/icons/guarantee.svg" alt="В наличии">
-                    </div>
+                    </div> -->
                 </aside>
             </main>
         </div>
@@ -75,6 +63,7 @@
 import AppFooter from './../../components/AppFooter.vue';
 import AppNavigation from './../../components/AppNavigation.vue';
 import AppSidebar from './../../components/AppSidebar.vue';
+import AppOrderForm from '../../components/form/AppOrderForm.vue';
 
 export default {
     data () {
@@ -85,7 +74,8 @@ export default {
     components: {
         AppFooter,
         AppNavigation,
-        AppSidebar
+        AppSidebar,
+        AppOrderForm
     },
     computed: {
         product () {
@@ -186,61 +176,7 @@ export default {
     color: #FFB500;
 }
 
-.contact-form {
-    margin: 0 auto 80px;
-    display: inline-block;
-    border-top: 1px solid rgba(191, 192, 192, 0.25);
-    border-bottom: 1px solid rgba(191, 192, 192, 0.25);
-    padding: 18px 0 28px;
-}
 
-input,
-textarea,
-select {
-    display: block;
-    width: 250px;
-    height: auto;
-    margin: 0 auto;
-    line-height: 1.3em; /* 18px */
-    font-size: 14px;
-    font-weight: 300;
-    font-family: inherit;
-    border-radius: 10px;
-    color: #000;
-    padding: calc(1.125em / 2) 13px;
-    border: 1px solid #949494;
-    box-sizing: border-box;
-    background-color: inherit;
-    color: #fff;
-    resize: vertical;
-    background: rgba(255, 255, 255, 0.05);
-}
-
-label {
-    text-align: left;
-    margin-bottom: 12px;
-    display: block;
-    line-height: 2em;
-    color: #fff;
-}
-
-.primary-button {
-    display: inline-block;
-    margin-top: 8px;
-    padding: 10px 70px 10px 36px;
-    font-size: 0.875em;
-    min-width: 50px;
-    border-radius: 20px;
-    border: 2px solid #ffc636;
-    background: #000;
-    text-transform: uppercase;
-    background: url(../../images/icons/arrow-right-link.svg) no-repeat 85% 50%;
-    background-color: rgba(255, 255, 255, 0.05);
-}
-
-.primary-button:hover {
-    border: 2px solid #fff;
-}
 
 .item-stock {
     font-weight: normal;

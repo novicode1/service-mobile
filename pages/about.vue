@@ -51,25 +51,8 @@
       </section>
       <footer>
         <section class="contact-us" id="contacts">
-          <div class="contact-form">
-            <h4>Напишите нам</h4>
-            <form v-on:submit.prevent="onSubmit" method="POST" class="feedback-form">
+          <app-send-question-form />
 
-              <!-- <label>
-                <input type="text" class="form-control message-poiter-hidden" style="display: none" name="user_model" value="Armchairs">
-              </label> -->
-
-                <input type="text" class="form-control" name="user_name" placeholder="Имя" v-model="name" required>
-
-                <input type="text" class="form-control" name="user_phone" placeholder="Номер телефона" v-model="phone" required>
-
-                <input type="email" class="form-control" name="user_email" placeholder="E-mail" v-model="email" required>
-
-                <input type="text" class="form-control" name="user_comment" placeholder="Комментарий" v-model="comment" required>
-
-              <button type="submit" class="submit-message-button">Отправить</button>
-					  </form>
-          </div>
           <div class="contacts">
             <h4>Контакты</h4>
             <div class="maps-location">
@@ -99,12 +82,13 @@
 </template>
 
 <script>
-import axios from 'axios';
-import AppNavigation from './../components/AppNavigation.vue';
+import AppNavigation from './../components/AppNavigation.vue'
+import AppSendQuestionForm from './../components/form/AppSendQuestionForm.vue'
 
 export default {
   components: {
     AppNavigation,
+    AppSendQuestionForm
   },
   data() {
     return {
@@ -260,27 +244,7 @@ footer .contact-us h4 {
   font-weight: normal;
   font-size: 2em;
   margin-bottom: 1em;
-}
-
-.contact-us .contact-form {
-  width: 45%;
-  margin: 0 auto;
-  text-align: center;
-  display: inline-block;
-  vertical-align: top;
-}
-
-.contact-form .form-control {
-  height: 1.875em;
-  margin-bottom: 5px;
-  padding: 15px 13px;
-  width: 300px;
-  color: white;
-  font-size: 1em;
-  font-family: 'Roboto', sans-serif;
-  border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.035);
-  border: 1px solid #707070;
+  margin-bottom: 50px;
 }
 
 .feedback-form .submit-message-button[type="submit"] {
@@ -306,6 +270,7 @@ footer .contact-us h4 {
 
 .contact-us .contacts {
   width: 55%;
+  padding: 40px 0;
   margin: 0 auto;
   text-align: center;
   display: inline-block;

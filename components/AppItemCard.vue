@@ -105,8 +105,8 @@ export default {
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
-  max-width: 90%;
-  max-height: 90%;
+  max-width: 100%;
+  max-height: 95%;
 }
 
 .item .item-image:hover {
