@@ -1,16 +1,26 @@
 <template>
   <div class="item">
-    <span class="salepill" v-if="item.sale">Б/у</span>
+    <span class="salepill salepill-used" v-if="item.used" :click="additem">Б/у</span>
+    <span class="salepill salepill-sale" v-if="item.sale">Скидка</span>
 
     <div class="item-image-wrapper">
-      <nuxt-link :to="{ name: 'product-item', query: { id: item.id }}">
+      <nuxt-link
+        :to="{ name: 'product-item', query: { path: this.$route.name, id: item.id, category: category, name: item.name }}"
+      >
         <img :src="`${item.imageUrl}`" :alt="`Image of ${item.name}`" class="item-image">
       </nuxt-link>
     </div>
 
-    <nuxt-link :to="{ name: 'product-item', query: { id: item.id }}">
-      <p class="item-name">{{ item.name | truncate(44, ' ...')}}</p>
-    </nuxt-link>
+    <nuxt-link
+      :to="{
+      name: 'product-item',
+      query: {
+        path: this.$route.name,
+        id: item.id,
+        category: category.category
+      }}"
+      class="item-name"
+    >{{ item.name | truncate(34, ' ...')}}</nuxt-link>
     <p class="item-price">{{ item.price | usdollar }}</p>
 
     <div class="item-stock">
@@ -19,21 +29,22 @@
         В наличии
       </div>
 
-
       <div class="not-in-stock" v-if="item.inStock === false">
         <img src="../images/icons/not-in-stock.svg" alt="Нет в наличии">
         Нет в наличии
       </div>
-
     </div>
-    <span class="item-code">
-      Код: {{ item.code }}
-    </span>
+    <span class="item-code">Код: {{ item.code | truncate(16, '...')}}</span>
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      category: this.checkPageCategory()
+    };
+  },
   props: {
     item: {
       type: Object,
@@ -44,25 +55,25 @@ export default {
       required: true
     }
   },
+
   filters: {
     usdollar: function(value) {
       return `$${value}`;
     }
   },
   methods: {
-    addItem() {
-      this.$store.commit('addItem', this.item);
+    checkPageCategory() {
+      return this.$route.query.category ? this.$route.query.category : "main";
     }
   }
 };
 </script>
 
 <style scoped>
-
 .item {
   flex-basis: 22%;
   border-radius: 10px;
-  padding: 20px 16px;
+  padding: 20px 16px 24px;
   line-height: 20px;
   background: white;
   float: left;
@@ -71,22 +82,22 @@ export default {
   position: relative;
 }
 
-@media(max-width: 1333px) {
+@media (max-width: 1333px) {
   .item {
     flex-basis: 23%;
   }
 }
-@media(max-width: 1073px) {
-   .item {
+@media (max-width: 1073px) {
+  .item {
     flex-basis: 23%;
   }
 }
-@media(max-width: 815px) {
+@media (max-width: 815px) {
   .item {
     flex-basis: 31.3%;
   }
 }
-@media(max-width: 555px) {
+@media (max-width: 555px) {
   .item {
     flex-basis: 48%;
     margin: 0 1% 12px;
@@ -115,19 +126,30 @@ export default {
 
 .item .salepill {
   position: absolute;
-  background-color: #0070C9;
+  top: 18px;
   color: white;
   padding: 2px 10px;
   font-size: 13px;
   font-weight: 500;
   z-index: 2;
-  border-radius: 1000px;
+  border-radius: 20px;
+}
+
+.item .salepill-used {
+  background-color: #0070c9;
+}
+
+.item .salepill-sale {
+  background-color: #ffb500;
+  right: 16px;
 }
 
 .item .item-name {
   font-weight: 500;
-  height: 3em;
-  color: #0070C9;
+  height: 2.86em;
+  line-height: 1.43em;
+  text-overflow: ellipsis;
+  color: #0070c9;
   position: relative;
   display: inline-block;
 }
@@ -140,10 +162,10 @@ export default {
 .item .item-price {
   font-size: 16px;
   font-weight: 500;
-  border-bottom: 1px solid #D1D1D1;
+  border-bottom: 1px solid #f6f6f6;
   padding-bottom: 12px;
   margin-bottom: 12px;
-  color: #2E3142;
+  color: #2e3142;
   margin-top: 9px;
 }
 
@@ -155,12 +177,8 @@ export default {
 .item-stock {
   font-weight: normal;
   font-size: 12px;
-  color: #2E4058;
-  float: left;
-}
-
-.item-stock > div {
-  margin-right: 48px;
+  color: #2e4058;
+  margin-bottom: 4px;
 }
 
 .item-stock img {
@@ -169,11 +187,27 @@ export default {
 }
 
 .item-code {
-  float: right;
-  vertical-align: baseline;
+  line-height: 18px;
+  display: block;
   font-weight: normal;
+  position: absolute;
+  bottom: 8px;
+  right: 10px;
   font-size: 12px;
-  color: #2E4058;
+  color: rgba(0, 0, 0, 0.5);
 }
 
+@media (max-device-width: 400px) {
+  .item {
+    flex-basis: 50%;
+    border-radius: 0;
+    margin: 0;
+    position: relative;
+    padding-bottom: 40px;
+  }
+
+  .item:nth-child(2n) {
+    border-left: 1px solid #ebebeb;
+  }
+}
 </style>

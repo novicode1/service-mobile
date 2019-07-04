@@ -19,7 +19,7 @@ export default {
   },
   computed: {
     checked() {
-      return this.$store.state.sale;
+      return this.$store.state.used;
     }
   },
   methods: {

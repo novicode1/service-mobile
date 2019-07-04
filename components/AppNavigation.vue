@@ -17,7 +17,7 @@
           <nuxt-link to="/about">О нас</nuxt-link>
         </li>
         <li class="menu-item">
-          <nuxt-link to="/about#services">Услуги</nuxt-link>
+          <a @click="viewGallery">Услуги</a>
         </li>
         <li class="menu-item">
           <nuxt-link to="/about#contacts">Контакты</nuxt-link>
@@ -50,7 +50,7 @@ export default {
   props: ['page'],
   data() {
     return {
-      isActive: true
+      isActive: false
     }
   },
   computed: {
@@ -61,6 +61,11 @@ export default {
   methods: {
     changeMenuState() {
       this.isActive = !this.isActive
+    },
+    viewGallery() {
+      this.$router.push({
+        path: `/about#services`
+      })
     }
   }
 };
@@ -87,7 +92,7 @@ export default {
 }
 
 .header .logo img {
-  height: 2.5em;
+  height: 36px;
   vertical-align: middle;
 }
 
@@ -179,19 +184,13 @@ export default {
   .header {
     height: auto;
     padding: 0;
-    overflow: auto;
     box-sizing: border-box;
-    line-height: initial;
+    line-height: 0px;
   }
 
   .header .logo {
-    line-height: 48px;
     display: inline-block;
-    padding-left: 32px;
-  }
-
-  .header .logo img {
-    height: 2em;
+    padding: 6px 0px 6px 32px;
   }
 
   #main-nav-toggle {
@@ -269,16 +268,10 @@ export default {
   .mainmenu.responsive .telephone a::after {
     display: none;
   }
-}
 
-
-@media (max-device-width: 900px) {
   .header .small-logo {
     display: block;
-  }
-
-  .header .logo {
-    padding: 10px 0 10px 32px;
+    height: 18px;
   }
 
   .header .main-logo {

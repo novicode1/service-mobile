@@ -89,14 +89,6 @@ export default {
   components: {
     AppNavigation,
     AppSendQuestionForm
-  },
-  data() {
-    return {
-      name: '',
-      phone: '',
-      email: '',
-      comment: ''
-    };
   }
 }
 </script>
@@ -410,8 +402,13 @@ footer .contact-us h4 {
       text-align: center;
     }
 
-    .maps-location {
+    .contact-us .maps-location {
       margin-bottom: 40px;
+      width: 80%;
+    }
+
+    .contact-us .maps-location iframe {
+      height: 300px;
     }
 
     footer {
@@ -424,7 +421,7 @@ footer .contact-us h4 {
       }
 
       .wrapper .content-about {
-        padding-top: 25vh;
+        padding-top: 10vh;
       }
 
       .content-about .promo-section {
@@ -455,7 +452,14 @@ footer .contact-us h4 {
       .content-about h1 {
         font-size: 2.5em;
       }
-    }
 
+      .contact-us .maps-location iframe {
+        height: 260px;
+      }
+
+      .contact-us .maps-location {
+        width: 100%;
+      }
+    }
   }
 </style>

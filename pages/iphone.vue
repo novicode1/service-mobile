@@ -3,7 +3,7 @@
     <app-navigation />
     <div class="contain">
       <div class="side-block">
-        <app-sidebar class="store-navigation"/>
+        <app-sidebar class="store-navigation" :active="true"/>
         <app-filter :pricerange.sync="highprice"/>
       </div>
       <transition-group name="items" tag="section" class="content">
@@ -40,7 +40,8 @@ export default {
   },
   data() {
     return {
-      highprice: 2700
+      highprice: 2700,
+      item: this.$route.query
     };
   },
   computed: {

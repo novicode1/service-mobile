@@ -118,14 +118,7 @@ input:-moz-placeholder {
   flex-flow: row wrap;
   justify-content: flex-start;
   max-width: 1200px;
-}
-
-@supports (display: grid) {
-  .capsule > * {
-    width: auto;
-    margin: 0;
-  }
-}
+} 
 
 /* --- items animation --- */
 

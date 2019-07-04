@@ -27,6 +27,19 @@
   </footer>
 </template>
 
+<script>
+export default {
+  // props: ['mode'],
+  data () {
+    return {
+      // isActive: false
+    }
+  }
+}
+</script>
+</script>
+
+
 <style scoped>
 footer {
   display: -webkit-flex; /* Safari */
@@ -79,10 +92,11 @@ footer .copyright {
 
   footer {
     text-align: initial;
+    width: 100%;
     display: initial;
     height: auto;
     width: auto;
-    background: transparent;
+    overflow: auto;
   }
 
   footer .location {

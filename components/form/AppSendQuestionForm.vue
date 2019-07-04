@@ -168,8 +168,10 @@ input {
     .contact-form .submit-button {
         width: 100%;
         background-image: none;
-        font-size: 20px;
+        font-size: 16px;
+        font-weight: normal; 
         padding-right: 20px;
+        padding-left: 20px;
     }
 }
 

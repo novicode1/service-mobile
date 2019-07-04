@@ -4,7 +4,7 @@
       <app-navigation />
       <div class="contain">
         <div class="side-block">
-          <app-sidebar class="store-navigation"/>
+          <app-sidebar class="store-navigation" :active="false" />
           <app-filter :pricerange.sync="highprice" class="store-filter"/>
         </div>
         <transition-group name="items" tag="section" class="content">
@@ -61,6 +61,11 @@ export default {
   .capsule > * {
     width: auto;
     margin: 0;
+  }
+}
+@media (max-device-width: 400px) {
+  section.content {
+    border-top: 12px solid #f2f2f2;
   }
 }
 </style>

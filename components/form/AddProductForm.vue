@@ -69,6 +69,7 @@
                         <input
                             type="file"
                             @change="setImageUrl($event)"
+                            accept="image/x-png,image/gif,image/jpeg,image/jpg"
                         >
                         <button type="button" tabindex="-1">Выберите файл</button>
                     </div>
@@ -161,8 +162,9 @@ export default {
             const files = event.target.files
             let filename = files[0].name
 
+
             if (filename.lastIndexOf('.') <= 0) {
-                return alert('Please add a valid file!')
+                return alert('Ваш файл не подходит. Произошла ошибка')
             }
 
             const fileReader = new FileReader()
@@ -176,8 +178,9 @@ export default {
         },
 
         onCreateProduct () {
-            if (!this.image) {
-                alert("Загрузите картинку и попробуйте еще раз")
+            let fileType = this.image.type
+            if ((!this.image) || (fileType === 'image/webp')) {
+                alert("Вы загрузили неверную картинку. Формат должен быть в .jpg или .jpeg или .png")
                 return
             }
             const productData = {

@@ -55,6 +55,7 @@ aside {
   background: #1C1C1C;
   padding: 25px;
   border-radius: 0px 10px 10px 0px;
+  margin-bottom: 20px;
 }
 
 .sidearea {

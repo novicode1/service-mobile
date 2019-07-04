@@ -2,79 +2,72 @@
   <aside>
     <div class="sidearea">
       <div class="nav-hidden">
-        <div class="nav-header" @click="isActive = !isActive">
+        <div class="nav-header" @click="toggleClass">
           <img src="./../images/icons/nav-arrow-down.svg" alt="развернуть">
           Каталог товаров
           <img src="./../images/icons/nav-arrow-down.svg" alt="развернуть">
         </div>
         <ul class="items-list" v-bind:style='{"display": (isActive? "none" : "block" ), "height": (isActive? "0" : "auto" )}'>
 
-          <li class="list-item">
-            <nuxt-link to="/iphone">
-              iPhone
+          <li class="list-item" v-for="link in links" :key="link.id">
+            <nuxt-link :to="{ path:`${link.url}`, query: { category: link.name }}">
+              {{ link.name }}
             </nuxt-link>
           </li>
-
+<!--
           <li class="list-item">
-            <nuxt-link to="/macbook">
-              Macbook
-            </nuxt-link>
-          </li>
-
-          <li class="list-item">
-            <nuxt-link to="/men">
+            <nuxt-link to="/men" :name="Macbook">
               Samsung
             </nuxt-link>
           </li>
 
           <li class="list-item">
-            <nuxt-link to="/women">
+            <nuxt-link to="/women" :name="Macbook">
               Meizu
             </nuxt-link>
           </li>
 
           <li class="list-item">
-            <nuxt-link to="/sale">
+            <nuxt-link to="/sale" :name="Macbook">
               Аудио
             </nuxt-link>
           </li>
 
           <li class="list-item">
-            <nuxt-link to="/sale">
+            <nuxt-link to="/sale" :name="Macbook">
               Компьютеры
             </nuxt-link>
           </li>
 
           <li class="list-item">
-            <nuxt-link to="/sale">
+            <nuxt-link to="/sale" :name="Macbook">
               Гироскутеры
             </nuxt-link>
           </li>
 
-
           <li class="list-item">
-            <nuxt-link to="/sale">
+            <nuxt-link to="/sale" :name="Macbook">
             Гаджеты
             </nuxt-link>
           </li>
 
           <li class="list-item">
-            <nuxt-link to="/sale">
+            <nuxt-link to="/sale" :name="Macbook">
             Аксессуары
             </nuxt-link>
           </li>
 
           <li class="list-item">
-            <nuxt-link to="/sale">
+            <nuxt-link to="/sale" :name="Macbook">
               Ремонт и услуги
             </nuxt-link>
           </li>
 
           <li class="list-item">
-            <nuxt-link to="/sale">
+            <nuxt-link to="/used" :name="Macbook">
               Б/у техника
             </nuxt-link>
-          </li>
+          </li> -->
         </ul>
       </div>
     </div>
@@ -83,15 +76,34 @@
 
 <script>
 export default {
+    props: {
+      active: {
+        type: Boolean,
+        default: true
+      }
+    },
     data() {
       return {
-        isActive: true
+        links: [
+          {
+            name: 'Macbook',
+            url: '/macbook'
+          },
+          {
+            name: 'Iphone',
+            url: '/iphone'
+          },
+          {
+            name: 'Аксессуары',
+            url: '/accessories'
+          }
+        ],
+        isActive: this.active
       };
   },
 
   methods: {
-    toggleClass: function(event){
-       // Check value
+    toggleClass: function(event) {
        if(this.isActive){
          this.isActive = false;
        }else{
@@ -110,11 +122,12 @@ aside {
   margin-bottom: 30px;
   color: white;
   overflow: hidden;
+  border-radius: 0 10px 10px 0;
 }
 
 .nav-hidden {
   background-color: #272828;
-  border-radius: 0 10px 10px 0;
+  border-radius: inherit;
 
   img {
     margin: 0 10px;
@@ -176,10 +189,6 @@ aside {
 .store-navigation .items-list * {
   height: auto;
   display: block;
-}
-
-.store-navigation .nav-hidden {
-  border-radius: 0 10px 10px 0;
 }
 
 @media (max-width: 816px) {

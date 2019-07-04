@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent="onCreateProduct" novalidate class="contact-form">
+    <form @submit.prevent="onCreateProduct" novalidate class="order-form">
         <div class="content-wrapper">
             <label class="input-field" :class="{ 'input-field-error': $v.tel.$error }">
                 <span class="label-text">Номер телефона</span>
@@ -72,7 +72,7 @@ export default {
 <style scoped>
 @import './form.css';
 
-.contact-form {
+.order-form {
     vertical-align: top;
     text-align: left;
     display: inline-block;
@@ -95,9 +95,11 @@ input {
     border-radius: 10px;
     color: #000;
     padding: calc(1.125em / 2) 13px;
-    border: 1px solid #949494;
+    border: 1px solid rgba(148, 148, 148, 0.438);
     box-sizing: border-box;
     background-color: inherit;
+    background-clip: padding-box;
+    box-shadow: none;
     color: #fff;
     resize: vertical;
     background: rgba(255, 255, 255, 0.05);
@@ -127,24 +129,33 @@ input {
 .submit-button {
     display: inline-block;
     margin-top: 8px;
-    padding: 4px 70px 4px 36px;
+    padding: 4px;
     font-size: 0.875em;
     min-width: 50px;
-    border-radius: 20px;
-    border: 2px solid #ffc636;
-    background: #000;
-    height: 44px;
+    width: 100%;
+    border-radius: 8px;
+    background-color: #FA6400;
+    height: 38px;
     text-transform: uppercase;
-    background: url(../../images/icons/arrow-right-link.svg) no-repeat 85% 50%;
-    background-color: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 20px 40px rgba(0, 0, 0, 0.05);
+}
+
+.submit-button:disabled {
+    opacity: 0.8;
 }
 
 .submit-button:hover {
-    border: 2px solid #fff;
+    transform: translateY(-1px);
+    transition: all 0.05s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.submit-button:active {
+    transform: translateY(1px);
+    transition: all 0.05s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 @media (max-device-width: 900px) {
-    .contact-form {
+    .order-form {
         box-sizing: border-box;
         display: block;
         width: auto;
@@ -152,61 +163,67 @@ input {
         text-align: center;
     }
 
-    .contact-form .content-wrapper {
+    .order-form .content-wrapper {
         display: inline-block;
         text-align: left;
     }
 
-    .contact-form .pmsubmit-button {
-        margin: 0 auto;
-        display: block;
-    }
-
-    .contact-form h1 {
+    .order-form h1 {
         text-align: center;
     }
 }
 
-@media (max-device-width: 600px) {
-    .contact-form {
+@media (max-device-width: 690px) {
+    .order-form {
         margin: 0;
-        padding-left: 32px;
-        padding-right: 32px;
+        border-color: #d6d6d6;
+        border-top: none;
     }
 
-    .contact-form .submit-button {
-        width: 100%;
-        background-image: none;
-        font-size: 20px;
-        padding-right: 20px;
-    }
-}
-
-@media (max-device-width: 518px) {
-    .contact-form {
-        padding: 0;
-    }
-
-    .contact-form h1 {
+    .order-form h1 {
         text-align: left;
     }
 
-    .contact-form .content-wrapper {
+    .order-form .content-wrapper {
         width: 100%;
-        padding-left: 20px;
-        padding-right: 20px;
+        padding: 40px 0;
         box-sizing: border-box;
     }
 
-    .contact-form h5 {
+    .order-form h5 {
         font-size: 0.875em;
         margin-bottom: 52px;
     }
 
-    .contact-form .input-field {
+    .order-form .input-field {
         width: 100%;
     }
 
+    .input-field .error {
+        color: rgb(121, 121, 121);
+        font-size: 14px;
+    }
+
+    .input-field .label-text {
+        font-weight: 500;
+        font-size: 13px;
+        color: #111;
+    }
+
+    .order-form input {
+        font-size: 16px;
+        padding: 0.7em 14px;
+        line-height: 1.5em;
+        border-radius: 4px;
+        background-color: #fff;
+        color: #000;
+        border: 1px solid rgba(0,0,0,0.2);
+    }
+
+    .submit-button {
+        font-size: 1em;
+        height: 48px;
+    }
 }
 
 </style>

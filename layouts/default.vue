@@ -54,9 +54,15 @@ footer {
   padding-top: 80px;
 }
 
-  @media (max-device-width: 1024px) {
-    .contain {
-      padding-top: 80px;
-    }
+@media (max-device-width: 1024px) {
+  .contain {
+    padding-top: 80px;
   }
+}
+
+@media (max-device-width: 900px) {
+  .contain {
+    padding-top: 40px;
+  }
+}
 </style>

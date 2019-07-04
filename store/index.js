@@ -7,6 +7,7 @@ const store = () => new Vuex.Store({
 		cartTotal: 0,
 		cart: {},
 		sale: false,
+		used: false,
 		products: [],
 		setCreatedProductKey: ''
 	},
@@ -21,11 +22,13 @@ const store = () => new Vuex.Store({
 					let product = {
 						category: data.category,
 						sale: data.sale,
+						used: data.used,
 						inStock: data.inStock,
 						name: data.name,
 						price: data.price,
 						imageUrl: data.imageUrl,
-						code: data.code
+						code: data.code,
+						options: data.options
 					}
 					product.id = s.id
 					products.push(product)
@@ -86,6 +89,7 @@ const store = () => new Vuex.Store({
 		iphone: state => filter(state.products, 'category', 'iphone'),
 		macbook: state => filter(state.products, 'category', 'macbook'),
 		sale: state => filter(state.products, 'sale', true),
+		used: state => filter(state.products, 'used', true),
 		createdProductKey (state) {
 			return state.createdProductKey
 		},
@@ -106,6 +110,9 @@ const store = () => new Vuex.Store({
 		},
 		switchSale: state => {
 			state.sale = !state.sale
+		},
+		switchUsed: state => {
+			state.used = !state.used
 		},
 		clearCartCount: state => {
 			state.cartTotal = 0
