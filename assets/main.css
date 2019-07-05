@@ -7,7 +7,7 @@ html {
   font-size: 14px;
   word-spacing: 1px;
   font-weight: 300;
-  background-color: #121212;
+  background-color: #121212; 
   color: #ffffff;
   cursor: default;
   -ms-text-size-adjust: 100%;
@@ -118,7 +118,7 @@ input:-moz-placeholder {
   flex-flow: row wrap;
   justify-content: flex-start;
   max-width: 1200px;
-} 
+}
 
 /* --- items animation --- */
 

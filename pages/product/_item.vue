@@ -22,7 +22,7 @@
               </li>
 
               <li class="breadcrumb">
-                <nuxt-link to="/">{{ product.name | truncate(50, ' ...') }}</nuxt-link>
+                <a>{{ product.name | truncate(50, ' ...') }}</a>
               </li>
             </ul>
           </nav>
