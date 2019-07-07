@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="8px" height="13px" viewBox="0 0 8 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>breadcrumb-icon</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="a" transform="translate(-261.000000, -133.000000)" stroke="#737373">
+            <g id="pagination" transform="translate(200.000000, 131.000000)">
+                <polyline id="breadcrumb-icon" points="62 2 68.023 8.023 62 14.046"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -46,11 +46,35 @@ export default {
   },
   computed: {
     wProducts() {
-      return this.$store.getters.iphone.filter(el =>
-        this.$store.state.sale
-          ? el.price < this.highprice && el.sale
-          : el.price < this.highprice
-      );
+      if (this.$store.state.used || this.$store.state.sale || (this.$store.state.used && this.$store.state.sale)) {
+        let items = this.$store.getters.iphone
+        items = items.filter(item => Number(item.price) < this.highprice)
+        console.log(items)
+
+
+        let itemsUsed = items.filter(item => item.used === true)
+
+        let itemsSale = items.filter(item => item.sale === true)
+
+        let concatAndDeDuplicateObjects = (p, ...arrs) => [].concat(...arrs).reduce((a, b) => !a.filter(c => b[p] === c[p]).length ? [...a, b] : a, [])
+
+        if (this.$store.state.used && this.$store.state.sale) {
+          return concatAndDeDuplicateObjects('code', itemsUsed, itemsSale)
+        }
+
+        else if (this.$store.state.used) {
+          return itemsUsed
+        }
+
+        else if (this.$store.state.sale) {
+          return itemsSale
+        }
+      }
+
+      else {
+        let items = this.$store.getters.iphone
+        return items.filter(item => Number(item.price) < this.highprice)
+      }
     }
   }
 };

@@ -1,83 +1,41 @@
 <template>
-  <main class="capsule wrapper">
+  <main class="wrapper">
     <app-navigation/>
-    <div class="contain">
-      <div class="side-block">
-        <app-sidebar class="store-navigation"/>
-      </div>
-      <div class="content" v-if="product">
-        <div class="item-header">
-          <h1>{{ product.name }}</h1>
-        </div>
+    <!-- <app-sidebar class="store-navigation side-block"/> -->
+        <main class="product-content" v-if="product">
+            <nav class="secondary-nav">
+                <ul class="breadcrumbs">
+                    <li class="breadcrumb">
+                        <nuxt-link to="/">Главная</nuxt-link>
+                    </li>
 
-        <main class="item-description">
-          <nav class="secondary-nav">
-            <ul class="breadcrumbs">
-              <li class="breadcrumb">
-                <nuxt-link to="/">Главная</nuxt-link>
-              </li>
+                    <li class="breadcrumb" v-if="category != 'main'">
+                        <nuxt-link :to="`/${this.$route.query.path}`">{{ category }}</nuxt-link>
+                    </li>
 
-              <li class="breadcrumb" v-if="category != 'main'">
-                <nuxt-link :to="`/${this.$route.query.path}`">{{ category }}</nuxt-link>
-              </li>
+                    <li class="breadcrumb">
+                        <a>{{ product.name | truncate(50, ' ...') }}</a>
+                    </li>
+                </ul>
+            </nav>
 
-              <li class="breadcrumb">
-                <a>{{ product.name | truncate(50, ' ...') }}</a>
-              </li>
-            </ul>
-          </nav>
+            <article class="item-header">
+                <img src="./../../images/icons/apple-logo.svg" alt="Apple logo">
+                <h1>{{ product.name }}</h1>
+                <p>С нашей программой Trade In вы можете получить скидку на новую технику, для этого просто свяжитесь с менеджером. </p>
+                <p role="note">* Это полезно для вас и всей нашей планеты <span class="emoji-congartulation">🥳</span></p>
+            </article>
 
-          <div class="item-image-wrapper">
-            <img :src="`${product.imageUrl}`" :alt="`Image of ${product.name}`" class="item-image">
-          </div>
-
-          <aside class="item-aside">
-            <div class="item-main-info">
-              <h2>{{ product.price | usdollar}}</h2>
-
-              <div class="item-stock">
-                <div class="in-stock" v-if="product.inStock === true">
-                  <img src="../../images/icons/in-stock.svg" alt="В наличии">
-                  В наличии
-                </div>
-
-                <div class="not-in-stock" v-if="product.inStock === false">
-                  <img src="../../images/icons/not-in-stock.svg" alt="Нет в наличии">
-                  Нет в наличии
-                </div>
-              </div>
+            <div class="item-image-wrapper">
+                <img :src="`${product.imageUrl}`" :alt="`Image of ${product.name}`" class="item-image">
             </div>
-
-            <app-order-form :code="product.code"/>
-
-            <ul class="services">
-                <li class="guarantees">
-                    <img src="../../images/icons/guarantee.svg" alt="Год гарантии на товар" height="30"
-                    width="auto">
-                    <span class="service-text">
-                        Гарантия 12 мес
-                    </span>
-                </li>
-                <li class="refund">
-                    <img src="../../images/icons/refund.svg" alt="Год гарантии на товар" height="30"
-                    width="32">
-                    <span class="service-text">
-                      Дней на возврат-обмен
-                    </span>
-                </li>
-            </ul>
-          </aside>
-
-
+        <iphone-options-form v-if="product.options" :productOptions="product.options" :productPrice="product.price" />
         </main>
-		<iphone-options-form  v-if="product.options" :productOptions="product.options" :productPrice="product.price" />
 
-      </div>
-      <div class="clear"></div>
-      <div class="push"></div>
-    </div>
-    <app-footer class="footer"/>
-  </main>
+        <div class="clear"></div>
+        <div class="push"></div>
+        <app-footer class="footer"/>
+    </main>
 </template>
 
 <script>
@@ -120,64 +78,15 @@ export default {
 </script>
 
 <style scoped>
-.content {
-  color: #fff;
-  background-color: #242424;
-  margin: 0 auto;
-  width: 79%;
-  border-radius: 10px;
+.wrapper {
+    font-size: 16px;
+    background-color: #fff;
+    color: #333;
 }
 
-.item-header {
-  padding: 0 24px;
-  border-radius: 10px 10px 0 0;
-  background-color: #4c4c4c;
-  width: 100%;
-}
-
-.item-header h1 {
-  font-size: 24px;
-  line-height: 48px;
-  display: inline-block;
-}
-
-.item-description {
-  padding: 48px 60px;
-}
-
-.item-aside {
-  display: inline-block;
-  margin-bottom: 80px;
-}
-
-.item-aside h2 {
-  font-size: 32px;
-  color: #fff;
-  font-weight: 400;
-  margin-bottom: 18px;
-}
-
-.item-image-wrapper {
-  height: 400px;
-  width: 400px;
-  background-color: #fff;
-  overflow: hidden;
-  position: relative;
-  border-radius: 10px;
-  float: left;
-  margin-right: 60px;
-}
-
-.item-image-wrapper img {
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  -ms-transform: translate(-50%, -50%);
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  max-width: 90%;
-  max-height: 90%;
+.product-content {
+    padding: 40px 0;
+    margin: 0 auto;
 }
 
 .breadcrumbs {
@@ -196,15 +105,16 @@ export default {
 }
 
 .secondary-nav {
-  position: relative;
-  mask-image: linear-gradient(to right, #000 0%, #000 72%, transparent 100%);
-  -webkit-mask-image: linear-gradient(
-    to right,
-    #000 0%,
-    #000 72%,
-    transparent 100%
-  );
-  -webkit-box-flex: 1;
+    position: relative;
+        margin-bottom: 60px;
+    mask-image: linear-gradient(to right, #000 0%, #000 72%, transparent 100%);
+    -webkit-mask-image: linear-gradient(
+        to right,
+        #000 0%,
+        #000 72%,
+        transparent 100%
+    );
+    -webkit-box-flex: 1;
 }
 .secondary-nav:before,
 .secondary-nav:after {
@@ -237,12 +147,11 @@ export default {
 .secondary-nav ul li a:visited {
   display: inline-block;
 }
-
 .breadcrumbs .breadcrumb + .breadcrumb::before {
   content: "";
   display: inline-block;
-  border-top: 1px solid #eee;
-  border-right: 1px solid #eee;
+  border-top: 1px solid #737373;
+  border-right: 1px solid #737373;
   transform: rotate(45deg);
   width: 8px;
   height: 8px;
@@ -250,203 +159,62 @@ export default {
   vertical-align: center;
 }
 
-.breadcrumbs .breadcrumb:last-child a {
-  color: #ffb500;
-}
-
-.item-stock {
-  font-weight: normal;
-  font-size: 14px;
-  color: #7ebb55;
-  vertical-align: middle;
-  margin-bottom: 20px;
-}
-
-.item-stock img {
-  vertical-align: middle;
-}
-
-.services {
-    list-style: none;
-    color: #fff;
-    padding-top: 8px;
-}
-
-.services > li {
+.breadcrumb {
     display: inline-block;
-    vertical-align: top;
+    vertical-align: baseline;
 }
 
-.services li + li {
-    margin-left: 20px;
-}
-
-.services .service-text {
-    display: inline-block;
-    margin-left: 8px;
-    line-height: 1.4em;
-}
-
-.guarantees .service-text {
-    max-width: 60px;
-}
-
-.refund .service-text {
-    max-width: 100px;
-}
-
-@media (max-device-width: 1074px) {
-  .contain .content {
-    width: calc(100% - 64px);
-  }
-}
-
-@media (max-device-width: 900px) {
-  .item-description {
-    width: 100%;
-  }
-  .item-image-wrapper {
-    width: 340px;
-    height: 340px;
-  }
-
-  .item-image-wrapper img {
-    max-width: 96%;
-    max-height: 96%;
-  }
-}
-
-@media (max-device-width: 838px) {
-  .item-description {
-    padding-left: 32px;
-    padding-right: 32px;
-  }
-  .item-image-wrapper {
-    margin-right: 32px;
-  }
-  .item-image-wrapper img {
-    max-width: 96%;
-    max-height: 96%;
-  }
-
-  .contain .content {
-    width: 100%;
-  }
-  .item-header {
-    border-radius: initial;
-  }
-}
-
-@media (max-device-width: 690px) {
-  .contain {
-    padding-top: 0;
-    border-top: 1px solid rgb(54, 54, 54);
-  }
-  .wrapper {
-    background-color: #ffffff;
-  }
-  .item-header {
-    padding: 6px 20px;
-    line-height: 28px;
-    color: #111;
-    background-color: #fff;
-  }
-  .item-header h1 {
-    font-weight: 500;
-    font-size: 28px;
-    line-height: 1.3em;
-    letter-spacing: -1px;
-  }
-  .item-main-info {
-    width: calc(100%+40px);
-    box-sizing: border-box;
-    margin-left: -20px;
-    padding: 40px 20px;
-    background-color: #f8f8fb;
-    text-align: center;
-  }
-  .secondary-nav {
-    margin-bottom: 60px;
-    mask-image: linear-gradient(to right, #000 0%, #000 90%, transparent 100%);
-  }
-
-  .breadcrumbs .breadcrumb + .breadcrumb::before {
-    border-color: rgba(136, 136, 136, 0.753);
-    margin-left: 3px;
-  }
-
-  .breadcrumbs .breadcrumb {
-    margin-right: 4px;
-  }
-  .breadcrumbs .breadcrumb a {
-    color: #888;
-    font-weight: 400;
-  }
-
-  .item-image-wrapper {
-    width: 100%;
-    height: 450px;
-    margin: 0 auto 80px;
-    display: block;
-    float: none;
-  }
-  .item-aside h2 {
-    color: #111;
-    font-weight: 500;
-
-    height: initial;
-    display: block;
-    line-height: initial;
-    font-size: 3em;
-  }
-  .item-image-wrapper img {
-    max-width: 90%;
-    max-height: 90%;
-  }
-
-  .item-aside {
-    display: block;
-    width: 100%;
-  }
-
-  .item-stock {
+.breadcrumb a {
     font-size: 14px;
-    margin-bottom: 0;
-  }
-
-  .store-navigation {
-    width: 100%;
-    border-radius: 0;
-    margin-right: 0;
-  }
-  .store-navigation .nav-hidden {
-    border-radius: 0;
-  }
-  .sidearea .nav-header img:first-child {
-    display: none;
-  }
-  .item-stock {
-    font-weight: 500;
-  }
-  .item-description {
-    padding: 12px 20px 48px;
-    background-color: #fff;
-  }
+    font-weight: normal;
+    color: #111;
 }
 
-@media (max-device-width: 440px) {
-  .secondary-nav {
-    display: block;
-  }
-  .breadcrumbs {
-    margin-bottom: 10px;
-  }
-  .item-image-wrapper {
-    height: 340px;
-    width: calc(100% + 40px);
+.breadcrumb:last-child a {
+    color: #0070C9;
+}
 
-    margin-left: -20px;
-    border-radius: 0;
-  }
+.item-header {
+    margin-bottom: 60px;
+}
+
+.item-header img {
+    margin-bottom: 26px;
+    max-width: 40px;
+}
+
+.item-header h1 {
+    max-width: 300px;
+    font-weight: 500;
+    font-size: 38px;
+    color: #111111;
+    letter-spacing: -1.29px;
+    line-height: 44px;
+    margin-bottom: 10px;
+}
+
+.item-header p {
+    font-size: 16px;
+    color: #333333;
+    letter-spacing: -0.13px;
+    line-height: 25px;
+    font-weight: normal;
+    max-width: 490px;
+}
+
+.item-header .emoji-congartulation {
+    font-size: 20px;
+}
+
+.item-image-wrapper {
+    margin-right: 44px;
+    max-width: 333px;
+    box-sizing: border-box;
+    display: inline-block;
+}
+
+.item-image-wrapper img {
+    display: block;
+    width: 100%;
 }
 </style>

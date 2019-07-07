@@ -1,51 +1,42 @@
 <template>
-    <form class="product-options">
-        <div class="content-wrapper">
-            <section class="product-colors" v-if="colors">
-                <h3>Выберите цвет.</h3>
-                <label class="option-field" v-for="optionColor in colors" :key="optionColor.id">
-                    <div v-for="optionField in optionColor" :key="optionField.id" class="input-type-radio">
+    <form class="product-options-form">
+        <h3>Выберите модель.</h3>
+        <div class="content-wrapper" v-if="productOptions">
+            <section class="product-options" v-for="(option, index) in productOptions" :key="option.id">
+                <h4 class="category-name">
+                    {{option.optionName}}gb
+                </h4>
+                <div class="option-field">
+                    <div v-for="optionItem in option.optionsList" :key="optionItem.id" class="input-type-radio">
                         <input
                             type="radio"
                             name="color"
-                            :value="Object.keys(optionColor)[0]"
-                            @click="changeColorsCurrentPrice(optionField)"
+                            :value="optionItem.name"
+                            @click="changeOptionPrice(optionItem, index)"
                         >
-                        <div class="option-content">
+
+                        <div class="option-colors">
+                            <span :style="{ backgroundColor: optionItem.color}" class="color-widget"></span>
                             <span class="option-name">
-                                {{ optionField.name }}
-                            </span>
-                            <span class="total-price">
-                                ${{ parseInt(initialPrice, 10) +  parseInt(optionField.price, 10) }}
+                                {{optionItem.name}}
                             </span>
                         </div>
                     </div>
-                </label>
+                </div>
+
+                <div class="price-section">
+                    <span class="option-price">
+                        ${{ getCurrentPrice(index) }}
+                    </span>
+                    <nuxt-link to="/" class="link-to-form">
+                        Купить
+                    </nuxt-link>
+                </div>
             </section>
 
-            <section class="product-capacity" v-if="capacity">
-                <h3>Выберите емкость памяти.</h3>
-                <label class="option-field" v-for="optionCapacity in capacity" :key="optionCapacity.id">
-                    <div v-for="optionField in optionCapacity" :key="optionField.id" class="input-type-radio">
-                        <input
-                            type="radio"
-                            name="capacity"
-                            :value="Object.keys(optionCapacity)[0] + 'gb'"
-                            @click="changeCapacityCurrentPrice(optionField)"
-                        >
-                        <div class="option-content">
-                            <span class="option-name">
-                                {{ Object.keys(optionCapacity)[0] }}<small>gb</small>
-                            </span>
-                            <span class="total-price">
-                                ${{ parseInt(initialPrice, 10) +  parseInt(optionField, 10) + optionsPrice.colorsCurrentPrice}}
-                            </span>
-                        </div>
-                    </div>
-                </label>
-            </section>
-
-            <span class="total-price">Total price: {{ totalPrice }}</span>
+            <span class="option-price">
+                Цена: ${{ lastSelectedOption.currentPrice }}
+            </span>
         </div>
     </form>
 </template>
@@ -55,7 +46,7 @@
 export default {
     props: {
         productOptions: {
-            type: Object,
+            type: Array,
             required: true
         },
         productPrice: {
@@ -65,42 +56,35 @@ export default {
     },
     data() {
         return {
-            colors: this.productOptions.colors,
-            capacity: this.productOptions.capacity,
-
-            optionsPrice: {
-                colorsCurrentPrice: Number,
-                capacityCurrentPrice: Number
-            },
-
-            initialPrice: this.productPrice
+            initialPrice: this.productPrice,
+            currentPrice: 0,
+            selectedOptions: [],
+            lastSelectedOption: {
+                price: 0
+            }
         }
     },
+
     methods: {
-        changeColorsCurrentPrice(optionField) {
-            this.optionsPrice.colorsCurrentPrice = parseInt(optionField.price, 10)
+        changeOptionPrice(optionItem, index) {
+            this.lastSelectedOption.currentPrice = parseInt(optionItem.price, 10)
+            this.lastSelectedOption.name = optionItem.name
+
+            let selectedOption = new Object
+
+            selectedOption.price = parseInt(optionItem.price, 10)
+
+            this.selectedOptions[index] = selectedOption
+            this.$forceUpdate();
         },
 
-        changeCapacityCurrentPrice(optionField) {
-            this.optionsPrice.capacityCurrentPrice = parseInt(optionField, 10)
-            // alert(this.optionsPrice.capacityCurrentPrice)
-        }
-    },
-    computed: {
-        totalPrice: function() {
-            let optionsPrice = 0
-            let options = this.optionsPrice
-            for (let option in options) {
-                if (options.hasOwnProperty(option)) {
-                    let optionPrice = parseFloat(options[option])
-                    if (Number.isNaN(optionPrice)) {
-                        optionPrice = 0
-                    }
-                    optionsPrice += optionPrice
-                }
+        getCurrentPrice(index) {
+            if (this.selectedOptions[index]) {
+                return this.selectedOptions[index].price
             }
-
-            return this.initialPrice + optionsPrice
+            else {
+                return 0
+            }
         }
     }
 }
@@ -110,87 +94,170 @@ export default {
 
 @import '../form/form.css';
 
-.product-options {
-    background-color: #fff;
+.product-options-form {
+    display: inline-block;
+    vertical-align: top;
+    padding-top: 40px;
+    width: 620px;
     color: #111;
     font-weight: 400;
+}
+
+.product-options {
     display: block;
+    position: relative;
     width: 100%;
-    padding: 80px 0;
-    text-align: center;
-}
-
-.product-options .content-wrapper {
-    text-align: left;
-    display: inline-block;
-    margin: 0 120px;
-    width: 410px;
-}
-
-.content-wrapper section {
-    padding: 32px 0;
-}
-
-.content-wrapper > section + section {
-    border-top: 1px solid #D6D6D6;
-}
-
-.product-options h3 {
-    font-weight: 500;
-    font-size: 18px;
-    letter-spacing: -0.5px;
-    margin-bottom: 18px;
+    border-top: 1px solid rgb(224, 224, 224);
 }
 
 .option-field {
+    display: inline-block;
+    padding: 18px 0 28px;
+    vertical-align: top;
+    width: 280px;
     color: #333333;
-    --option-margin: 16px;
-    width: calc(50% - var(--option-margin) / 2);
+    margin: 0;
 }
 
-.option-fiels .label-text {
-    color: #333333;
+h3 {
     display: inline-block;
     vertical-align: middle;
-}
-
-.option-field:nth-child(2n) {
-    margin-right: var(--option-margin);
-}
-
-.product-capacity .option-content, .product-colors .option-content {
-    text-align: center;
-    padding-top: 20px;
-}
-
-.product-capacity .option-name, .product-colors .option-name {
-    display: inline-block;
-    font-size: 30px;
+    margin-bottom: 64px;
     font-weight: 500;
-    letter-spacing: -1px;
-    margin-bottom: 2px;
+    font-size: 19px;
+    color: #000000;
+    letter-spacing: -0.5px;
 }
 
-.product-capacity .option-name small {
+.category-name {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 26px 0 38px;
+    width: 140px;
+    font-weight: 500;
+    font-size: 30px;
+    color: #111111;
+    letter-spacing: -0.3px;
     text-transform: uppercase;
-    font-size: 20px;
-    font-weight: bold;
 }
 
-.product-capacity .total-price, .product-colors .total-price {
-    font-size: 16px;
-    font-weight: 400;
+h4::after {
+    content: 'Базовая';
+    padding-top: 3px;
+    font-weight: normal;
+    font-size: 14px;
+    color: #888888;
+    text-transform: none;
     display: block;
+    letter-spacing: -0.01px;
+    line-height: 16px;
 }
 
-.product-colors .option-name {
-    font-size: 24px;
+.product-options:nth-child(1) h4::after {
+    content: 'Базовая';
 }
 
-.product-colors .option-content {
+.product-options:nth-child(2) h4::after {
+    content: 'Много фото';
+}
+
+.product-options:nth-child(3) h4::after {
+    content: 'Забудь про iCloud :)';
+}
+
+.product-options:nth-child(4) h4::after {
+    content: 'Крайне много фоток';
+}
+
+.product-options:nth-child(5) h4::after {
+    content: 'Лучший из лучших';
+}
+
+.product-options:first-child h4::before, .product-options:first-child .option-field::before {
+    position: absolute;
+    top: -24px;
+    font-size: 14px;
+    color: #333333;
+    text-transform: none;
+    font-weight: normal;
+    letter-spacing: -0.31px;
+}
+
+.product-options:first-child h4::before {
+    content: 'Память';
+}
+
+.product-options:first-child .option-field::before {
+    content: 'Цвет (на выбор)';
+}
+
+.option-colors .color-widget {
+    display: block;
+    margin: 0 auto;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    margin-bottom: 8px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.option-colors .option-name {
     text-align: center;
-    padding-top: 26px;
+    display: block;
+    font-size: 12px;
+    color: #333333;
+    letter-spacing: 0.04px;
+    text-align: center;
 }
+
+.price-section {
+    float: right;
+    height: 118px;
+    width: 154px;
+    padding: 34px 10px 0 0;
+    box-sizing: border-box;
+    background-color: #FBFBFB;
+    text-align: center;
+}
+
+.option-price {
+    font-size: 24px;
+    color: #333333;
+    letter-spacing: -0.28px;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.link-to-form {
+    display: block;
+    font-weight: normal;
+    font-size: 14px;
+    color: #0070C9;
+    letter-spacing: -0.22px;
+}
+
+.link-to-form::after {
+    content: '';
+    display: inline-block;
+    vertical-align: baseline;
+    width: 8px;
+    height: 8px;
+    margin-left: -2px;
+    transform: rotate(45deg);
+    border-top: 1.5px solid #0070C9;
+    border-right: 1.5px solid #0070C9;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -198,12 +265,13 @@ export default {
 .input-type-radio {
     position: relative;
     display: inline-block;
-    box-sizing: border-box;
+    box-sizing: content-box;
     vertical-align: baseline;
-    width: 100%;
-    height: 106px;
+    width: 72px;
+    height: 60px;
     font-size: 12px;
     border-radius: 4px;
+    margin-right: 4px;
 }
 
 .input-type-radio > input {
@@ -216,8 +284,8 @@ export default {
     z-index: 1;
 }
 
-.input-type-radio > .option-content {
-    box-sizing: border-box;
+.input-type-radio > .option-colors {
+    box-sizing: content-box;
     position: absolute;
     top: 0;
     left: 0;
@@ -225,39 +293,38 @@ export default {
     width: 100%;
     height: 100%;
     z-index: 0;
-    border: 1px solid #d4d6db;
-    background: #fff center center no-repeat;
+    padding-top: 8px;
     background-size: 0.555em 0.555em;
     border-radius: inherit;
 }
 
-.input-type-radio > input:checked + .option-content {
-    border: 2px solid #f29723;
+.input-type-radio > input:checked + .option-colors {
+    border: 2px solid rgba(242, 152, 35, 0.9);
 }
 
-.input-type-radio > input:hover + .option-content {
+.input-type-radio > input:hover + .option-colors {
     border: 1px solid #888
 }
 
-.input-type-radio > input:checked:checked + .option-content {
-    border: 2px solid #f29723;
+.input-type-radio > input:checked:checked + .option-colors {
+    border: 2px solid rgba(242, 152, 35, 0.9);
 }
 
-.input-type-radio > input:focus + .option-content {
+.input-type-radio > input:focus + .option-colors {
     outline: 3px solid rgb(196, 226, 255);
 }
 
-.input-type-radio > input:focus:hover + .option-content {
+.input-type-radio > input:focus:hover + .option-colors {
     outline: transparent;
 }
 
-.input-type-radio > input[disabled] + .option-content {
+.input-type-radio > input[disabled] + .option-colors {
     box-shadow: none;
     background-color: #f0f1f5;
     border-color: #d4d6db;
 }
 
-.input-type-radio > input[disabled]:checked + .option-content {
+.input-type-radio > input[disabled]:checked + .option-colors {
     opacity: 0.5;
 }
 

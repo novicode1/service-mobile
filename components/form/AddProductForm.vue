@@ -31,8 +31,7 @@
             <label class="input-field" :class="{ 'input-field-error': $v.category.$error }">
                 Category
                 <select :value="category" @change="setCategory($event.target.value)">
-                    <option value="macbook">macbook</option>
-                    <option value="iphone">iphone</option>
+                    <option :value="option.value" v-for="option in optionCategories" :key="option">{{option.name}}</option> 
                 </select>
 
                 <span class="error" v-if="!$v.category.required">Обязательное поле</span>
@@ -97,7 +96,21 @@ export default {
             price: 0,
             category: '',
             code: '',
-            imageUrl: ''
+            imageUrl: '',
+            optionCategories: [
+                {
+                    value: 'macbook',
+                    name: 'macbook'
+                },
+                {
+                    value: 'iphone',
+                    name: 'iphone'
+                },
+                {
+                    value: 'accessories',
+                    name: 'аксессуары'
+                }
+            ]
         }
     },
     validations: {
@@ -185,7 +198,7 @@ export default {
             }
             const productData = {
                 name: this.name,
-                price: this.price,
+                price: Number(this.price),
                 category: this.category,
                 code: this.code,
                 image: this.image,

@@ -79,7 +79,6 @@ export default {
   padding: 0 4.375em 0 1.563em;
   background-color: #232323;
   z-index: 6;
-  border-radius: 4px 0 0 0;
   box-sizing: border-box;
 }
 

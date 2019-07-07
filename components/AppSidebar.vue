@@ -61,13 +61,7 @@
             <nuxt-link to="/sale" :name="Macbook">
               Ремонт и услуги
             </nuxt-link>
-          </li>
-
-          <li class="list-item">
-            <nuxt-link to="/used" :name="Macbook">
-              Б/у техника
-            </nuxt-link>
-          </li> -->
+          </li>-->
         </ul>
       </div>
     </div>
@@ -96,6 +90,14 @@ export default {
           {
             name: 'Аксессуары',
             url: '/accessories'
+          },
+          {
+            name: 'Скидки',
+            url: '/sale'
+          },
+          {
+            name: 'Б/у техника',
+            url: '/used'
           }
         ],
         isActive: this.active

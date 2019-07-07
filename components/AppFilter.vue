@@ -15,7 +15,8 @@
       <span class="min">${{ min }}</span>
       <span class="max">${{ max }}</span>
     </div>
-    <app-switch v-if="!sale" />
+    <app-switch-sale />
+    <app-switch-used />
     <div class="sidearea callout">
       Not ready
     </div>
@@ -23,11 +24,16 @@
 </template>
 
 <script>
-import AppSwitch from './AppSwitch.vue';
+import AppSwitchSale from './switch/AppSwitchSale.vue';
+import AppSwitchUsed from './switch/AppSwitchUsed.vue'; 
 
 export default {
   props: {
     sale: {
+      type: Boolean,
+      default: false
+    },
+    used: {
       type: Boolean,
       default: false
     },
@@ -43,7 +49,8 @@ export default {
     };
   },
   components: {
-    AppSwitch
+    AppSwitchSale,
+    AppSwitchUsed
   }
 };
 </script>
