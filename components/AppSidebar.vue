@@ -3,65 +3,16 @@
     <div class="sidearea">
       <div class="nav-hidden">
         <div class="nav-header" @click="toggleClass">
-          <img src="./../images/icons/nav-arrow-down.svg" alt="развернуть">
           Каталог товаров
           <img src="./../images/icons/nav-arrow-down.svg" alt="развернуть">
         </div>
-        <ul class="items-list" v-bind:style='{"display": (isActive? "none" : "block" ), "height": (isActive? "0" : "auto" )}'>
+        <ul class="items-list" :style='{"display": (isActive? "none" : "block" ), "height": (isActive? "0" : "auto" )}'>
 
           <li class="list-item" v-for="link in links" :key="link.id">
             <nuxt-link :to="{ path:`${link.url}`, query: { category: link.name }}">
               {{ link.name }}
             </nuxt-link>
           </li>
-<!--
-          <li class="list-item">
-            <nuxt-link to="/men" :name="Macbook">
-              Samsung
-            </nuxt-link>
-          </li>
-
-          <li class="list-item">
-            <nuxt-link to="/women" :name="Macbook">
-              Meizu
-            </nuxt-link>
-          </li>
-
-          <li class="list-item">
-            <nuxt-link to="/sale" :name="Macbook">
-              Аудио
-            </nuxt-link>
-          </li>
-
-          <li class="list-item">
-            <nuxt-link to="/sale" :name="Macbook">
-              Компьютеры
-            </nuxt-link>
-          </li>
-
-          <li class="list-item">
-            <nuxt-link to="/sale" :name="Macbook">
-              Гироскутеры
-            </nuxt-link>
-          </li>
-
-          <li class="list-item">
-            <nuxt-link to="/sale" :name="Macbook">
-            Гаджеты
-            </nuxt-link>
-          </li>
-
-          <li class="list-item">
-            <nuxt-link to="/sale" :name="Macbook">
-            Аксессуары
-            </nuxt-link>
-          </li>
-
-          <li class="list-item">
-            <nuxt-link to="/sale" :name="Macbook">
-              Ремонт и услуги
-            </nuxt-link>
-          </li>-->
         </ul>
       </div>
     </div>
@@ -84,8 +35,12 @@ export default {
             url: '/macbook'
           },
           {
-            name: 'Iphone',
+            name: 'iPhone',
             url: '/iphone'
+          },
+          {
+            name: 'Apple Watch',
+            url: '/apple-watch'
           },
           {
             name: 'Аксессуары',

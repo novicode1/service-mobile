@@ -31,7 +31,7 @@
             <label class="input-field" :class="{ 'input-field-error': $v.category.$error }">
                 Category
                 <select :value="category" @change="setCategory($event.target.value)">
-                    <option :value="option.value" v-for="option in optionCategories" :key="option">{{option.name}}</option> 
+                    <option :value="option.value" v-for="option in optionCategories" :key="option">{{option.name}}</option>
                 </select>
 
                 <span class="error" v-if="!$v.category.required">Обязательное поле</span>
@@ -105,6 +105,10 @@ export default {
                 {
                     value: 'iphone',
                     name: 'iphone'
+                },
+                {
+                    value: 'appleWatch',
+                    name: 'apple watch'
                 },
                 {
                     value: 'accessories',

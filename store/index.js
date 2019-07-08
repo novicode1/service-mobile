@@ -89,6 +89,7 @@ const store = () => new Vuex.Store({
 		iphone: state => filter(state.products, 'category', 'iphone'),
 		macbook: state => filter(state.products, 'category', 'macbook'),
 		accessories: state => filter(state.products, 'category', 'accessories'),
+		appleWatch: state => filter(state.products, 'category', 'appleWatch'),
 		sale: state => filter(state.products, 'sale', true),
 		used: state => filter(state.products, 'used', true),
 		createdProductKey (state) {

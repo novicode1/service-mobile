@@ -3,8 +3,11 @@
     <app-navigation />
     <div class="contain">
       <div class="side-block">
-        <app-sidebar class="store-navigation" :active="true"/>
-        <app-filter :pricerange.sync="highprice"/>
+        <app-sidebar class="store-navigation desktop" :active="false" />
+        <app-filter :pricerange.sync="highprice" class="store-filter desktop" :active="false"/>
+
+        <app-sidebar class="store-navigation mobile-hidden" :active="true" />
+        <app-filter :pricerange.sync="highprice" class="store-filter mobile-hidden" :active="true"/>
       </div>
       <transition-group name="items" tag="section" class="content">
         <app-item-card

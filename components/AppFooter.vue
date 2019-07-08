@@ -37,7 +37,6 @@ export default {
   }
 }
 </script>
-</script>
 
 
 <style scoped>
@@ -87,24 +86,59 @@ footer .copyright {
   footer .footer-logo {
     display: block;
     height: 2.5em;
-    margin: auto;
+    margin: 0 auto 40px;
   }
 
   footer {
-    text-align: initial;
-    width: 100%;
-    display: initial;
-    height: auto;
-    width: auto;
-    overflow: auto;
+    display: block;
+    padding: 40px 10% 0;
+    text-align: left;
   }
 
-  footer .location {
-    margin: 16px 0;
+  footer img {
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  footer div img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .telephone-number img {
+    height: 28px;
   }
 
   footer > div {
-    margin: 16px 0;
+    margin: 16px 0 16px;
+    display: inline-block;
+    text-align: left;
+  }
+
+  footer div:nth-child(2n) {
+    margin-right: 60px;
+  }
+
+  .copyright {
+    padding-top: 40px;
+  }
+
+  .location-text-wrapper {
+    display: block;
+    width: 100%;
+  }
+}
+
+
+@media (max-device-width: 610px) {
+  footer div:nth-child(2n) {
+    margin-right: 0;
+  }
+
+  footer > div {
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
   }
 }
 </style>

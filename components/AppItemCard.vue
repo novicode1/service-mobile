@@ -105,7 +105,7 @@ export default {
 }
 
 .item .item-image-wrapper {
-  height: 165px;
+  height: 200px;
   width: 100%;
   overflow: hidden;
   position: relative;
@@ -197,17 +197,17 @@ export default {
   color: rgba(0, 0, 0, 0.5);
 }
 
-@media (max-device-width: 400px) {
+@media (max-device-width: 555px) {
   .item {
-    flex-basis: 50%;
+    flex-basis: calc(50% - 3px);
     border-radius: 0;
-    margin: 0;
+    margin: 0 0 6px;
     position: relative;
     padding-bottom: 40px;
   }
 
-  .item:nth-child(2n) {
-    border-left: 1px solid #ebebeb;
+  .item:nth-child(2n-1) {
+    margin-right: 6px;
   }
 }
 </style>

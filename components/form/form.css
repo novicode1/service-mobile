@@ -17,6 +17,9 @@ textarea
     box-shadow: none;
     background: rgba(255, 255, 255, 0.089);
     background-clip: padding-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 input::-moz-focus-inner {

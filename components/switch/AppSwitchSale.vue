@@ -32,5 +32,7 @@ export default {
 
 <style scoped lang="scss">
 @import "switch.scss";
- 
+  .sidearea {
+    padding-top: 15px;
+  }
 </style>

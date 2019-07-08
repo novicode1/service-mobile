@@ -1,5 +1,26 @@
 <template>
     <form @submit.prevent="onCreateProduct" novalidate class="order-form">
+        <h4>Быстрый заказ 📦</h4>
+
+        <ul class="selected-options" v-if="productDetails">
+            <li class="option">
+                {{productName}}
+                <span class="option-description">Название</span>
+            </li>
+            <li class="option" v-if="productDetails.color">
+                {{productDetails.color}}
+                <span class="option-description">Опции</span>
+            </li>
+            <li class="option" v-if="productDetails.currentPrice">
+                {{productDetails.currentPrice}}$
+                <span class="option-description">Цена</span>
+            </li>
+            <li class="option" v-if="productDetails.name">
+                {{productDetails.name}}
+                <span class="option-description">Экран</span>
+            </li>
+        </ul>
+
         <div class="content-wrapper">
             <label class="input-field" :class="{ 'input-field-error': $v.tel.$error }">
                 <span class="label-text">Номер телефона</span>
@@ -11,7 +32,7 @@
 
 
             <label class="input-field">
-                <span class="label-text">Комментарий</span>
+                <span class="label-text">Комментарий (опционально)</span>
                 <input v-model.trim="comment" @input="setCode($event.target.value)"/>
             </label>
             <button class="submit-button" :disabled="$v.$invalid">Быстрый заказ</button>
@@ -33,7 +54,17 @@ export default {
         }
     },
 
-    props: ["code"],
+    props: {
+        code: {
+            type: String
+        },
+        productName: {
+            type: String
+        },
+        productDetails: {
+            type: Object
+        }
+    },
 
     validations: {
         tel: {
@@ -54,7 +85,13 @@ export default {
         },
 
         onCreateProduct () {
-            let comment = 'Новый заказ 🎉\n\n<strong>Телефон:</strong> ' + this.tel + '\n<strong>Комментарий:</strong> ' + this.comment + '\n\n' + 'Код товара: ' + this.code + '\n' + window.location.href
+            let options = ''
+            if (this.productDetails.name) {
+                options = '<strong>Опции:</strong>' + '\n- Название: ' + this.productName + '\n- Цена: ' + this.productDetails.currentPrice + '$' + '\n- Опции: ' + this.productDetails.color + '\n- Экран: ' + this.productDetails.name
+            }
+
+            let comment = 'Новый заказ 🎉\n\n<strong>Телефон:</strong> ' + this.tel + '\n<strong>Комментарий:</strong> ' + this.comment + '\n\n' + options + '\n\n<strong>Код товара:</strong> ' + this.code + '\n\n' + window.location.href
+
             this.$axios.post('https://api.telegram.org/bot709794055:AAHXeUUQe1R4O3FEGMoH1ONsQtUlVO0FTRE/sendMessage', {
                 chat_id: "-260327413",
                 text: comment,
@@ -63,23 +100,73 @@ export default {
             .catch(error => {
                 console.log(error);
             })
-			alert("Заказ успешно оформлен! Мы вам перезвоним.")
+            alert("Заказ успешно оформлен! Мы вам перезвоним.")
         }
     }
 }
 </script>
 
 <style scoped>
-@import './form.css';
+@import '../../form/form.css';
+
+h4 {
+    font-weight: 500;
+    font-size: 24px;
+    color: #0070C9;
+    letter-spacing: -0.72px;
+    margin-bottom: 24px;
+    text-align: left;
+    line-height: 40px;
+}
 
 .order-form {
-    vertical-align: top;
     text-align: left;
-    display: inline-block;
-    border-top: 1px solid rgba(191, 192, 192, 0.25);
-    border-bottom: 1px solid rgba(191, 192, 192, 0.25);
+    display: block;
+    width: 400px;
     padding: 18px 0 28px;
 }
+
+
+.selected-options {
+    list-style: none;
+    padding-top: 24px;
+    border-bottom: 1px solid rgba(191, 192, 192, 0.25);
+    border-top: 1px solid rgba(191, 192, 192, 0.25);
+}
+
+.selected-options .option {
+    display: inline-block;
+    font-weight: 500;
+    vertical-align: top;
+    font-size: 17px;
+    color: #111111;
+    letter-spacing: -0.57px;
+    margin-bottom: 26px;
+    width: 24%;
+    line-height: 1.5;
+}
+
+.option .option-description {
+    font-weight: normal;
+    font-size: 17px;
+    color: #888888;
+    letter-spacing: -0.57px;
+    display: block;
+    padding-top: 3px;
+}
+
+.option:nth-child(2n-1) {
+    margin-right: 20px;
+    min-width: 240px;
+}
+
+.content-wrapper {
+    padding-top: 24px;
+}
+
+
+
+
 
 .item-aside h4 {
     font-size: 32px;
@@ -88,20 +175,21 @@ export default {
     margin-bottom: 18px;
 }
 
-input {
-    line-height: 1.3em; /* 18px */
-    font-size: 14px;
-    font-weight: 300;
+.order-form input {
+    line-height: 1.222em; /* 22px */
+    font-size: 18px;
+    font-weight: 400;
     border-radius: 10px;
-    color: #000;
-    padding: calc(1.125em / 2) 13px;
-    border: 1px solid rgba(148, 148, 148, 0.438);
+    color: #888888;
+    letter-spacing: -0.54px;
+    padding: 1em 13px;
+    border: 1px solid #D6D6D6;
     box-sizing: border-box;
     background-color: inherit;
     background-clip: padding-box;
     box-shadow: none;
-    color: #fff;
     resize: vertical;
+    border-radius: 4px;
     background: rgba(255, 255, 255, 0.05);
     margin-bottom: 2px;
 }
@@ -112,14 +200,17 @@ input {
 }
 
 .input-field {
-    margin: 0 auto 16px;
-    width: 240px;
+    margin: 0 auto 18px;
+    width: 100%;
 }
 
 .input-field .label-text {
-    margin-bottom: 2px;
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 14px;
+    color: #333333;
+    letter-spacing: -0.31px;
     display: inline-block;
-    font-weight: 300;
 }
 
 .input-field-error input {
@@ -130,14 +221,16 @@ input {
     display: inline-block;
     margin-top: 8px;
     padding: 4px;
-    font-size: 0.875em;
+    font-size: 14px;
+    font-weight: 500;
     min-width: 50px;
     width: 100%;
-    border-radius: 8px;
-    background-color: #FA6400;
-    height: 38px;
-    text-transform: uppercase;
+    border-radius: 4px;
+    background: linear-gradient(-180deg, rgb(255, 130, 46) 0%, #FA6400 100%);
+    border: 1px solid #FA6400;
+    height: 58px;
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 20px 40px rgba(0, 0, 0, 0.05);
+    transition: all 0.12s cubic-bezier(0.455, 0.03, 0.515, 0.955);
 }
 
 .submit-button:disabled {
@@ -151,25 +244,37 @@ input {
 
 .submit-button:active {
     transform: translateY(1px);
+    box-shadow: none;
     transition: all 0.05s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-@media (max-device-width: 900px) {
+@media(max-width: 1073px) {
     .order-form {
-        box-sizing: border-box;
+        width: 100%;
         display: block;
-        width: auto;
-        margin: 0 auto;
-        text-align: center;
     }
 
-    .order-form .content-wrapper {
-        display: inline-block;
-        text-align: left;
+    .option:nth-child(2n-1) {
+        min-width: 60%;
     }
 
+    .option:nth-child(2n) {
+        margin-right: 40px;
+    }
+}
+
+@media (max-device-width: 900px) {
     .order-form h1 {
         text-align: center;
+    }
+}
+
+@media (max-device-width: 450px) {
+    .selected-options .option {
+        max-width: 100%;
+        box-sizing: border-box;
+        margin-right: 0;
+        width: 100%;
     }
 }
 
@@ -225,5 +330,6 @@ input {
         height: 48px;
     }
 }
+
 
 </style>

@@ -26,11 +26,37 @@
                 <p role="note">* Это полезно для вас и всей нашей планеты <span class="emoji-congartulation">🥳</span></p>
             </article>
 
-            <div class="item-image-wrapper">
+            <div class="item-image-wrapper" v-if="product.category !== 'accessories'">
                 <img :src="`${product.imageUrl}`" :alt="`Image of ${product.name}`" class="item-image">
             </div>
-        <iphone-options-form v-if="product.options" :productOptions="product.options" :productPrice="product.price" />
+
+            <iphone-options-form
+                v-if="product.options && product.category === 'iphone'"
+                :productOptions="product.options"
+                :productPrice="product.price"
+                :productName="product.name"
+                :code="product.code"
+            />
+
+            <accessories-options-form
+                v-if="product.options && product.category == 'accessories'"
+                :productOptions="product.options"
+                :productPrice="product.price"
+                :productName="product.name"
+                :productImageUrl="product.imageUrl"
+                :code="product.code"
+            />
+
+            <apple-watch-options-form 
+                v-if="product.options && product.category === 'appleWatch'"
+                :productOptions="product.options"
+                :productPrice="product.price"
+                :productName="product.name"
+                :code="product.code"
+            />
         </main>
+
+
 
         <div class="clear"></div>
         <div class="push"></div>
@@ -42,8 +68,9 @@
 import AppFooter from "./../../components/AppFooter.vue";
 import AppNavigation from "./../../components/AppNavigation.vue";
 import AppSidebar from "./../../components/AppSidebar.vue";
-import IphoneOptionsForm from "./../../components/optionsForm/IphoneOptionsForm.vue";
-import AppOrderForm from "../../components/form/AppOrderForm.vue";
+import IphoneOptionsForm from "./../../components/optionsForm/iphone/IphoneOptionsForm.vue";
+import AccessoriesOptionsForm from "./../../components/optionsForm/accessories/AccessoriesOptionsForm.vue";
+import AppleWatchOptionsForm from "./../../components/optionsForm/apple-watch/AppleWatchOptionsForm.vue";
 
 export default {
     head() {
@@ -60,8 +87,9 @@ export default {
         AppFooter,
         AppNavigation,
         AppSidebar,
-		AppOrderForm,
-		IphoneOptionsForm
+        IphoneOptionsForm,
+        AccessoriesOptionsForm,
+        AppleWatchOptionsForm
     },
 
     computed: {
@@ -79,7 +107,6 @@ export default {
 
 <style scoped>
 .wrapper {
-    font-size: 16px;
     background-color: #fff;
     color: #333;
 }
@@ -106,7 +133,7 @@ export default {
 
 .secondary-nav {
     position: relative;
-        margin-bottom: 60px;
+    margin-bottom: 60px;
     mask-image: linear-gradient(to right, #000 0%, #000 72%, transparent 100%);
     -webkit-mask-image: linear-gradient(
         to right,
@@ -216,5 +243,33 @@ export default {
 .item-image-wrapper img {
     display: block;
     width: 100%;
+}
+
+@media(max-width: 1073px) {
+    .product-content {
+        padding: 40px 60px;
+        width: 100%;
+        display: block;
+    }
+
+    .item-header h1 {
+        max-width: 90%;
+    }
+
+    .item-image-wrapper {
+        width: 70%;
+        max-width: 500px;
+        margin: 0 auto;
+        display: block;
+        margin-bottom: 40px;
+    }
+}
+
+@media(max-width: 600px) {
+    .product-content {
+        padding: 40px 32px;
+        width: 100%;
+        display: block;
+    }
 }
 </style>

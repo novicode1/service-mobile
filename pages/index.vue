@@ -4,8 +4,11 @@
       <app-navigation />
       <div class="contain">
         <div class="side-block">
-          <app-sidebar class="store-navigation" :active="false" />
-          <app-filter :pricerange.sync="highprice" class="store-filter"/>
+          <app-sidebar class="store-navigation desktop" :active="false" />
+          <app-filter :pricerange.sync="highprice" class="store-filter desktop" :active="false"/>
+
+          <app-sidebar class="store-navigation mobile-hidden" :active="true" />
+          <app-filter :pricerange.sync="highprice" class="store-filter mobile-hidden" :active="true"/>
         </div>
         <transition-group name="items" tag="section" class="content">
           <app-item-card
@@ -76,16 +79,12 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+
 @supports (display: grid) {
   .capsule > * {
     width: auto;
     margin: 0;
-  }
-}
-@media (max-device-width: 400px) {
-  section.content {
-    border-top: 12px solid #f2f2f2;
   }
 }
 </style>

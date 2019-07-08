@@ -16,9 +16,6 @@ import AppFooter from './../components/AppFooter.vue'
 import AppNavigation from './../components/AppNavigation'
 
 export default {
-    data() {
-
-    },
     components: {
         AppAddProductForm,
         AppNavigation,

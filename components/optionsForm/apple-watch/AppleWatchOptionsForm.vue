@@ -1,10 +1,10 @@
 <template>
-    <form class="product-options-form">
+    <div class="product-options-form">
         <h3>Выберите модель.</h3>
         <div class="content-wrapper" v-if="productOptions">
             <section class="product-options" v-for="(option, index) in productOptions" :key="option.id">
                 <h4 class="category-name">
-                    {{option.optionName}}gb
+                    {{option.optionName}}
                 </h4>
                 <div class="option-field">
                     <div v-for="optionItem in option.optionsList" :key="optionItem.id" class="input-type-radio">
@@ -12,13 +12,12 @@
                             type="radio"
                             name="color"
                             :value="optionItem.name"
-                            @click="changeOptionPrice(optionItem, index)"
+                            @click="changeOptionPrice(optionItem, index, option.optionName)"
                         >
 
                         <div class="option-colors">
-                            <span :style="{ backgroundColor: optionItem.color}" class="color-widget"></span>
                             <span class="option-name">
-                                {{optionItem.name}}
+                                {{optionItem.name | truncate(16, ' ...')}}
                             </span>
                         </div>
                     </div>
@@ -28,30 +27,40 @@
                     <span class="option-price">
                         ${{ getCurrentPrice(index) }}
                     </span>
-                    <nuxt-link to="/" class="link-to-form">
+                    <a href="#order-form-anchor" class="link-to-form">
                         Купить
-                    </nuxt-link>
+                    </a>
                 </div>
+                <a href="#order-form-anchor" class="link-to-form-mobile">
+                    Купить
+                </a>
             </section>
-
-            <span class="option-price">
-                Цена: ${{ lastSelectedOption.currentPrice }}
-            </span>
         </div>
-    </form>
+        <app-order-form :productName="productName" :productDetails="lastSelectedOption" :code="code" id="order-form-anchor"/>
+    </div>
 </template>
 
 <script>
+import AppOrderForm from "./AppOrderForm.vue";
 
 export default {
+    components: {
+		AppOrderForm
+    },
     props: {
         productOptions: {
             type: Array,
             required: true
         },
+        productName: {
+            type: String
+        },
         productPrice: {
             type: Number,
             required: true
+        },
+        code: {
+            type: String
         }
     },
     data() {
@@ -60,15 +69,16 @@ export default {
             currentPrice: 0,
             selectedOptions: [],
             lastSelectedOption: {
-                price: 0
+                currentPrice: 0
             }
         }
     },
 
     methods: {
-        changeOptionPrice(optionItem, index) {
+        changeOptionPrice(optionItem, index, name) {
             this.lastSelectedOption.currentPrice = parseInt(optionItem.price, 10)
-            this.lastSelectedOption.name = optionItem.name
+            this.lastSelectedOption.color = optionItem.name
+            this.lastSelectedOption.name = name
 
             let selectedOption = new Object
 
@@ -91,8 +101,46 @@ export default {
 </script>
 
 <style scoped>
+.option-field {
+    overflow: visible;
+    white-space: nowrap;
+    position: relative;
+    margin-bottom: 60px;
+    mask-image: linear-gradient(to right, #000 0%, #000 90%, transparent 100%);
+    -webkit-mask-image: linear-gradient(
+        to right,
+        #000 0%,
+        #000 90%,
+        transparent 100%
+    );
+    -webkit-box-flex: 1;
+}
+.product-options:before,
+.product-options:after {
+  content: "";
+  height: calc(100% - 2em);
+  pointer-events: none;
+  position: absolute;
+  top: 1em;
+  width: 10px;
+  z-index: 2;
+}
 
-@import '../form/form.css';
+.option-field {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.input-type-radio {
+  white-space: nowrap;
+}
+
+.content-wrapper {
+    display: block;
+    width: 100%;
+    margin-bottom: 80px;
+}
 
 .product-options-form {
     display: inline-block;
@@ -112,7 +160,7 @@ export default {
 
 .option-field {
     display: inline-block;
-    padding: 18px 0 28px;
+    padding: 32px 0 28px;
     vertical-align: top;
     width: 280px;
     color: #333333;
@@ -138,7 +186,6 @@ h3 {
     font-size: 30px;
     color: #111111;
     letter-spacing: -0.3px;
-    text-transform: uppercase;
 }
 
 h4::after {
@@ -154,23 +201,15 @@ h4::after {
 }
 
 .product-options:nth-child(1) h4::after {
-    content: 'Базовая';
+    content: 'Компактный';
 }
 
 .product-options:nth-child(2) h4::after {
-    content: 'Много фото';
+    content: 'Большой';
 }
 
 .product-options:nth-child(3) h4::after {
-    content: 'Забудь про iCloud :)';
-}
-
-.product-options:nth-child(4) h4::after {
-    content: 'Крайне много фоток';
-}
-
-.product-options:nth-child(5) h4::after {
-    content: 'Лучший из лучших';
+    content: 'Огромный';
 }
 
 .product-options:first-child h4::before, .product-options:first-child .option-field::before {
@@ -184,30 +223,31 @@ h4::after {
 }
 
 .product-options:first-child h4::before {
-    content: 'Память';
+    content: 'Экран';
 }
 
 .product-options:first-child .option-field::before {
-    content: 'Цвет (на выбор)';
+    content: 'Опции (на выбор)';
 }
 
-.option-colors .color-widget {
-    display: block;
-    margin: 0 auto;
-    border-radius: 50%;
-    width: 32px;
-    height: 32px;
-    margin-bottom: 8px;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15);
+.link-to-form-mobile {
+    display: none;
+}
+
+.option-colors {
+    text-align: center;
 }
 
 .option-colors .option-name {
     text-align: center;
-    display: block;
-    font-size: 12px;
+    display: inline-block;
+    white-space: normal;
+    font-size: 17px;
+    font-weight: 500;
     color: #333333;
     letter-spacing: 0.04px;
     text-align: center;
+    max-width: 98%;
 }
 
 .price-section {
@@ -252,26 +292,18 @@ h4::after {
 
 
 
-
-
-
-
-
-
-
-
-
-
 .input-type-radio {
     position: relative;
     display: inline-block;
     box-sizing: content-box;
     vertical-align: baseline;
-    width: 72px;
-    height: 60px;
+    width: 128px;
+    height: 50px;
     font-size: 12px;
     border-radius: 4px;
     margin-right: 4px;
+    overflow: visible;
+    white-space: nowrap;
 }
 
 .input-type-radio > input {
@@ -286,14 +318,17 @@ h4::after {
 
 .input-type-radio > .option-colors {
     box-sizing: content-box;
+    border: 1px solid #eeeeee;
     position: absolute;
     top: 0;
     left: 0;
     display: block;
     width: 100%;
+    padding-top: 12px;
+    box-sizing: border-box;
+    padding-bottom: 8px;
     height: 100%;
     z-index: 0;
-    padding-top: 8px;
     background-size: 0.555em 0.555em;
     border-radius: inherit;
 }
@@ -311,7 +346,7 @@ h4::after {
 }
 
 .input-type-radio > input:focus + .option-colors {
-    outline: 3px solid rgb(196, 226, 255);
+    outline: 2px solid rgb(196, 226, 255);
 }
 
 .input-type-radio > input:focus:hover + .option-colors {
@@ -326,6 +361,128 @@ h4::after {
 
 .input-type-radio > input[disabled]:checked + .option-colors {
     opacity: 0.5;
+}
+
+@media(max-width: 1073px) {
+    h3 {
+        font-size: 22px;
+    }
+
+    .product-options-form {
+        display: block;
+        width: 100%;
+        padding: 40px 80px 0;
+    }
+}
+
+@media(max-width: 900px) {
+    .product-options-form {
+        width: 100%;
+        padding: 40px 0;
+    }
+}
+
+@media(max-width: 700px) {
+    .category-name {
+        padding: 0;
+        display: block;
+        width: 100%;
+        border-bottom: 1px solid #D6D6D6;
+    }
+
+    .product-options {
+        border: none;
+    }
+
+    .option-field {
+        display: block;
+        width: 100%;
+        padding-bottom: 40px;
+    }
+
+    .option-colors .color-widget {
+        margin: 0 auto 8px;
+    }
+
+    .product-options:first-child h4::before, .option-field:first-child:before, .option-field::before {
+        display: none;
+    }
+
+    .option-field::before {
+        display: inline-block;
+        position: static !important;
+        content: "Опции:" !important;
+        font-weight: normal;
+        margin-right: 24px;
+        font-size: 14px;
+        color: #333333;
+        vertical-align: top;
+        letter-spacing: -0.31px;
+    }
+
+    .price-section {
+        position: absolute;
+        float: none;
+        height: auto;
+        right: 0;
+        top: 16px;
+        text-align: right;
+        background: none;
+        width: auto;
+        padding: 0;
+    }
+
+    h4::after {
+        margin-bottom: 14px;
+        font-weight: normal;
+        font-size: 14px;
+        color: #333333;
+        letter-spacing: -0.31px;
+    }
+
+    .option-price {
+        font-size: 18px;
+        color: #111;
+        font-weight: 500;
+        letter-spacing: -0.48px;
+    }
+
+    .price-section::before {
+        display: block;
+        content: 'Цена';
+        font-weight: normal;
+        font-size: 12px;
+        color: #888888;
+        margin-bottom: 4px;
+    }
+
+    .link-to-form {
+        display: none;
+    }
+
+    .link-to-form-mobile {
+        display: block;
+        background-color: #F96400;
+        text-align: center;
+        padding: 13px 0 14px;
+        font-weight: 500;
+        font-size: 14px;
+        color: #FFFFFF;
+        letter-spacing: -0.39px;
+        border-radius: 4px;
+        background-image: linear-gradient(-180deg, #3F9FEB 0%, #0071CA 100%);
+        border: 1px solid #0070C9;
+        margin-bottom: 70px;
+        line-height: 16px;
+    }
+}
+
+@media (max-device-width: 350px) {
+    .option-field::before {
+        margin-right: 10px;
+        display: block;
+        margin-bottom: 8px;
+    }
 }
 
 </style>
