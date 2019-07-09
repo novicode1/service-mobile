@@ -9,7 +9,7 @@
                         <nuxt-link to="/">Главная</nuxt-link>
                     </li>
 
-                    <li class="breadcrumb" v-if="category != 'main'">
+                    <li class="breadcrumb" v-if="(category != 'main') && $route.query.path != underfined">
                         <nuxt-link :to="`/${this.$route.query.path}`">{{ category }}</nuxt-link>
                     </li>
 
@@ -47,7 +47,7 @@
                 :code="product.code"
             />
 
-            <apple-watch-options-form 
+            <apple-watch-options-form
                 v-if="product.options && product.category === 'appleWatch'"
                 :productOptions="product.options"
                 :productPrice="product.price"
@@ -81,8 +81,9 @@ export default {
     data() {
         return {
         	category: this.$route.query.category
-        };
+        }
     },
+
     components: {
         AppFooter,
         AppNavigation,

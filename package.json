@@ -13,12 +13,14 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
+    "@trevoreyre/autocomplete-vue": "^2.0.2",
     "axios": "^0.17.1",
     "firebase": "^5.10.0",
     "firebase-admin": "^8.2.0",
     "firebase-functions": "^3.0.2",
     "fs": "0.0.1-security",
     "gsap": "^1.20.3",
+    "lodash": "^4.17.11",
     "node-sass": "^4.7.2",
     "nuxt": "^1.0.0-rc11",
     "roboto-fontface": "^0.10.0",

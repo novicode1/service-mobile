@@ -59,7 +59,12 @@ export default {
         isActive: this.active
       };
   },
-
+  mounted: function() {
+    this.onResize()
+  },
+  destroyed: function() {
+    window.removeEventListener('resize', this.onResize)
+  },
   methods: {
     toggleClass: function(event) {
        if(this.isActive){
@@ -67,6 +72,13 @@ export default {
        }else{
          this.isActive = true;
        }
+    },
+    onResize() {
+      if (window.innerWidth > 1077) {
+        this.isActive = false
+      } else {
+        this.isActive = true
+      }
     }
   },
   components: {

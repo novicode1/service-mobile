@@ -139,7 +139,7 @@ export default {
 }
 
 .content-about .promo-section {
-  background: url(../images/main-monkey.png) no-repeat 80% 100%;
+  background: url(../images/main-monkey.jpg) no-repeat 80% 100%;
   background-size: 70% auto;
   box-shadow: #FFB500;
   margin-left: var(--wrapper-margin);
@@ -212,13 +212,13 @@ export default {
 .content-about .our-services {
   justify-content: flex-end;
   margin-right: var(--wrapper-margin);
-  background: url(../images/telephone-monkey.png) no-repeat 30% 50%;
+  background: url(../images/telephone-monkey.jpg) no-repeat 30% 50%;
   background-size: 60% auto;
 }
 
 .devices-repair {
   margin-left: var(--wrapper-margin);
-  background: url(../images/laptop-monkey.png) no-repeat 75% 50%;
+  background: url(../images/laptop-monkey.jpg) no-repeat 75% 50%;
   background-size: 60% auto;
 }
 

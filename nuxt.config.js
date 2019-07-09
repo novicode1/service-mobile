@@ -44,7 +44,7 @@ module.exports = {
     '~/plugins/firebase',
     {src: '~/plugins/vuelidate'},
     {src: '~/plugins/axios'},
-    {src: '~/plugins/smooth-scroll'}
+    {src: '~/plugins/searchBar'}
   ],
   axios: {
     /* set API_URL environment variable to configure access to the API

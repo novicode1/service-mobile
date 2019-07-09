@@ -1,13 +1,27 @@
 <template>
   <main class="capsule wrapper">
-    <app-navigation />
+    <app-navigation/>
     <div class="contain">
       <div class="side-block">
-        <app-sidebar class="store-navigation desktop" :active="false" />
-        <app-filter :pricerange.sync="highprice" class="store-filter desktop" :active="false"/>
+        <app-sidebar class="store-navigation" :active="false" />
+        <app-filter :pricerange.sync="highprice" class="store-filter" :active="false"/>
+      </div>
+      <div class="content" v-if="!wProducts.length">
+        <skeleton-card v-for="index in 10" :key="index"/>
+      </div>
+      <div class="content">
+        <section class="category-promo">
+            <div class="header-wrapper">
+                <img src="../images/categories/iphone-logo.png" alt="Apple iphone logo" width="126" height="auto" class="iphone-logo">
+                <img src="../images/categories/iphone-name.svg" alt="Apple iphone logo" width="180" height="auto" class="iphone-name">
 
-        <app-sidebar class="store-navigation mobile-hidden" :active="true" />
-        <app-filter :pricerange.sync="highprice" class="store-filter mobile-hidden" :active="true"/>
+                <span class="promo-text">
+                    Какой из них подходит для вас?
+                </span>
+            </div>
+            <img src="../images/categories/iphone-promo.jpg" alt="Apple iphone promo" width="480" height="auto" class="iphone-promo">
+            <img src="../images/categories/iphone-mobile-promo.jpg" alt="Apple iphone promo" width="280" height="auto" class="iphone-promo-mobile">
+        </section>
       </div>
       <transition-group name="items" tag="section" class="content">
         <app-item-card
@@ -31,6 +45,7 @@ import AppFilter from './../components/AppFilter.vue';
 import AppSidebar from './../components/AppSidebar.vue';
 import AppMasthead from './../components/AppMasthead.vue';
 import AppItemCard from './../components/AppItemCard.vue';
+import SkeletonCard from './../components/skeleton/SkeletonCard.vue';
 
 export default {
   components: {
@@ -38,6 +53,7 @@ export default {
     AppNavigation,
     AppFilter,
     AppSidebar,
+    SkeletonCard,
     AppMasthead,
     AppItemCard
   },
@@ -82,3 +98,123 @@ export default {
   }
 };
 </script>
+<style scoped>
+.category-promo {
+    display: block;
+    width: 100%;
+    background-color: #FAFAFA;
+    overflow: auto;
+    box-sizing: border-box;
+    border-radius: 6px;
+    margin: 0 10px 1%;
+}
+
+.header-wrapper {
+    display: inline-block;
+    padding-left: 32px;
+}
+
+.iphone-logo {
+    display: inline-block;
+    padding-top: 38px;
+    margin-bottom: 50px;
+}
+
+.iphone-name {
+    display: block;
+    margin-bottom: 16px;
+}
+
+.promo-text {
+    display: block;
+    font-weight: normal;
+    font-size: 16px;
+    color: #8d8d8d;
+    letter-spacing: -0.49px;
+    line-height: 22px;
+}
+
+.iphone-promo {
+    float: right;
+    margin-right: 102px;
+}
+
+.iphone-promo-mobile {
+    display: none;
+}
+
+@media (max-device-width: 900px) {
+    .category-promo {
+        overflow-x: hidden;
+    }
+    .iphone-promo {
+        margin-right: 36px;
+    }
+}
+
+@media (max-device-width: 800px) {
+    .iphone-promo {
+        width: 440px;
+        padding-top: 20px;
+        margin-right: 20px;
+    }
+}
+
+@media (max-device-width: 750px) {
+    .iphone-promo {
+        margin-right: -120px;
+    }
+}
+
+@media (max-device-width: 650px) {
+    .category-promo {
+        background: #FAFAFA;
+    }
+    .iphone-promo {
+        float: none;
+        margin-right: 0;
+        display: block;
+        width: 95%;
+        margin-left: 15px;
+    }
+}
+
+@media (max-device-width: 556px) {
+    .category-promo {
+        margin: 0;
+        border-radius: 0;
+    }
+}
+
+@media (max-device-width: 450px) {
+    .iphone-promo {
+        display: none;
+    }
+
+    .iphone-promo-mobile {
+        display: block;
+        margin: 0 auto;
+    }
+
+    .iphone-logo {
+        display: block;
+        margin: 0 auto 44px;
+    }
+
+    .iphone-name {
+        margin: 0 auto 14px;
+    }
+
+    .promo-text {
+        margin-bottom: 40px;
+    }
+
+    .header-wrapper {
+        margin-bottom: 20px;
+        text-align: center;
+        padding-left: 0;
+        display: block;
+        width: 100%;
+    }
+}
+</style>

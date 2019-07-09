@@ -1,6 +1,6 @@
 <template>
 <div>
-    <app-navigation />
+    <app-navigation/>
 
     <div class="content-wrapper">
         <app-add-product-form />

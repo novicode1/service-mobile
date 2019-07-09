@@ -3,7 +3,7 @@
     <span class="salepill salepill-used" v-if="item.used" :click="additem">Б/у</span>
     <span class="salepill salepill-sale" v-if="item.sale">Скидка</span>
 
-    <div class="item-image-wrapper">
+    <div class="item-image-wrapper" v-if="item.imageUrl">
       <nuxt-link
         :to="{ name: 'product-item', query: { path: this.$route.name, id: item.id, category: category, name: item.name }}"
       >

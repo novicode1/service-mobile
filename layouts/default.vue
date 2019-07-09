@@ -20,6 +20,59 @@ export default {
 </script>
 
 <style>
+
+.autocomplete {
+  width: 260px;
+  display: inline-block;
+  margin-left: 40px;
+  vertical-align: top;
+  line-height: 1.3;
+  font-size: 14px;
+  font-weight: 400;
+  color: #111;
+  margin-top: 5px;
+}
+
+.autocomplete-input {
+  background-color: transparent;
+  color: #fff;
+  font-size: 17px;
+  border: 1px solid #444;
+  font-weight: 400;
+  letter-spacing: -0.5px;
+  padding: 6px 10px 8px 48px;
+}
+
+.autocomplete-input:focus, .autocomplete-input[aria-expanded=true] {
+  color: #444;
+}
+
+@media (max-device-width: 1100px) {
+  .autocomplete-input {
+    padding: 4px 10px 6px 48px;
+    font-size: 14px;
+  }
+
+  .autocomplete {
+    margin-top: 4px;
+  }
+}
+
+@media (max-device-width: 574px) {
+  .autocomplete {
+    display: block;
+    width: calc(100% - 64px);
+    margin: 14px auto 14px;
+  }
+}
+
+@media (max-device-width: 450px) {
+  .autocomplete {
+    width: calc(100% - 32px);
+    margin-top: 10px;
+  }
+}
+
 html,
 body {
   height: 100%;

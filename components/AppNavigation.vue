@@ -5,6 +5,7 @@
       <img src="../images/icons/about-logo.svg" class="small-logo" alt="Логотип Service Mobile" width="40">
     </nuxt-link>
 
+    <search-bar/>
     <nav class="mainmenu " :class="{ 'responsive' : isActive }" role="nav">
       <ul class="menu-list">
         <li class="menu-item telephone">
@@ -23,14 +24,9 @@
           <nuxt-link to="/about#contacts">Контакты</nuxt-link>
         </li>
 
-        <li class="menu-item">
-          <nuxt-link to="/" class="shop-link" v-if="page">
+        <li class="menu-item" v-if="page">
+          <nuxt-link to="/" class="shop-link">
             Магазин
-            <img src="../images/icons/shopping-cart.svg" alt="Иконка номера для звонка">
-          </nuxt-link>
-
-          <nuxt-link to="/cart" class="shop-link" v-if="!page">
-            Корзина
             <img src="../images/icons/shopping-cart.svg" alt="Иконка номера для звонка">
           </nuxt-link>
         </li>
@@ -45,19 +41,31 @@
 </template>
 
 <script>
+import SearchBar from './searchBar/SearchBar.vue';
 
 export default {
-  props: ['page'],
+  props: {
+    page: {
+      required: false
+    }
+  },
+
+  components: {
+    SearchBar
+  },
+
   data() {
     return {
       isActive: false
     }
   },
+
   computed: {
     cartTotal() {
       return this.$store.state.cartTotal
     }
   },
+
   methods: {
     changeMenuState() {
       this.isActive = !this.isActive
@@ -84,6 +92,7 @@ export default {
 
 .header .logo {
   display: inline-block;
+  vertical-align: top;
 }
 
 .header .small-logo {
@@ -179,19 +188,27 @@ export default {
   transition: transform .3s;
 }
 
-@media (max-device-width: 900px) {
+@media (max-device-width: 1100px) {
+  .header .small-logo {
+    display: block;
+    height: 18px;
+  }
+
+  .header .main-logo {
+    display: none;
+  }
+  .header .logo {
+    display: inline-block;
+    padding: 6px 0px 6px 32px;
+  }
+
   .header {
     height: auto;
     padding: 0;
     box-sizing: border-box;
     line-height: 0px;
   }
-
-  .header .logo {
-    display: inline-block;
-    padding: 6px 0px 6px 32px;
-  }
-
+  
   #main-nav-toggle {
     position: relative;
     display: block;
@@ -265,15 +282,6 @@ export default {
   }
 
   .mainmenu.responsive .telephone a::after {
-    display: none;
-  }
-
-  .header .small-logo {
-    display: block;
-    height: 18px;
-  }
-
-  .header .main-logo {
     display: none;
   }
 }

@@ -1,6 +1,6 @@
 <template>
 <div>
-  <app-navigation />
+  <app-navigation/>
   <div class="capsule cart">
     <div v-if="cartTotal > 0">
       <h1>Корзина</h1>

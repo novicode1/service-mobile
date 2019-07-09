@@ -156,19 +156,6 @@ input:-moz-placeholder {
   opacity: 0;
 }
 
-aside.mobile-hidden {
-  display: none !important;
-}
-@media (max-device-width: 1077px) {
-  aside.mobile-hidden {
-    display: inline-block !important;
-  }
-
-  aside.desktop {
-    display: none !important;
-  }
-}
-
 
 @media (max-device-width: 555px) {
   section.content {
