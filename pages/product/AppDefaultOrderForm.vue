@@ -2,22 +2,15 @@
     <form @submit.prevent="onCreateProduct" novalidate class="order-form">
         <h4>Быстрый заказ 📦</h4>
 
-        <ul class="selected-options" v-if="productDetails">
+        <ul class="selected-options" v-if="productName">
             <li class="option">
                 {{productName}}
                 <span class="option-description">Название</span>
             </li>
-            <li class="option" v-if="productDetails.color">
-                {{productDetails.color}}
-                <span class="option-description">Опции</span>
-            </li>
-            <li class="option" v-if="productDetails.currentPrice">
-                {{productDetails.currentPrice}}$
+
+            <li class="option">
+                ${{productPrice}}
                 <span class="option-description">Цена</span>
-            </li>
-            <li class="option" v-if="productDetails.name">
-                {{productDetails.name}}
-                <span class="option-description">Экран</span>
             </li>
         </ul>
 
@@ -61,6 +54,9 @@ export default {
         productName: {
             type: String
         },
+        productPrice: {
+            required: true
+        },
         productDetails: {
             type: Object
         }
@@ -87,7 +83,7 @@ export default {
         onCreateProduct () {
             let options = ''
             if (this.productDetails.name) {
-                options = '<strong>Опции:</strong>' + '\n- Название: ' + this.productName + '\n- Цена: ' + this.productDetails.currentPrice + '$' + '\n- Опции: ' + this.productDetails.color + '\n- Экран: ' + this.productDetails.name
+                options = '<strong>Опции:</strong>' + '\n- Название: ' + this.productName + '\n- Цена: ' + this.productDetails.currentPrice + '$' + '\n- Цвет: ' + this.productDetails.color
             }
 
             let comment = 'Новый заказ 🎉\n\n<strong>Телефон:</strong> ' + this.tel + '\n<strong>Комментарий:</strong> ' + this.comment + '\n\n' + options + '\n\n<strong>Код товара:</strong> ' + this.code + '\n\n' + window.location.href
@@ -107,7 +103,7 @@ export default {
 </script>
 
 <style scoped>
-@import '../../form/form.css';
+@import '../../components/form/form.css';
 
 h4 {
     font-weight: 500;
@@ -120,9 +116,10 @@ h4 {
 }
 
 .order-form {
-    text-align: left;
-    display: block;
+    display: inline-block;
+    vertical-align: top;
     width: 400px;
+    text-align: left;
     padding: 18px 0 28px;
 }
 

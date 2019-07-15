@@ -30,6 +30,9 @@ const store = () => new Vuex.Store({
 						code: data.code,
 						options: data.options
 					}
+					if (data.imagesUsed) {
+                        product.imagesUsed = data.imagesUsed
+					} 
 					product.id = s.id
 					products.push(product)
 				})
@@ -37,6 +40,7 @@ const store = () => new Vuex.Store({
 			})
 			.catch(error => console.log(error))
 		},
+
 		createProduct ({commit, getters}, payload) {
 			const product = {
 				name: payload.name,
@@ -46,6 +50,10 @@ const store = () => new Vuex.Store({
 				used: payload.used,
 				sale: payload.sale,
 				inStock: true
+			}
+
+			if (payload.options) {
+				product.options = payload.options
 			}
 
 			let key
@@ -90,6 +98,9 @@ const store = () => new Vuex.Store({
 		macbook: state => filter(state.products, 'category', 'macbook'),
 		accessories: state => filter(state.products, 'category', 'accessories'),
 		appleWatch: state => filter(state.products, 'category', 'appleWatch'),
+		ipad: state => filter(state.products, 'category', 'ipad'),
+		airpods: state => filter(state.products, 'category', 'airpods'),
+		mac: state => filter(state.products, 'category', 'mac'),
 		sale: state => filter(state.products, 'sale', true),
 		used: state => filter(state.products, 'used', true),
 		createdProductKey (state) {

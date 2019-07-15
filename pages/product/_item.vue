@@ -22,12 +22,21 @@
             <article class="item-header">
                 <img src="./../../images/icons/apple-logo.svg" alt="Apple logo">
                 <h1>{{ product.name }}</h1>
+                <span class="product-price" v-if="!product.options">
+                    <small>Цена: </small>${{ product.price }}
+                </span>
                 <p>С нашей программой Trade In вы можете получить скидку на новую технику, для этого просто свяжитесь с менеджером. </p>
                 <p role="note">* Это полезно для вас и всей нашей планеты <span class="emoji-congartulation">🥳</span></p>
             </article>
 
-            <div class="item-image-wrapper" v-if="product.category !== 'accessories'">
+            <div class="item-image-wrapper" v-if="(product.category !== 'accessories' || !product.options) && !product.imagesUsed">
                 <img :src="`${product.imageUrl}`" :alt="`Image of ${product.name}`" class="item-image">
+            </div>
+
+            <div class="images-used" v-if="product.imagesUsed">
+                <div v-for="(imageUrl, index) in product.imagesUsed" :key="imageUrl+index">
+                    <img :src="`${imageUrl}`" alt="Картинка б/у товара" class="image-used" width="800">
+                </div>
             </div>
 
             <iphone-options-form
@@ -47,12 +56,44 @@
                 :code="product.code"
             />
 
+            <ipad-options-form
+                v-if="product.options && product.category == 'ipad'"
+                :productOptions="product.options"
+                :productPrice="product.price"
+                :productName="product.name"
+                :productImageUrl="product.imageUrl"
+                :code="product.code"
+            />
+
             <apple-watch-options-form
                 v-if="product.options && product.category === 'appleWatch'"
                 :productOptions="product.options"
                 :productPrice="product.price"
                 :productName="product.name"
                 :code="product.code"
+            />
+
+            <mac-options-form
+                v-if="product.options && product.category === 'mac'"
+                :productOptions="product.options"
+                :productPrice="product.price"
+                :productName="product.name"
+                :code="product.code"
+            />
+
+            <macbook-options-form
+                v-if="product.options && product.category === 'macbook'"
+                :productOptions="product.options"
+                :productPrice="product.price"
+                :productName="product.name"
+                :code="product.code"
+            />
+
+            <app-default-order-form
+                v-if="!product.options"
+                :productName="product.name"
+                :productPrice="product.price"
+                class="default-form"
             />
         </main>
 
@@ -71,6 +112,10 @@ import AppSidebar from "./../../components/AppSidebar.vue";
 import IphoneOptionsForm from "./../../components/optionsForm/iphone/IphoneOptionsForm.vue";
 import AccessoriesOptionsForm from "./../../components/optionsForm/accessories/AccessoriesOptionsForm.vue";
 import AppleWatchOptionsForm from "./../../components/optionsForm/apple-watch/AppleWatchOptionsForm.vue";
+import IpadOptionsForm from "./../../components/optionsForm/ipad/IpadOptionsForm.vue";
+import MacOptionsForm from "./../../components/optionsForm/mac/MacOptionsForm.vue";
+import MacbookOptionsForm from "./../../components/optionsForm/macbook/MacbookOptionsForm.vue";
+import AppDefaultOrderForm from "./AppDefaultOrderForm.vue";
 
 export default {
     head() {
@@ -90,7 +135,11 @@ export default {
         AppSidebar,
         IphoneOptionsForm,
         AccessoriesOptionsForm,
-        AppleWatchOptionsForm
+        AppleWatchOptionsForm,
+        MacOptionsForm,
+        IpadOptionsForm,
+        MacbookOptionsForm,
+        AppDefaultOrderForm
     },
 
     computed: {
@@ -212,18 +261,18 @@ export default {
 }
 
 .item-header h1 {
-    max-width: 300px;
+    max-width: 400px;
     font-weight: 500;
     font-size: 38px;
     color: #111111;
     letter-spacing: -1.29px;
     line-height: 44px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .item-header p {
     font-size: 16px;
-    color: #333333;
+    color: #686868;
     letter-spacing: -0.13px;
     line-height: 25px;
     font-weight: normal;
@@ -245,6 +294,37 @@ export default {
     display: block;
     width: 100%;
 }
+
+.image-used {
+    max-width: 100%;
+    display: block;
+    margin: 0 auto 40px;
+}
+
+.images-used ~ .default-form {
+    margin: 0 auto;
+    display: block;
+}
+
+.item-header .product-price small {
+    font-weight: 400; 
+    font-size: 15px;
+    color: #888888;
+    letter-spacing: -0.01px;
+    text-align: left;
+    display: block;
+}
+
+.item-header .product-price {
+    display: inline-block;
+    padding: 20px 0;
+    font-size: 28px;
+    line-height: 1.38105;
+    font-weight: 400;
+    letter-spacing: -1px;
+    color: #111;
+}
+
 
 @media(max-width: 1073px) {
     .product-content {

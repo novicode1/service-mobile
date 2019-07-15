@@ -35,6 +35,9 @@ export default {
 
         onSubmit(result) {
             let url
+            if (!result) {
+                return[]
+            }
             if (location.hostname === "localhost") {
                 url = 'http://localhost:3000/'
             }
@@ -42,7 +45,7 @@ export default {
                 url = 'https://service-mobile-21c17.firebaseapp.com/'
             }
 
-            window.open(`${url}product?id=${encodeURI(result.id)}&name=${result.name}`) 
+            window.open(`${url}product?id=${encodeURI(result.id)}&name=${result.name}`)
         }
     }
 }

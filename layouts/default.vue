@@ -35,12 +35,12 @@ export default {
 
 .autocomplete-input {
   background-color: transparent;
-  color: #fff;
+  color: #fff;text-overflow: ellipsis;
   font-size: 17px;
   border: 1px solid #444;
   font-weight: 400;
   letter-spacing: -0.5px;
-  padding: 6px 10px 8px 48px;
+  padding: 8px 10px 6px 48px;
 }
 
 .autocomplete-input:focus, .autocomplete-input[aria-expanded=true] {

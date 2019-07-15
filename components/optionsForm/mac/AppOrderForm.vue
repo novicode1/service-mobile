@@ -9,7 +9,7 @@
             </li>
             <li class="option" v-if="productDetails.color">
                 {{productDetails.color}}
-                <span class="option-description">Опции</span>
+                <span class="option-description">Объем диска</span>
             </li>
             <li class="option" v-if="productDetails.currentPrice">
                 {{productDetails.currentPrice}}$
@@ -17,7 +17,7 @@
             </li>
             <li class="option" v-if="productDetails.name">
                 {{productDetails.name}}
-                <span class="option-description">Экран</span>
+                <span class="option-description">Оперативная память</span>
             </li>
         </ul>
 
@@ -87,7 +87,7 @@ export default {
         onCreateProduct () {
             let options = ''
             if (this.productDetails.name) {
-                options = '<strong>Опции:</strong>' + '\n- Название: ' + this.productName + '\n- Цена: ' + this.productDetails.currentPrice + '$' + '\n- Опции: ' + this.productDetails.color + '\n- Экран: ' + this.productDetails.name
+                options = '<strong>Опции:</strong>' + '\n- Название: ' + this.productName + '\n- Цена: ' + this.productDetails.currentPrice + '$' + '\n- Объем диска: ' + this.productDetails.color + '\n- Оперативная память: ' + this.productDetails.name
             }
 
             let comment = 'Новый заказ 🎉\n\n<strong>Телефон:</strong> ' + this.tel + '\n<strong>Комментарий:</strong> ' + this.comment + '\n\n' + options + '\n\n<strong>Код товара:</strong> ' + this.code + '\n\n' + window.location.href
@@ -148,6 +148,7 @@ h4 {
 
 .option .option-description {
     font-weight: normal;
+    line-height: normal;
     font-size: 17px;
     color: #888888;
     letter-spacing: -0.57px;

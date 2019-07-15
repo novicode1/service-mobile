@@ -25,6 +25,7 @@
                                     src="../images/click.svg"
                                 />
                             </div>
+                            <span :style="{ backgroundColor: optionItem.color}" class="color-widget"></span>
                             <span class="option-name">
                                 {{optionItem.name | truncate(16, ' ...')}}
                             </span>
@@ -117,11 +118,11 @@ export default {
     white-space: nowrap;
     position: relative;
     margin-bottom: 60px;
-    mask-image: linear-gradient(to right, #000 0%, #000 90%, transparent 100%);
+    mask-image: linear-gradient(to right, #000 0%, #000 80%, transparent 100%);
     -webkit-mask-image: linear-gradient(
         to right,
         #000 0%,
-        #000 90%,
+        #000 72%,
         transparent 100%
     );
     -webkit-box-flex: 1;
@@ -157,10 +158,8 @@ export default {
     position: absolute;
     width: 40px;
     right: -20px;
-    top: -28px;
+    top: 10px;
     height: auto;
-    z-index: 999;
-    transform: rotate(-50deg);
 }
 
 .click-tip::before {
@@ -190,7 +189,7 @@ export default {
 
 .option-field {
     display: inline-block;
-    padding: 32px 0 25px;
+    padding: 18px 0 25px;
     vertical-align: top;
     width: 280px;
     color: #333333;
@@ -213,10 +212,10 @@ h3 {
     padding: 26px 0 38px;
     width: 140px;
     font-weight: 500;
-    text-transform: lowercase;
     font-size: 30px;
     color: #111111;
     letter-spacing: -0.3px;
+    text-transform: uppercase;
 }
 
 h4::after {
@@ -232,15 +231,23 @@ h4::after {
 }
 
 .product-options:nth-child(1) h4::after {
-    content: 'Компактный';
+    content: 'Базовая';
 }
 
 .product-options:nth-child(2) h4::after {
-    content: 'Большой';
+    content: 'Много приложений';
 }
 
 .product-options:nth-child(3) h4::after {
-    content: 'Огромный';
+    content: 'Забудь про iCloud :)';
+}
+
+.product-options:nth-child(4) h4::after {
+    content: 'Крайне много пиложений';
+}
+
+.product-options:nth-child(5) h4::after {
+    content: 'Лучший из лучших';
 }
 
 .product-options:first-child h4::before, .product-options:first-child .option-field::before {
@@ -254,11 +261,11 @@ h4::after {
 }
 
 .product-options:first-child h4::before {
-    content: 'Экран';
+    content: 'Память';
 }
 
 .product-options:first-child .option-field::before {
-    content: 'Опции (на выбор)';
+    content: 'Цвет (на выбор)';
 }
 
 .link-to-form-mobile {
@@ -269,16 +276,25 @@ h4::after {
     text-align: center;
 }
 
+.option-colors .color-widget {
+    display: block;
+    margin: 0 auto;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    margin-bottom: 8px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
 .option-colors .option-name {
     text-align: center;
     display: inline-block;
     white-space: normal;
-    font-size: 17px;
-    font-weight: 500;
+    font-size: 12px;
     color: #333333;
     letter-spacing: 0.04px;
     text-align: center;
-    max-width: 98%;
+    max-width: 90%;
 }
 
 .price-section {
@@ -328,8 +344,8 @@ h4::after {
     display: inline-block;
     box-sizing: content-box;
     vertical-align: baseline;
-    width: 128px;
-    height: 50px;
+    width: 72px;
+    height: 72px;
     font-size: 12px;
     border-radius: 4px;
     margin-right: 4px;
@@ -349,17 +365,14 @@ h4::after {
 
 .input-type-radio > .option-colors {
     box-sizing: content-box;
-    border: 1px solid #eeeeee;
     position: absolute;
     top: 0;
     left: 0;
     display: block;
     width: 100%;
-    padding-top: 12px;
-    box-sizing: border-box;
-    padding-bottom: 8px;
     height: 100%;
     z-index: 0;
+    padding-top: 8px;
     background-size: 0.555em 0.555em;
     border-radius: inherit;
 }
@@ -442,7 +455,7 @@ h4::after {
     .option-field::before {
         display: inline-block;
         position: static !important;
-        content: "Опции:" !important;
+        content: "Цвет:" !important;
         font-weight: normal;
         margin-right: 24px;
         font-size: 14px;

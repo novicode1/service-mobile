@@ -28,7 +28,7 @@
 
 
             <label class="input-field">
-                <span class="label-text">Комментарий (опционально)</span>
+                <span class="label-text">Комментарий (по желанию)</span>
                 <input v-model.trim="comment" @input="setCode($event.target.value)"/>
             </label>
             <button class="submit-button" :disabled="$v.$invalid">Быстрый заказ</button>

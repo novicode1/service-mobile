@@ -1,7 +1,6 @@
 <template>
     <form @submit.prevent="onCreateProduct" novalidate class="add-product-form">
         <div class="content-wrapper">
-            <h1>Добавить товар</h1>
 
             <label class="input-field" :class="{ 'input-field-error': $v.name.$error }">
                 Название
@@ -28,15 +27,6 @@
             </label>
 
 
-            <label class="input-field" :class="{ 'input-field-error': $v.category.$error }">
-                Category
-                <select :value="category" @change="setCategory($event.target.value)">
-                    <option :value="option.value" v-for="option in optionCategories" :key="option">{{option.name}}</option>
-                </select>
-
-                <span class="error" v-if="!$v.category.required">Обязательное поле</span>
-            </label>
-
             <label class="input-field">
                 <span class="input-type-checkbox">
                     <input
@@ -62,7 +52,7 @@
             </label>
 
             <label class="input-field">
-                Фото товара:
+                Главное фото товара:
                 <div class="input-type-file">
                     <div class="input-wrapper">
                         <input
@@ -73,7 +63,7 @@
                         <button type="button" tabindex="-1">Выберите файл</button>
                     </div>
                 </div>
-                <img :src="imageUrl" height="350" alt="Превью фото" v-if="imageUrl" accept="image/*">
+                <img :src="imageUrl" height="auto" alt="Превью фото" v-if="imageUrl" accept="image/*" class="promo-picked-image">
             </label>
             <button class="submit-button" :disabled="$v.$invalid">Добавить товар</button>
         </div>
@@ -87,6 +77,11 @@
 import { required, minLength, maxLength, between, email, sameAs } from 'vuelidate/lib/validators'
 
 export default {
+    props: {
+        selectedCategory: {
+            required: true
+        }
+    },
     data() {
         return {
             name: '',
@@ -94,27 +89,9 @@ export default {
             sale: false,
             used: false,
             price: 0,
-            category: '',
+            category: this.selectedCategory,
             code: '',
-            imageUrl: '',
-            optionCategories: [
-                {
-                    value: 'macbook',
-                    name: 'macbook'
-                },
-                {
-                    value: 'iphone',
-                    name: 'iphone'
-                },
-                {
-                    value: 'appleWatch',
-                    name: 'apple watch'
-                },
-                {
-                    value: 'accessories',
-                    name: 'аксессуары'
-                }
-            ]
+            imageUrl: ''
         }
     },
     validations: {
@@ -143,11 +120,6 @@ export default {
         setPrice(value) {
             this.price = value
             this.$v.price.$touch()
-        },
-
-        setCategory(value) {
-            this.category = value
-            this.$v.category.$touch()
         },
 
         setUsed(value) {
@@ -211,28 +183,25 @@ export default {
             }
 
             this.$store.dispatch('createProduct', productData)
-            alert("Товар добавлен")
+            setTimeout(function() { alert("Товар добавлен"); }, 2000);
         },
     }
 }
 </script>
 
 <style scoped>
-@import './form.css';
+@import '../form.css';
+.promo-picked-image {
+    max-width: 100%;
+}
 
 .add-product-form {
     display: inline-block;
     text-align: left;
-    margin: 0 100px;
 }
 
 .add-product-form .content-wrapper {
     padding: 40px 0;
-}
-
-h1 {
-    margin-bottom: 40px;
-    font-weight: 400;
 }
 
 .input-field .error {
@@ -245,6 +214,7 @@ h1 {
 
 @media (max-device-width: 900px) {
     .add-product-form {
+        margin: 0 100px;
         box-sizing: border-box;
         display: block;
         width: auto;
@@ -253,7 +223,8 @@ h1 {
     }
 
     .add-product-form .content-wrapper {
-        display: inline-block;
+        display: block;
+        width: 100%;
         text-align: left;
     }
 
@@ -268,12 +239,6 @@ h1 {
 }
 
 @media (max-device-width: 600px) {
-    .add-product-form {
-        margin: 0;
-        padding-left: 32px;
-        padding-right: 32px;
-    }
-
     .add-product-form .submit-button {
         width: 100%;
         background-image: none;
@@ -290,14 +255,6 @@ h1 {
     .add-product-form h1 {
         text-align: left;
     }
-
-    .add-product-form .content-wrapper {
-        width: 100%;
-        padding-left: 20px;
-        padding-right: 20px;
-        box-sizing: border-box;
-    }
-
     .add-product-form h4 {
         font-size: 1.125em;
     }
@@ -310,7 +267,6 @@ h1 {
     .add-product-form .input-field {
         width: 100%;
     }
-
 }
 
 </style>

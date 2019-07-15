@@ -57,6 +57,7 @@ export default {
     AppMasthead,
     AppItemCard
   },
+  scrollToTop: true, 
   data() {
     return {
       highprice: 2700,

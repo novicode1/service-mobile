@@ -26,7 +26,7 @@
                                 />
                             </div>
                             <span class="option-name">
-                                {{optionItem.name | truncate(16, ' ...')}}
+                                {{optionItem.name}}
                             </span>
                         </div>
                     </div>
@@ -74,9 +74,9 @@ export default {
     },
     data() {
         return {
-            isOptionPicked: false,
             initialPrice: this.productPrice,
             currentPrice: 0,
+            isOptionPicked: false,
             selectedOptions: [],
             lastSelectedOption: {
                 currentPrice: 0
@@ -113,38 +113,7 @@ export default {
 
 <style scoped>
 .option-field {
-    overflow: visible;
-    white-space: nowrap;
-    position: relative;
     margin-bottom: 60px;
-    mask-image: linear-gradient(to right, #000 0%, #000 90%, transparent 100%);
-    -webkit-mask-image: linear-gradient(
-        to right,
-        #000 0%,
-        #000 90%,
-        transparent 100%
-    );
-    -webkit-box-flex: 1;
-}
-.product-options:before,
-.product-options:after {
-  content: "";
-  height: calc(100% - 2em);
-  pointer-events: none;
-  position: absolute;
-  top: 1em;
-  width: 10px;
-  z-index: 2;
-}
-
-.option-field {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow: auto;
-  -webkit-overflow-scrolling: touch;
-}
-.input-type-radio {
-  white-space: nowrap;
 }
 
 .content-wrapper {
@@ -168,8 +137,8 @@ export default {
     position: absolute;
     width: 26px;
     height: 21px;
-    right: 26px;
-    top: -1px;
+    right: 24px;
+    top: -4px;
 }
 
 .product-options-form {
@@ -192,7 +161,7 @@ export default {
     display: inline-block;
     padding: 32px 0 25px;
     vertical-align: top;
-    width: 280px;
+    width: 360px;
     color: #333333;
     margin: 0;
 }
@@ -213,34 +182,10 @@ h3 {
     padding: 26px 0 38px;
     width: 140px;
     font-weight: 500;
-    text-transform: lowercase;
+    text-transform: uppercase;
     font-size: 30px;
     color: #111111;
     letter-spacing: -0.3px;
-}
-
-h4::after {
-    content: 'Базовая';
-    padding-top: 3px;
-    font-weight: normal;
-    font-size: 14px;
-    color: #888888;
-    text-transform: none;
-    display: block;
-    letter-spacing: -0.01px;
-    line-height: 16px;
-}
-
-.product-options:nth-child(1) h4::after {
-    content: 'Компактный';
-}
-
-.product-options:nth-child(2) h4::after {
-    content: 'Большой';
-}
-
-.product-options:nth-child(3) h4::after {
-    content: 'Огромный';
 }
 
 .product-options:first-child h4::before, .product-options:first-child .option-field::before {
@@ -254,7 +199,7 @@ h4::after {
 }
 
 .product-options:first-child h4::before {
-    content: 'Экран';
+    content: 'ROM';
 }
 
 .product-options:first-child .option-field::before {
@@ -284,10 +229,9 @@ h4::after {
 .price-section {
     float: right;
     height: 118px;
-    width: 154px;
+    width: 80px;
     padding: 34px 10px 0 0;
     box-sizing: border-box;
-    background-color: #FBFBFB;
     text-align: center;
 }
 
@@ -325,14 +269,14 @@ h4::after {
 
 .input-type-radio {
     position: relative;
-    display: inline-block;
+    display: block;
     box-sizing: content-box;
-    vertical-align: baseline;
-    width: 128px;
-    height: 50px;
+    width: 100%;
+    height: 80px;
     font-size: 12px;
     border-radius: 4px;
     margin-right: 4px;
+    margin-bottom: 12px;
     overflow: visible;
     white-space: nowrap;
 }
@@ -349,19 +293,20 @@ h4::after {
 
 .input-type-radio > .option-colors {
     box-sizing: content-box;
-    border: 1px solid #eeeeee;
+    border: 1px solid #D6D6D6;
     position: absolute;
     top: 0;
     left: 0;
     display: block;
     width: 100%;
-    padding-top: 12px;
+    padding: 0px 12px;
+    line-height: 80px;
     box-sizing: border-box;
-    padding-bottom: 8px;
     height: 100%;
     z-index: 0;
     background-size: 0.555em 0.555em;
     border-radius: inherit;
+    text-align: left;
 }
 
 .input-type-radio > input:checked + .option-colors {
@@ -418,7 +363,6 @@ h4::after {
         padding: 0;
         display: block;
         width: 100%;
-        border-bottom: 1px solid #D6D6D6;
     }
 
     .product-options {
@@ -428,7 +372,7 @@ h4::after {
     .option-field {
         display: block;
         width: 100%;
-        padding-bottom: 40px;
+        padding-bottom: 20px;
     }
 
     .option-colors .color-widget {
@@ -449,18 +393,17 @@ h4::after {
         color: #333333;
         vertical-align: top;
         letter-spacing: -0.31px;
+        margin-bottom: 4px;
     }
 
     .price-section {
-        position: absolute;
-        float: none;
+        padding-top: 20px;
         height: auto;
-        right: 0;
-        top: 16px;
-        text-align: right;
+        width: 100%;
+        display: block;
         background: none;
-        width: auto;
         padding: 0;
+        text-align: left;
     }
 
     h4::after {
@@ -472,19 +415,20 @@ h4::after {
     }
 
     .option-price {
-        font-size: 18px;
+        font-size: 24px;
         color: #111;
         font-weight: 500;
         letter-spacing: -0.48px;
+        display: block;
     }
 
     .price-section::before {
         display: block;
         content: 'Цена';
         font-weight: normal;
-        font-size: 12px;
+        font-size: 14px;
         color: #888888;
-        margin-bottom: 4px;
+        margin-bottom: 6px;
     }
 
     .link-to-form {
@@ -496,6 +440,7 @@ h4::after {
         background-color: #F96400;
         text-align: center;
         padding: 13px 0 14px;
+        overflow: hidden;
         font-weight: 500;
         font-size: 14px;
         color: #FFFFFF;
@@ -503,7 +448,7 @@ h4::after {
         border-radius: 4px;
         background-image: linear-gradient(-180deg, #3F9FEB 0%, #0071CA 100%);
         border: 1px solid #0070C9;
-        margin-bottom: 70px;
+        margin-bottom: 80px;
         line-height: 16px;
     }
 }

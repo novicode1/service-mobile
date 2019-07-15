@@ -10,6 +10,23 @@
         <img :src="`${item.imageUrl}`" :alt="`Image of ${item.name}`" class="item-image">
       </nuxt-link>
     </div>
+    <span class="product-colors" v-if="item.options && (item.category === 'iphone' || item.category === 'ipad')">
+      <span
+        class="product-color"
+        :style="{ backgroundColor: option.color}"
+        v-for="(option, index) in item.options[0].optionsList" :key='color+index'
+      >
+      </span>
+    </span>
+
+    <span class="product-colors" v-if="item.category === 'accessories'">
+      <span
+        class="product-color"
+        :style="{ backgroundColor: option.color}"
+        v-for="(option, index) in item.options" :key='option+index'
+      >
+      </span>
+    </span>
 
     <nuxt-link
       :to="{
@@ -20,7 +37,7 @@
         category: category.category
       }}"
       class="item-name"
-    >{{ item.name | truncate(34, ' ...')}}</nuxt-link>
+    >{{ item.name | truncate(48, ' ...')}}</nuxt-link>
     <p class="item-price">{{ item.price | usdollar }}</p>
 
     <div class="item-stock">
@@ -82,16 +99,10 @@ export default {
   position: relative;
 }
 
-@media (max-width: 1333px) {
-  .item {
-    flex-basis: 23%;
-  }
+.item {
+  flex-basis: 23%;
 }
-@media (max-width: 1073px) {
-  .item {
-    flex-basis: 23%;
-  }
-}
+
 @media (max-width: 815px) {
   .item {
     flex-basis: 31.3%;
@@ -104,11 +115,35 @@ export default {
   }
 }
 
+.product-colors {
+  display: block;
+  width: 100%;
+  text-align: right;
+  position: absolute;
+  top: 228px;
+  right: 16px;
+}
+
+.item .product-color {
+  display: inline-block;
+  margin: 0 auto;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  margin-bottom: 8px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.product-color + .product-color {
+  margin-left: 4px;
+}
+
 .item .item-image-wrapper {
   height: 200px;
   width: 100%;
   overflow: hidden;
   position: relative;
+  margin-bottom: 40px;
 }
 
 .item-image-wrapper img {
@@ -208,6 +243,19 @@ export default {
 
   .item:nth-child(2n-1) {
     margin-right: 6px;
+  }
+
+  .product-colors {
+    top: 228px;
+  }
+
+  .item .product-color {
+    width: 15px;
+    height: 15px;
+  }
+
+  .item .item-image-wrapper {
+    margin-bottom: 36px;
   }
 }
 </style>

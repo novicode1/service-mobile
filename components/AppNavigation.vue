@@ -18,10 +18,7 @@
           <nuxt-link to="/about">О нас</nuxt-link>
         </li>
         <li class="menu-item">
-          <a @click="viewGallery">Услуги</a>
-        </li>
-        <li class="menu-item">
-          <nuxt-link to="/about#contacts">Контакты</nuxt-link>
+          <a href="#services">Услуги</a>
         </li>
 
         <li class="menu-item" v-if="page">
@@ -69,11 +66,6 @@ export default {
   methods: {
     changeMenuState() {
       this.isActive = !this.isActive
-    },
-    viewGallery() {
-      this.$router.push({
-        path: `/about#services`
-      })
     }
   }
 };
@@ -208,7 +200,7 @@ export default {
     box-sizing: border-box;
     line-height: 0px;
   }
-  
+
   #main-nav-toggle {
     position: relative;
     display: block;

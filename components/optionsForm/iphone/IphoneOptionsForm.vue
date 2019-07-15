@@ -4,10 +4,10 @@
         <div class="content-wrapper" v-if="productOptions">
             <section class="product-options" v-for="(option, index) in productOptions" :key="option.id">
                 <h4 class="category-name">
-                    {{option.optionName}}gb
+                    {{option.optionName}}
                 </h4>
                 <div class="option-field">
-                    <div v-for="optionItem in option.optionsList" :key="optionItem.id" class="input-type-radio">
+                    <div v-for="(optionItem, optionIndex) in option.optionsList" :key="optionItem.id" class="input-type-radio">
                         <input
                             type="radio"
                             name="color"
@@ -16,6 +16,15 @@
                         >
 
                         <div class="option-colors">
+                            <div
+                                class="click-tip"
+                                :style='{"display": ((isOptionPicked===false && index===0 && optionIndex===0) ? "block" : "none" )}'
+                            >
+                                <img
+                                    class=""
+                                    src="../images/click.svg"
+                                />
+                            </div>
                             <span :style="{ backgroundColor: optionItem.color}" class="color-widget"></span>
                             <span class="option-name">
                                 {{optionItem.name | truncate(16, ' ...')}}
@@ -67,6 +76,7 @@ export default {
     data() {
         return {
             initialPrice: this.productPrice,
+            isOptionPicked: false,
             currentPrice: 0,
             selectedOptions: [],
             lastSelectedOption: {
@@ -86,6 +96,7 @@ export default {
             selectedOption.price = parseInt(optionItem.price, 10)
 
             this.selectedOptions[index] = selectedOption
+            this.isOptionPicked = true
             this.$forceUpdate();
         },
 
@@ -143,6 +154,25 @@ export default {
     margin-bottom: 80px;
 }
 
+.click-tip {
+    position: absolute;
+    width: 40px;
+    right: -24px;
+    top: -14px;
+    height: auto;
+    z-index: 999;
+    transform: rotate(-50deg);
+}
+
+.click-tip::before {
+    content: url(../images/click-blur.svg);
+    position: absolute;
+    width: 26px;
+    height: 21px;
+    right: 26px;
+    top: -1px;
+}
+
 .product-options-form {
     display: inline-block;
     vertical-align: top;
@@ -161,7 +191,7 @@ export default {
 
 .option-field {
     display: inline-block;
-    padding: 18px 0 28px;
+    padding: 18px 0 25px;
     vertical-align: top;
     width: 280px;
     color: #333333;

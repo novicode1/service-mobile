@@ -1,5 +1,5 @@
 <template>
-  <div class="SkeletonCard">
+  <div class="skeleton-card">
     <svg
       width="152px"
       height="140px"
@@ -28,7 +28,7 @@
 
 <script>
 export default {
-  name: "SkeletonCard",
+  name: "skeleton-card",
   computed: {
     computedWidth() {
       return (
@@ -43,7 +43,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.SkeletonCard {
+.skeleton-card {
   display: inline-block;
   // position: relative;
   overflow: hidden;
@@ -78,7 +78,7 @@ export default {
   border-radius: 10px;
 }
 
-.SkeletonCard::after {
+.skeleton-card::after {
   position: absolute;
   top: 0;
   right: 0;
@@ -95,6 +95,19 @@ export default {
   animation: shimmer 5s infinite;
   content: "";
 }
+
+@media (max-width: 815px) {
+  .skeleton-card {
+    flex-basis: 31.3%;
+  }
+}
+@media (max-width: 555px) {
+  .skeleton-card {
+    flex-basis: 48%;
+    margin: 0 1% 12px;
+  }
+}
+
 
 @keyframes shimmer {
   100% {

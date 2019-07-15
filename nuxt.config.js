@@ -14,7 +14,8 @@ module.exports = {
       { hid: 'description', name: 'description', content: 'Магазин техники Service Mobile' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: './favicon.ico' },
+      { rel: 'icon', type: 'image/png', href: './favicon.png' }
     ]
   },
   css: ['~/assets/main.css'],
@@ -22,23 +23,6 @@ module.exports = {
   ** Customize the progress bar color
   */
   loading: { color: '#3e64ea' },
-  router: {
-    scrollBehavior: function (to, from, savedPosition) {
-      if (savedPosition) {
-        return savedPosition
-      } else {
-        const position = {}
-        if (to.hash) {
-          position.selector = to.hash
-        }
-        if (to.matched.some(m => m.meta.scrollToTop)) {
-          position.x = 0
-          position.y = 0
-        }
-        return position
-      }
-    }
-  },
   plugins: [
     { ssr: false, src: '~plugins/string-cut' },
     '~/plugins/firebase',

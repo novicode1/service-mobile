@@ -17,6 +17,15 @@
                     >
 
                     <div class="option-colors">
+                        <div
+                            class="click-tip"
+                            :style='{"display": ((isOptionPicked===false && index===0 ) ? "block" : "none" )}'
+                        >
+                            <img
+                                class=""
+                                src="../images/click.svg"
+                            />
+                        </div>
                         <span :style="{ backgroundColor: option.color}" class="color-widget"></span>
                         <span class="option-name">{{option.name | truncate(16, '...')}}</span>
                     </div>
@@ -65,6 +74,7 @@ export default {
     },
     data() {
         return {
+            isOptionPicked: false,
             lastSelectedOption: {
                 currentPrice: 0,
                 imageUrl: this.productImageUrl
@@ -79,7 +89,7 @@ export default {
             this.lastSelectedOption.imageUrl = option.imageUrl
             this.lastSelectedOption.name = name
             console.log(this.lastSelectedOption.imageUrl)
-
+            this.isOptionPicked = true
             this.$forceUpdate();
         }
     }
@@ -112,6 +122,40 @@ export default {
     margin-bottom: 80px;
 }
 
+.click-tip {
+    position: absolute;
+    width: 40px;
+    right: -20px;
+    top: 10px;
+    height: auto;
+}
+
+.click-tip::before {
+    content: url(../images/click-blur.svg);
+    position: absolute;
+    width: 26px;
+    height: 21px;
+    right: 26px;
+    top: -1px;
+}
+
+.click-tip {
+    position: absolute;
+    width: 40px;
+    right: -20px;
+    top: 10px;
+    height: auto;
+}
+
+.click-tip::before {
+    content: url(../images/click-blur.svg);
+    position: absolute;
+    width: 26px;
+    height: 21px;
+    right: 26px;
+    top: -1px;
+}
+
 .product-options-form {
     display: inline-block;
     vertical-align: top;
@@ -141,7 +185,7 @@ export default {
     );
     -webkit-box-flex: 1;
     display: inline-block;
-    padding: 18px 0 28px;
+    padding: 18px 0 25px;
     vertical-align: top;
     width: 280px;
     color: #333333;

@@ -39,12 +39,24 @@ export default {
             url: '/macbook'
           },
           {
+            name: 'iPad',
+            url: '/ipad'
+          },
+          {
             name: 'Apple Watch',
             url: '/apple-watch'
           },
           {
+            name: 'Airpods',
+            url: '/airpods' 
+          },
+          {
             name: 'Аксессуары',
             url: '/accessories'
+          },
+          {
+            name: 'Mac',
+            url: '/mac'
           },
           {
             name: 'Скидки',
