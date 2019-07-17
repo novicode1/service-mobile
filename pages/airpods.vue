@@ -9,28 +9,6 @@
       <div class="content" v-if="!wProducts.length">
         <skeleton-card v-for="index in 10" :key="index"/>
       </div>
-      <!-- <div class="content">
-        <section class="category-promo">
-          <div class="header-wrapper">
-            <span class="new-badge">New</span>
-            <img
-              src="../images/categories/airpods/name.svg"
-              alt="iPad Pro 2018"
-              width="220"
-              height="auto"
-              class="airpods-name"
-            >
-            <span class="promo-text">Самый мощный iPad. <br>Без компромиссов.</span>
-          </div>
-          <img
-            src="../images/categories/airpods/promo.jpg"
-            alt="Apple Watch promo"
-            width="600"
-            height="auto"
-            class="airpods-promo"
-          >
-        </section>
-      </div> -->
 
       <transition-group name="items" tag="section" class="content">
         <app-item-card v-for="(item, index) in wProducts" :key="item" :item="item" :index="index"/>

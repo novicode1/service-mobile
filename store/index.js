@@ -9,9 +9,18 @@ const store = () => new Vuex.Store({
 		sale: false,
 		used: false,
 		products: [],
-		setCreatedProductKey: ''
+		setCreatedProductKey: '',
+		user: null,
+		status: null,
+		error: null
 	},
 	actions: {
+		getCookie ({ commit }) {
+			const user = this.$cookiz.get('uid')
+			if (user) {
+				this.dispatch('setUser', {uid: user})
+			}
+		},
 		loadProducts ({commit}) {
 			this.$firestore.collection('products')
 			.get()
@@ -32,7 +41,7 @@ const store = () => new Vuex.Store({
 					}
 					if (data.imagesUsed) {
                         product.imagesUsed = data.imagesUsed
-					} 
+					}
 					product.id = s.id
 					products.push(product)
 				})
@@ -54,6 +63,10 @@ const store = () => new Vuex.Store({
 
 			if (payload.options) {
 				product.options = payload.options
+			}
+
+			if (payload.imagesUsed) {
+				product.imagesUsed = payload.imagesUsed
 			}
 
 			let key
@@ -90,6 +103,25 @@ const store = () => new Vuex.Store({
 			this.$router.push({
 				path: '/admin'
 			})
+		},
+		signUserIn ({commit}, payload) {
+			this.$auth.signInWithEmailAndPassword(payload.email, payload.password)
+			.then((response) => {
+				commit('setUser', response.user.uid)
+				this.$cookiz.set('uid', response.user.uid)
+				commit('setStatus', 'success')
+				commit('setError', null)
+			})
+			.catch((error) => {
+				commit('setStatus', 'failure')
+				commit('setError', error.message)
+			})
+		},
+		saveUID ({commit}, uid) {
+			commit('saveUID', uid)
+		},
+		setUser ({commit}, user) {
+			commit('setUser', user)
 		}
 
 	},
@@ -112,6 +144,18 @@ const store = () => new Vuex.Store({
 					return product.id === productId
 				})
 			}
+		},
+		status (state) {
+			return state.status
+		},
+		user (state) {
+			return state.user
+		},
+		isAuthenticated (state) {
+			return !!state.user && !!state.user.uid
+		},
+		error (state) {
+			return state.error
 		}
 	},
 	mutations: {
@@ -145,6 +189,18 @@ const store = () => new Vuex.Store({
 		},
 		setCreatedProductKey (state, payload) {
 			state.createdProductKey = payload
+		},
+		setUser (state, payload) {
+			state.user = payload
+		},
+		removeUser (state) {
+			state.user = null
+		},
+		setStatus (state, payload) {
+			state.status = payload
+		},
+		setError (state, payload) {
+			state.error = payload
 		}
 	}
 })

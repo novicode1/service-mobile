@@ -9,9 +9,8 @@
 <script>
 export default {
   created() {
-    this.$store.dispatch("loadProducts").then(() => {
-      console.log("Successful dispatch")
-    })
+    this.$store.dispatch("loadProducts")
+    this.$store.dispatch("getCookie")
   },
   components: {
     name: "footer"

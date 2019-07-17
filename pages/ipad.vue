@@ -6,9 +6,6 @@
         <app-sidebar class="store-navigation" :active="false"/>
         <app-filter :pricerange.sync="highprice" class="store-filter" :active="false"/>
       </div>
-      <div class="content" v-if="!wProducts.length">
-        <skeleton-card v-for="index in 10" :key="index"/>
-      </div>
       <div class="content">
         <section class="category-promo">
           <div class="header-wrapper">
@@ -30,6 +27,9 @@
             class="ipad-promo"
           >
         </section>
+      </div>
+      <div class="content" v-if="!wProducts.length">
+        <skeleton-card v-for="index in 10" :key="index"/>
       </div>
 
       <transition-group name="items" tag="section" class="content">

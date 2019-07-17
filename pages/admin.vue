@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="wrapper">
     <app-navigation/>
     <div class="content-wrapper">
         <h1>Добавить товар</h1>
@@ -42,7 +42,7 @@
         <add-iphone v-if="withOptions === 'false' && category==='iphone'" :selectedCategory="category"/>
         <add-apple-watch v-if="withOptions === 'false' && category==='appleWatch'" :selectedCategory="category"/>
         <add-i-pad v-if="withOptions === 'false' && category==='ipad'" :selectedCategory="category"/>
-        <add-mac v-if="withOptions === 'false' && category==='mac'" :selectedCategory="category"/> 
+        <add-mac v-if="withOptions === 'false' && category==='mac'" :selectedCategory="category"/>
         <add-macbook v-if="withOptions === 'false' && category==='macbook'" :selectedCategory="category"/>
         <add-accessories v-if="withOptions === 'false' && category==='accessories'" :selectedCategory="category"/>
     </div>
@@ -60,6 +60,7 @@ import AddMacbook from './../components/form/addProductForms/AddMacbook.vue'
 import AddAppleWatch from './../components/form/addProductForms/AddAppleWatch.vue'
 import AddAccessories from './../components/form/addProductForms/AddAccessories.vue'
 import AddIPad from './../components/form/addProductForms/AddiPad.vue'
+
 
 import AppFooter from './../components/AppFooter.vue'
 import AppNavigation from './../components/AppNavigation'
@@ -103,7 +104,6 @@ export default {
     },
     components: {
         AddDefaultProductForm,
-
         AddIphone,
         AddAppleWatch,
         AddAccessories,
@@ -113,6 +113,11 @@ export default {
 
         AppNavigation,
         AppFooter,
+    },
+        computed: {
+        user () {
+            return this.$store.getters.user
+        }
     },
     methods: {
         setCategory(value) {

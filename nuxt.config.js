@@ -19,9 +19,6 @@ module.exports = {
     ]
   },
   css: ['~/assets/main.css'],
-  /*
-  ** Customize the progress bar color
-  */
   loading: { color: '#3e64ea' },
   plugins: [
     { ssr: false, src: '~plugins/string-cut' },
@@ -30,12 +27,16 @@ module.exports = {
     {src: '~/plugins/axios'},
     {src: '~/plugins/searchBar'}
   ],
+  modules: [
+    ['cookie-universal-nuxt', { alias: 'cookiz' }]
+  ],
   axios: {
-    /* set API_URL environment variable to configure access to the API
-    */
     baseURL: process.env.API_URL || 'http://localhost:3000/',
     redirectError: {
       404: '/notfound'
     }
+  },
+  router: {
+    middleware: 'router-auth'
   }
 }

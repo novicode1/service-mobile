@@ -15,7 +15,7 @@
           </a>
         </li>
         <li class="menu-item">
-          <nuxt-link to="/about">О нас</nuxt-link>
+          <nuxt-link to="/about">О нас</nuxt-link> 
         </li>
         <li class="menu-item">
           <a href="#services">Услуги</a>

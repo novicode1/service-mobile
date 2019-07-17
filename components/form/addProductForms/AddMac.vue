@@ -70,7 +70,7 @@
                         <span class="label-text">Цена за товар:</span>
                         <input v-model="options[index].optionsList[optionIndex].price" type="number" placeholder="1099"/>
                     </label>
-                    <span @click="deleteOption(index, optionIndex)" class="delete-option input-field">Удалить</span>
+                    <span @click="deleteOption(index, optionIndex)" class="delete-option ">Удалить</span>
 
                 </div>
                 <button @click="deleteCategory(index)" class="delete-category" type="button">▬</button>
@@ -231,7 +231,7 @@ export default {
             const productData = {
                 name: this.name,
                 price: Number(this.price),
-                category: this.category,
+                category: this.selectedCategory,
                 code: this.code,
                 image: this.image,
                 used: this.used,
@@ -307,11 +307,13 @@ h2 {
     border-radius: 10px;
 }
 
-.delete-option {
-    padding-top: 4px;
-    display: inline-block;
-    color: rgb(219, 73, 109);
-    font-weight: 400;
+.option-add span.delete-option {
+  width: auto;
+  padding-top: 4px;
+  display: block; 
+  color: rgb(219, 73, 109);
+  margin-left: 80px;
+  font-weight: 400;
 }
 
 .delete-option:hover {

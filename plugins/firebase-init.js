@@ -17,5 +17,6 @@ if (!firebase.apps.length) {
 
 export const DB = firebase.firestore()
 export const storage = firebase.storage()
+export const auth = firebase.auth()
 
 export default firebase

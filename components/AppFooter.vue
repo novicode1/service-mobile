@@ -21,22 +21,11 @@
     </div>
 
     <div class="copyright">
-      © 2019 Service Mobile. All rights reserved.
+      © 2019 Service Mobile. All rights reserved. 
     </div>
 
   </footer>
 </template>
-
-<script>
-export default {
-  // props: ['mode'],
-  data () {
-    return {
-      // isActive: false
-    }
-  }
-}
-</script>
 
 
 <style scoped>

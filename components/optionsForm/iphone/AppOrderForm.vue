@@ -101,11 +101,14 @@ export default {
                 console.log(error);
             })
             alert("Заказ успешно оформлен! Мы вам перезвоним.")
+			this.$router.push({
+				path: '/'
+			})
         }
     }
 }
 </script>
-
+ 
 <style scoped>
 @import '../../form/form.css';
 

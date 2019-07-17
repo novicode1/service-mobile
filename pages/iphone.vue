@@ -6,9 +6,6 @@
         <app-sidebar class="store-navigation" :active="false" />
         <app-filter :pricerange.sync="highprice" class="store-filter" :active="false"/>
       </div>
-      <div class="content" v-if="!wProducts.length">
-        <skeleton-card v-for="index in 10" :key="index"/>
-      </div>
       <div class="content">
         <section class="category-promo">
             <div class="header-wrapper">
@@ -22,6 +19,9 @@
             <img src="../images/categories/iphone-promo.jpg" alt="Apple iphone promo" width="480" height="auto" class="iphone-promo">
             <img src="../images/categories/iphone-mobile-promo.jpg" alt="Apple iphone promo" width="280" height="auto" class="iphone-promo-mobile">
         </section>
+      </div>
+      <div class="content" v-if="!wProducts.length">
+        <skeleton-card v-for="index in 10" :key="index"/>
       </div>
       <transition-group name="items" tag="section" class="content">
         <app-item-card
@@ -57,7 +57,7 @@ export default {
     AppMasthead,
     AppItemCard
   },
-  scrollToTop: true, 
+  scrollToTop: true,
   data() {
     return {
       highprice: 2700,

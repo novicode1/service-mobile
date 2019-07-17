@@ -6,9 +6,6 @@
         <app-sidebar class="store-navigation" :active="false" />
         <app-filter :pricerange.sync="highprice" class="store-filter" :active="false"/>
       </div>
-      <div class="content" v-if="!wProducts.length">
-        <skeleton-card v-for="index in 10" :key="index"/>
-      </div>
       <div class="content">
         <section class="category-promo">
             <div class="header-wrapper">
@@ -29,6 +26,9 @@
             <img src="../images/categories/airpods-left.png" alt="Airpods left" width="84" height="auto" class="airpods-left">
             <img src="../images/categories/airpods-right.png" alt="Airpods right" width="94" height="auto" class="airpods-right">
         </section>
+      </div>
+      <div class="content" v-if="!wProducts.length">
+        <skeleton-card v-for="index in 10" :key="index"/>
       </div>
       <transition-group name="items" tag="section" class="content">
         <app-item-card

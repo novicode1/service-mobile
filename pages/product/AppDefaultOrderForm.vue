@@ -97,6 +97,9 @@ export default {
                 console.log(error);
             })
             alert("Заказ успешно оформлен! Мы вам перезвоним.")
+			this.$router.push({
+				path: '/'
+			})
         }
     }
 }
