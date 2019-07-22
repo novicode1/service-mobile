@@ -28,7 +28,7 @@ module.exports = {
     {src: '~/plugins/searchBar'}
   ],
   modules: [
-    ['cookie-universal-nuxt', { alias: 'cookiz' }]
+    ['cookie-universal-nuxt']
   ],
   axios: {
     baseURL: process.env.API_URL || 'http://localhost:3000/',

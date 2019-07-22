@@ -9,15 +9,20 @@
     <nav class="mainmenu " :class="{ 'responsive' : isActive }" role="nav">
       <ul class="menu-list">
         <li class="menu-item telephone">
-          <a href="tel:096-866-73-32" class="tel-call-link">
+          <a href="tel:+380968667332" class="tel-call-link">
             <img src="../images/icons/telephone-call.svg" alt="Иконка номера для звонка">
             +38 063-333-99-93
           </a>
         </li>
         <li class="menu-item">
-          <nuxt-link to="/about">О нас</nuxt-link> 
+          <nuxt-link to="/about">О нас</nuxt-link>
         </li>
-        <li class="menu-item">
+
+        <li class="menu-item" v-if="!page">
+          <a href="/about">Услуги</a>
+        </li>
+
+        <li class="menu-item" v-if="page">
           <a href="#services">Услуги</a>
         </li>
 

@@ -52,7 +52,8 @@ export default {
             type: String
         },
         productName: {
-            type: String
+            type: String,
+            required: true
         },
         productPrice: {
             required: true
@@ -81,11 +82,7 @@ export default {
         },
 
         onCreateProduct () {
-            let options = ''
-            if (this.productDetails.name) {
-                options = '<strong>Опции:</strong>' + '\n- Название: ' + this.productName + '\n- Цена: ' + this.productDetails.currentPrice + '$' + '\n- Цвет: ' + this.productDetails.color
-            }
-
+            let options = '<strong>Опции:</strong>' + '\n- Название: ' + this.productName + '\n- Цена: $' + this.productPrice
             let comment = 'Новый заказ 🎉\n\n<strong>Телефон:</strong> ' + this.tel + '\n<strong>Комментарий:</strong> ' + this.comment + '\n\n' + options + '\n\n<strong>Код товара:</strong> ' + this.code + '\n\n' + window.location.href
 
             this.$axios.post('https://api.telegram.org/bot709794055:AAHXeUUQe1R4O3FEGMoH1ONsQtUlVO0FTRE/sendMessage', {

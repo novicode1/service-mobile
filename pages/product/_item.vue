@@ -1,7 +1,6 @@
 <template>
   <main class="wrapper">
     <app-navigation/>
-    <!-- <app-sidebar class="store-navigation side-block"/> -->
         <main class="product-content" v-if="product">
             <nav class="secondary-nav">
                 <ul class="breadcrumbs">
@@ -18,6 +17,12 @@
                     </li>
                 </ul>
             </nav>
+
+            <button class="product-edit" v-if="user" id="show-modal" @click="showModal = !showModal">
+                Редактировать
+            </button>
+
+            <edit-modal v-if="showModal && user" @close="showModal = false" :product="product" />
 
             <article class="item-header">
                 <img src="./../../images/icons/apple-logo.svg" alt="Apple logo">
@@ -38,6 +43,10 @@
                     <img :src="`${imageUrl}`" alt="Картинка б/у товара" class="image-used" width="800">
                 </div>
             </div>
+
+            <span role="note" class="ask-manager-note" v-if="product.used === true">
+                За более детальной информацией обращайтесь по телефону <a href="tel:+380968667332">+38 063-333-99-93</a>
+            </span>
 
             <iphone-options-form
                 v-if="product.options && product.category === 'iphone'"
@@ -94,6 +103,7 @@
                 :productName="product.name"
                 :productPrice="product.price"
                 class="default-form"
+                :code="product.code"
             />
         </main>
 
@@ -101,7 +111,7 @@
 
         <div class="clear"></div>
         <div class="push"></div>
-        <app-footer class="footer"/>
+        <app-footer class="footer" v-if="product"/>
     </main>
 </template>
 
@@ -116,6 +126,7 @@ import IpadOptionsForm from "./../../components/optionsForm/ipad/IpadOptionsForm
 import MacOptionsForm from "./../../components/optionsForm/mac/MacOptionsForm.vue";
 import MacbookOptionsForm from "./../../components/optionsForm/macbook/MacbookOptionsForm.vue";
 import AppDefaultOrderForm from "./AppDefaultOrderForm.vue";
+import EditModal from "./EditModal.vue";
 
 export default {
     head() {
@@ -125,7 +136,8 @@ export default {
     },
     data() {
         return {
-        	category: this.$route.query.category
+            category: this.$route.query.category,
+            showModal: false
         }
     },
 
@@ -133,6 +145,7 @@ export default {
         AppFooter,
         AppNavigation,
         AppSidebar,
+        EditModal,
         IphoneOptionsForm,
         AccessoriesOptionsForm,
         AppleWatchOptionsForm,
@@ -145,6 +158,9 @@ export default {
     computed: {
         product() {
         	return this.$store.getters.loadedProduct(this.$route.query.id);
+        },
+        user() {
+            return this.$store.getters.user
         }
     },
     filters: {
@@ -156,6 +172,22 @@ export default {
 </script>
 
 <style scoped>
+.ask-manager-note {
+    display: block;
+    padding: 20px;
+    background: #F6F6EE;
+    line-height: 1.3;
+    text-align: center;
+    font-weight: 400;
+    letter-spacing: -0.5px;
+    color: rgb(70, 70, 70);
+    margin-bottom: 40px;
+}
+
+.ask-manager-note a {
+    color: #0071CA;
+}
+
 .wrapper {
     background-color: #fff;
     color: #333;
@@ -164,6 +196,28 @@ export default {
 .product-content {
     padding: 40px 0;
     margin: 0 auto;
+}
+
+.product-edit {
+    display: block;
+    text-align: center;
+    padding: 13px 14px 13px 40px;
+    font-weight: 500;
+    font-size: 14px;
+    color: #FFFFFF;
+    letter-spacing: -0.39px;
+    border-radius: 4px;
+    background-image: url(settings.svg), linear-gradient(-180deg, #3F9FEB 0%, #0071CA 100%);
+    background-position: 12px center, 0 0;
+    background-repeat: no-repeat, repeat;
+    border: 1px solid #0070C9;
+    margin-bottom: 70px;
+    line-height: 16px;
+}
+
+.product-edit:hover {
+    background-color: rgb(99, 174, 236);
+    background-image: url(settings.svg), none;
 }
 
 .breadcrumbs {
@@ -307,7 +361,7 @@ export default {
 }
 
 .item-header .product-price small {
-    font-weight: 400; 
+    font-weight: 400;
     font-size: 15px;
     color: #888888;
     letter-spacing: -0.01px;

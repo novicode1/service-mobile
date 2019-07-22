@@ -12,13 +12,14 @@ const store = () => new Vuex.Store({
 		setCreatedProductKey: '',
 		user: null,
 		status: null,
+		loading: false,
 		error: null
 	},
 	actions: {
-		getCookie ({ commit }) {
-			const user = this.$cookiz.get('uid')
+		async nuxtServerInit ({ dispatch, state }) {
+			const user = this.$cookies.get('uid')
 			if (user) {
-				this.dispatch('setUser', {uid: user})
+				await dispatch('setUser', user)
 			}
 		},
 		loadProducts ({commit}) {
@@ -50,7 +51,7 @@ const store = () => new Vuex.Store({
 			.catch(error => console.log(error))
 		},
 
-		createProduct ({commit, getters}, payload) {
+		createProduct ({commit, getters, state}, payload) {
 			const product = {
 				name: payload.name,
 				price: payload.price,
@@ -60,7 +61,7 @@ const store = () => new Vuex.Store({
 				sale: payload.sale,
 				inStock: true
 			}
-
+			commit('setLoading', true)
 			if (payload.options) {
 				product.options = payload.options
 			}
@@ -100,15 +101,19 @@ const store = () => new Vuex.Store({
 			.catch((error) => {
 				console.log(error)
 			})
+
+			commit('setLoading', false)
 			this.$router.push({
 				path: '/admin'
 			})
 		},
 		signUserIn ({commit}, payload) {
+			commit('setLoading', true)
 			this.$auth.signInWithEmailAndPassword(payload.email, payload.password)
 			.then((response) => {
 				commit('setUser', response.user.uid)
-				this.$cookiz.set('uid', response.user.uid)
+				const token = response.user.uid
+				this.$cookies.set('uid', token)
 				commit('setStatus', 'success')
 				commit('setError', null)
 			})
@@ -116,14 +121,44 @@ const store = () => new Vuex.Store({
 				commit('setStatus', 'failure')
 				commit('setError', error.message)
 			})
+			commit('setLoading', false)
 		},
+
 		saveUID ({commit}, uid) {
 			commit('saveUID', uid)
 		},
+
 		setUser ({commit}, user) {
 			commit('setUser', user)
-		}
+		},
 
+		updateProductData ({commit}, payload) {
+			const updateObj = {}
+			if (payload.name) {
+				updateObj.name = payload.name
+			}
+			if (payload.price) {
+				updateObj.price = payload.price
+			}
+			if (payload.code) {
+				updateObj.code = payload.code
+			}
+			if (payload.category) {
+				updateObj.category = payload.category
+			}
+			commit('setLoading', true)
+
+			updateObj.used = payload.used
+			updateObj.inStock = payload.inStock
+
+			this.$firestore.collection('products').doc(payload.id).update(updateObj)
+			.then(querySnapshot => {
+				commit('setLoading', false)
+			})
+			.catch(error => {
+				console.log(error)
+			})
+		}
 	},
 	getters: {
 		iphone: state => filter(state.products, 'category', 'iphone'),
@@ -156,6 +191,9 @@ const store = () => new Vuex.Store({
 		},
 		error (state) {
 			return state.error
+		},
+		loading (state) {
+			return state.loading
 		}
 	},
 	mutations: {
@@ -201,6 +239,9 @@ const store = () => new Vuex.Store({
 		},
 		setError (state, payload) {
 			state.error = payload
+		},
+		setLoading (state, payload) {
+			state.loading = payload
 		}
 	}
 })

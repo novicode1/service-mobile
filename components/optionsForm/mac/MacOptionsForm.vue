@@ -2,12 +2,12 @@
     <div class="product-options-form">
         <h3>Выберите модель.</h3>
         <div class="content-wrapper" v-if="productOptions">
-            <section class="product-options" v-for="(option, index) in productOptions" :key="option.id">
+            <section class="product-options" v-for="(option, index) in productOptions" :key="option+index">
                 <h4 class="category-name">
                     {{option.optionName}}
                 </h4>
                 <div class="option-field">
-                    <div v-for="(optionItem, optionIndex) in option.optionsList" :key="optionItem.id" class="input-type-radio">
+                    <div v-for="(optionItem, optionIndex) in option.optionsList" :key="optionIndex" class="input-type-radio">
                         <input
                             type="radio"
                             name="color"
@@ -179,7 +179,7 @@ h3 {
 .category-name {
     display: inline-block;
     vertical-align: middle;
-    text-transform: uppercase; 
+    text-transform: uppercase;
     padding: 26px 0 38px;
     width: 140px;
     font-weight: 500;

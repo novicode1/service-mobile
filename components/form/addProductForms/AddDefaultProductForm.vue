@@ -209,10 +209,6 @@ export default {
                 sale: this.sale
             }
 
-            console.log(this.imagesUsed[0])
-            console.log(this.used)
-            console.log(productData.category)
-
             if ((this.imagesUsed[0] !== '') && (this.used === true)) {
                 productData.imagesUsed = this.imagesUsed
             }
@@ -412,6 +408,14 @@ input[type="color"] {
 }
 
 @media (max-device-width: 518px) {
+    .delete-category:hover::after {
+        display: none;
+    }
+
+    .delete-option:hover::after {
+        display: none;
+    }
+
     .add-product-form {
         padding: 0;
     }

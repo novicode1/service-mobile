@@ -54,7 +54,7 @@
         </div>
         <img
           :src="imageUrl"
-          height="350"
+          height="auto"
           alt="Превью фото"
           v-if="imageUrl"
           accept="image/*"
@@ -64,7 +64,7 @@
 
       <h2>Опции</h2>
 
-      <div class="option-add" v-for="(option, index) in options" :key="index">
+      <div class="option-add" v-for="(option, index) in options" :key="option+index">
         <label class="input-field">
           <span class="label-text">Память(gb):</span>
           <input v-model="options[index].optionName" placeholder="64gb">
@@ -246,7 +246,6 @@ export default {
         this.imageUrl = fileReader.result;
       });
 
-      console.log(this.options[0].optionsList[0].color);
 
       fileReader.readAsDataURL(files[0]);
       this.image = files[0];
@@ -467,6 +466,14 @@ input[type="color"] {
 }
 
 @media (max-device-width: 518px) {
+  .delete-category:hover::after {
+    display: none;
+  }
+
+  .delete-option:hover::after {
+    display: none;
+  }
+
   .add-product-form {
     padding: 0;
   }

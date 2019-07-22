@@ -17,7 +17,9 @@
               height="auto"
               class="mac-name"
             >
-            <span class="promo-text">Чертовски мощный.<br>Retina Display. </span>
+            <span class="promo-text">Чертовски мощный.
+              <br>Retina Display.
+            </span>
           </div>
           <img
             src="../images/categories/mac/promo.jpg"
@@ -29,12 +31,25 @@
         </section>
       </div>
       <div class="content" v-if="!wProducts.length">
-        <skeleton-card v-for="index in 10" :key="index"/>
+        <skeleton-card v-for="index in 12" :key="index+'index'"/>
       </div>
 
       <transition-group name="items" tag="section" class="content">
-        <app-item-card v-for="(item, index) in wProducts" :key="item" :item="item" :index="index"/>
+        <app-item-card
+          v-for="(item, index) in wProducts"
+          :key="item+index"
+          :item="item"
+          :index="index"
+        />
       </transition-group>
+
+      <div
+        class="button-wrapper"
+        :style='{"display": (isAllItemsAreShown ? "none" : "block" )}'
+        v-if="wProducts.length > 11"
+      >
+        <button @click="showMoreItems" class="show-more">Показать еще</button>
+      </div> 
       <div class="clear"></div>
       <div class="push"></div>
     </div>
@@ -47,7 +62,6 @@ import AppFooter from "./../components/AppFooter.vue";
 import AppNavigation from "./../components/AppNavigation.vue";
 import AppFilter from "./../components/AppFilter.vue";
 import AppSidebar from "./../components/AppSidebar.vue";
-import AppMasthead from "./../components/AppMasthead.vue";
 import AppItemCard from "./../components/AppItemCard.vue";
 import SkeletonCard from "./../components/skeleton/SkeletonCard.vue";
 
@@ -58,14 +72,23 @@ export default {
     AppNavigation,
     AppFilter,
     AppSidebar,
-    AppMasthead,
     AppItemCard
   },
   data() {
     return {
       highprice: 2700,
-      item: this.$route.query
+      item: this.$route.query,
+      limit: 12,
+      isAllItemsAreShown: false
     };
+  },
+  methods: {
+    showMoreItems() {
+      this.limit += 20;
+      if (this.wProducts.length != this.limit) {
+        this.isAllItemsAreShown = true;
+      }
+    }
   },
   computed: {
     wProducts() {
@@ -76,8 +99,6 @@ export default {
       ) {
         let items = this.$store.getters.mac;
         items = items.filter(item => Number(item.price) < this.highprice);
-        console.log(items);
-
         let itemsUsed = items.filter(item => item.used === true);
 
         let itemsSale = items.filter(item => item.sale === true);
@@ -91,15 +112,24 @@ export default {
             );
 
         if (this.$store.state.used && this.$store.state.sale) {
-          return concatAndDeDuplicateObjects("code", itemsUsed, itemsSale);
+          return this.limit
+            ? concatAndDeDuplicateObjects("code", itemsUsed, itemsSale).slice(
+                0,
+                this.limit
+              )
+            : concatAndDeDuplicateObjects("code", itemsUsed, itemsSale);
         } else if (this.$store.state.used) {
-          return itemsUsed;
+          return this.limit ? itemsUsed.slice(0, this.limit) : itemsUsed;
         } else if (this.$store.state.sale) {
-          return itemsSale;
+          return this.limit ? itemsSale.slice(0, this.limit) : itemsSale;
         }
       } else {
         let items = this.$store.getters.mac;
-        return items.filter(item => Number(item.price) < this.highprice);
+        return this.limit
+          ? items
+              .filter(item => Number(item.price) < this.highprice)
+              .slice(0, this.limit)
+          : items.filter(item => Number(item.price) < this.highprice);
       }
     }
   }
@@ -107,6 +137,41 @@ export default {
 </script>
 
 <style scoped>
+.button-wrapper {
+  padding-left: 19.1489%;
+}
+
+.show-more {
+  display: block;
+  margin: 0 auto;
+  margin-top: 8px;
+  padding: 12px 6px;
+  font-size: 14px;
+  font-weight: 500;
+  min-width: 50px;
+  width: auto;
+  border-radius: 4px;
+  background-image: linear-gradient(-180deg, #3f9feb 0%, #0071ca 100%);
+  border: 1px solid #0070c9;
+  color: #fff;
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 20px 40px rgba(0, 0, 0, 0.05);
+  transition: all 0.12s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+
+.show-more:disabled {
+  opacity: 0.8;
+}
+
+.show-more:hover {
+  transform: translateY(-1px);
+  transition: all 0.05s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.show-more:active {
+  transform: translateY(1px);
+  box-shadow: none;
+  transition: all 0.05s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
 .category-promo {
   display: block;
   width: 100%;
@@ -132,7 +197,7 @@ export default {
 .new-badge {
   font-weight: normal;
   font-size: 13px;
-  color: #EF5602;
+  color: #ef5602;
   display: inline-block;
   margin-bottom: 8px;
   letter-spacing: -0.41px;
@@ -155,6 +220,12 @@ export default {
 @media (max-device-width: 1240px) {
   .mac-promo {
     margin-right: -80px;
+  }
+}
+
+@media (max-width: 1073px) {
+  .button-wrapper {
+    padding: 0;
   }
 }
 

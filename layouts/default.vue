@@ -1,19 +1,34 @@
 <template>
   <div>
     <div class="wrapper">
-      <nuxt class="site-content"/>
+      <app-loader v-if="loading === true" />
+      <nuxt class="site-content" />
     </div>
   </div>
 </template>
 
 <script>
+import AppLoader from "../components/AppLoader.vue";
+
 export default {
   created() {
     this.$store.dispatch("loadProducts")
-    this.$store.dispatch("getCookie")
+    if (this.$store) {
+      try {
+        this.$store.dispatch('nuxtServerInit')
+      } catch (err) {
+        console.debug('Error occurred when calling nuxtServerInit: ', err.message)
+        throw err
+      }
+    }
+  },
+  computed: {
+    loading () {
+      return this.$store.getters.loading
+    }
   },
   components: {
-    name: "footer"
+    AppLoader
   }
 };
 </script>

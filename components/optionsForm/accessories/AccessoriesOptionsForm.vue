@@ -8,7 +8,7 @@
         <h3>Выберите цвет.</h3>
         <div class="content-wrapper" v-if="productOptions">
             <section class="product-options">
-                <div class="input-type-radio" v-for="(option, index) in productOptions" :key="option.id">
+                <div class="input-type-radio" v-for="(option, index) in productOptions" :key="option+index">
                     <input
                         type="radio"
                         name="color"
@@ -88,7 +88,6 @@ export default {
             this.lastSelectedOption.color = option.name
             this.lastSelectedOption.imageUrl = option.imageUrl
             this.lastSelectedOption.name = name
-            console.log(this.lastSelectedOption.imageUrl)
             this.isOptionPicked = true
             this.$forceUpdate();
         }

@@ -1,5 +1,6 @@
 /* eslint-disable indent */
 export default function ({ store, redirect, route }) {
+    store.dispatch('nuxtServerInit')
     if (isLogin(store) && route.name === 'login') {
         return redirect('/admin')
     }

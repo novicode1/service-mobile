@@ -11,21 +11,41 @@
       </nuxt-link>
     </div>
     <span class="product-colors" v-if="item.options && (item.category === 'iphone' || item.category === 'ipad')">
-      <span
-        class="product-color"
-        :style="{ backgroundColor: option.color}"
-        v-for="(option, index) in item.options[0].optionsList" :key='color+index'
-      >
-      </span>
+      <nuxt-link
+        :to="{
+        name: 'product-item',
+        query: {
+          path: this.$route.name,
+          id: item.id,
+          category: category.category
+        }}">
+        <span
+          class="product-color"
+          :style="{ backgroundColor: option.color}"
+          v-for="(option, index) in item.options[0].optionsList" :key='option+index'
+        >
+        </span>
+      </nuxt-link>
     </span>
 
     <span class="product-colors" v-if="item.category === 'accessories'">
-      <span
-        class="product-color"
-        :style="{ backgroundColor: option.color}"
-        v-for="(option, index) in item.options" :key='option+index'
-      >
-      </span>
+      <nuxt-link
+      :to="{
+      name: 'product-item',
+      query: {
+        path: this.$route.name,
+        id: item.id,
+        category: category.category
+      }}">
+        <span
+          class="product-color"
+          :style="{ backgroundColor: option.color}"
+          v-for="(option, index) in item.options" :key='option+index'
+        >
+        </span>
+
+      </nuxt-link>
+
     </span>
 
     <nuxt-link

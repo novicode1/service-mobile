@@ -13,11 +13,12 @@
 
             <label class="input-field" :class="{ 'input-field-error': $v.password.$error }">
                 <span class="label-text" type="password">Password</span>
-                <input v-model.trim="password" @input="setPassword($event.target.value)" placeholder="Password"/>
+                <input v-model.trim="password" @input="setPassword($event.target.value)" placeholder="Password" type="password"/>
 
                 <span class="error" v-if="!$v.password.required">Обязательное поле</span>
                 <span class="error" v-if="!$v.password.minLength">Минимально {{$v.password.$params.minLength.min}} букв.</span>
             </label>
+            <span class="error-login" v-if="error">Неправильный логин или пароль! <br> {{error}}</span>
             <button class="submit-button" :disabled="$v.$invalid">Войти</button>
         </div>
     </form>
@@ -30,8 +31,8 @@ import { required, minLength } from 'vuelidate/lib/validators'
 export default {
     data() {
         return {
-            email: 'dannovik30@gmail.com',
-            password: 'dddddd'
+            email: '',
+            password: ''
         }
     },
 
@@ -47,6 +48,9 @@ export default {
     },
 
     computed: {
+        error() {
+            return this.$store.getters.error
+        },
         user () {
             return this.$store.getters.user
         }
@@ -127,5 +131,16 @@ h2 {
     transform: translateY(1px);
     box-shadow: none;
     transition: all 0.05s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.error-login {
+    display: block;
+    max-width: 310px;
+    line-height: 1.3;
+    padding: 8px;
+    box-sizing: border-box;
+    background-color: rgb(218, 91, 91);
+    border-radius: 4px;
+    text-align: center;
 }
 </style>

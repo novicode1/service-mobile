@@ -8,14 +8,14 @@
           @input="setName($event.target.value)"
           placeholder="iPhone Xs 64/256/512GB"
         >
-        
+
         <span class="error" v-if="!$v.name.required">Обязательное поле</span>
         <span
           class="error"
           v-if="!$v.name.minLength"
         >Name must have at least {{$v.name.$params.minLength.min}} letters.</span>
       </label>
-      
+
       <label class="input-field" :class="{ 'input-field-error': $v.code.$error }">
         Код товара
         <input v-model.trim="code" @input="setCode($event.target.value)">
@@ -25,14 +25,14 @@
           v-if="!$v.code.minLength"
         >Максимум {{$v.code.$params.maxLength.max}} символов.</p>
       </label>
-      
+
       <label class="input-field" :class="{ 'input-field-error': $v.price.$error }">
         Цена
         <input v-model.trim="price" @change="setPrice($event.target.value)">
-        
+
         <span class="error" v-if="!$v.price.required">Обязательное поле</span>
       </label>
-      
+
       <label class="input-field">
         <span class="input-type-checkbox">
           <input v-model="sale" type="checkbox" @change="$v.sale.$touch()">
@@ -40,7 +40,7 @@
         </span>
         Скидка
       </label>
-      
+
       <label class="input-field">Главное фото товара:
         <div class="input-type-file">
           <div class="input-wrapper">
@@ -54,7 +54,7 @@
         </div>
         <img
           :src="imageUrl"
-          height="350"
+          height="auto"
           alt="Превью фото"
           v-if="imageUrl"
           accept="image/*"
@@ -64,7 +64,7 @@
 
       <h2>Опции</h2>
 
-      <div class="option-add" v-for="(option, index) in options" :key="index">
+      <div class="option-add" v-for="(option, index) in options" :key="option+index">
         <label class="input-field">
           <span class="label-text">Память:</span>
           <input v-model="options[index].optionName" placeholder="256gb">
@@ -79,7 +79,7 @@
             <span class="label-text">Название цвета:</span>
             <input v-model="options[index].optionsList[optionIndex].name" placeholder="Space Gray">
           </label>
-          
+
           <label class="input-field">
             <span class="label-text">Цвет в HEX формате:</span>
             <input
@@ -88,7 +88,7 @@
               placeholder="#333444"
             >
           </label>
-          
+
           <label class="input-field">
             <span class="label-text">Цена за товар:</span>
             <input
@@ -246,7 +246,6 @@ export default {
         this.imageUrl = fileReader.result;
       });
 
-      console.log(this.options[0].optionsList[0].color);
 
       fileReader.readAsDataURL(files[0]);
       this.image = files[0];
@@ -468,6 +467,14 @@ input[type="color"] {
 }
 
 @media (max-device-width: 518px) {
+  .delete-category:hover::after {
+    display: none;
+  }
+
+  .delete-option:hover::after {
+    display: none;
+  }
+
   .add-product-form {
     padding: 0;
   }

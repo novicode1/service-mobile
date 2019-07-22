@@ -53,11 +53,16 @@
           </section>
         </div>
         <div class="content" v-if="!products.length">
-          <skeleton-card v-for="index in 10" :key="index"/>
+          <skeleton-card v-for="index in 12" :key="index+'index'"/>
         </div>
         <transition-group name="items" tag="section" class="content">
           <app-item-card v-for="(item, index) in products" :key="item" :item="item" :index="index"/>
         </transition-group>
+
+        <div class="button-wrapper" :style='{"display": (isAllItemsAreShown ? "none" : "block" )}'  v-if="products.length > 11">
+          <button @click="showMoreItems" class="show-more">Показать еще </button>
+        </div>
+
         <div class="clear"></div>
         <div class="push"></div>
       </div>
@@ -86,8 +91,18 @@ export default {
   scrollToTop: true,
   data() {
     return {
-      highprice: 2700
+      highprice: 2700,
+      limit: 12,
+      isAllItemsAreShown: false
     };
+  },
+  methods: {
+    showMoreItems () {
+      this.limit += 20
+      if (this.products.length != this.limit) {
+        this.isAllItemsAreShown = true
+      }
+    }
   },
   computed: {
     products() {
@@ -115,15 +130,15 @@ export default {
                   !a.filter(c => b[p] === c[p]).length ? [...a, b] : a,
                 []
               );
-          return concatAndDeDuplicateObjects("code", itemsUsed, itemsSale);
+          return this.limit ? concatAndDeDuplicateObjects("code", itemsUsed, itemsSale).slice(0,this.limit) : concatAndDeDuplicateObjects("code", itemsUsed, itemsSale);
         } else if (this.$store.state.used) {
-          return itemsUsed;
+          return this.limit ? itemsUsed.slice(0,this.limit) : itemsUsed;
         } else if (this.$store.state.sale) {
-          return itemsSale;
+          return this.limit ? itemsSale.slice(0,this.limit) : itemsSale;
         }
       } else {
         let allItems = this.$store.state.products;
-        return allItems.filter(item => item.price < this.highprice);
+        return this.limit ? allItems.filter(item => item.price < this.highprice).slice(0,this.limit) : allItems.filter(item => item.price < this.highprice);
       }
     }
   }
@@ -136,6 +151,42 @@ export default {
     width: auto;
     margin: 0;
   }
+}
+
+.button-wrapper {
+  padding-left: 19.1489%;
+}
+
+.show-more {
+    display: block;
+    margin: 0 auto;
+    margin-top: 8px;
+    padding: 12px 6px;
+    font-size: 14px;
+    font-weight: 500;
+    min-width: 50px;
+    width: auto;
+    border-radius: 4px;
+    background-image: linear-gradient(-180deg, #3F9FEB 0%, #0071CA 100%);
+    border: 1px solid #0070C9;
+    color: #fff;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.2), 0 20px 40px rgba(0, 0, 0, 0.05);
+    transition: all 0.12s cubic-bezier(0.455, 0.03, 0.515, 0.955);
+}
+
+.show-more:disabled {
+    opacity: 0.8;
+}
+
+.show-more:hover {
+    transform: translateY(-1px);
+    transition: all 0.05s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.show-more:active {
+    transform: translateY(1px);
+    box-shadow: none;
+    transition: all 0.05s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .category-promo {
@@ -288,6 +339,12 @@ export default {
     }
 }
 
+@media (max-width: 1073px) {
+  .button-wrapper {
+    padding: 0;
+  }
+}
+
 @media (max-device-width: 750px) {
     .categories-row ul {
         display: flex;
@@ -310,6 +367,9 @@ export default {
 
     .geolocation {
         margin-bottom: 20px;
+    }
+    .promo-text {
+      font-size: 24px;
     }
 }
 </style>

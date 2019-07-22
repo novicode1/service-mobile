@@ -8,14 +8,14 @@
           @input="setName($event.target.value)"
           placeholder="iPhone XS Leather Case"
         >
-        
+
         <span class="error" v-if="!$v.name.required">Обязательное поле</span>
         <span
           class="error"
           v-if="!$v.name.minLength"
         >Name must have at least {{$v.name.$params.minLength.min}} letters.</span>
       </label>
-      
+
       <label class="input-field" :class="{ 'input-field-error': $v.code.$error }">
         Код товара
         <input v-model.trim="code" @input="setCode($event.target.value)">
@@ -25,14 +25,14 @@
           v-if="!$v.code.minLength"
         >Максимум {{$v.code.$params.maxLength.max}} символов.</p>
       </label>
-      
+
       <label class="input-field" :class="{ 'input-field-error': $v.price.$error }">
         Цена
         <input v-model.trim="price" @change="setPrice($event.target.value)">
-        
+
         <span class="error" v-if="!$v.price.required">Обязательное поле</span>
       </label>
-      
+
       <label class="input-field">
         <span class="input-type-checkbox">
           <input v-model="sale" type="checkbox" @change="$v.sale.$touch()">
@@ -40,7 +40,7 @@
         </span>
         Скидка
       </label>
-      
+
       <label class="input-field">Главное фото товара:
         <div class="input-type-file">
           <div class="input-wrapper">
@@ -54,7 +54,7 @@
         </div>
         <img
           :src="imageUrl"
-          height="350"
+          height="auto"
           alt="Превью фото"
           v-if="imageUrl"
           accept="image/*"
@@ -70,23 +70,23 @@
             <span class="label-text">Название цвета:</span>
             <input v-model="options[index].name" placeholder="Sunset">
           </label>
-          
+
           <label class="input-field">
             <span class="label-text">Цвет в HEX формате:</span>
-            <input v-model="options[index].color" placeholder="#333444">
+            <input v-model="options[index].color" placeholder="#333444" type="color">
           </label>
-          
+
           <label class="input-field">
-            <span class="label-text">Ссылка на кратинку:</span>
+            <span class="label-text">Ссылка на картинку:</span>
             <input v-model="options[index].imageUrl" placeholder="https://image.png">
           </label>
-          
+
           <label class="input-field">
             <span class="label-text">Цена за товар:</span>
             <input v-model="options[index].price" type="number" placeholder="400">
           </label>
+          <span @click="deleteCategory(index)" class="delete-option">Удалить</span>
         </div>
-        <button @click="deleteCategory(index)" class="delete-category" type="button">▬</button>
       </div>
 
       <button @click="addCategory" class="add-category" type="button">+</button>
@@ -119,7 +119,7 @@ export default {
       name: "",
       options: [
         {
-          color: "",
+          color: "#eee",
           imageUrl: "",
           name: "",
           price: 0
@@ -154,7 +154,7 @@ export default {
   methods: {
     addCategory() {
       this.options.push({
-        color: "",
+        color: "#eee",
         imageUrl: "",
         name: "",
         price: 0
@@ -424,6 +424,14 @@ input[type="color"] {
 }
 
 @media (max-device-width: 600px) {
+  .delete-category:hover::after {
+    display: none;
+  }
+
+  .delete-option:hover::after {
+    display: none;
+  }
+
   .add-product-form .submit-button {
     width: 100%;
     font-size: 20px;

@@ -1,54 +1,58 @@
 <template>
-<div class="wrapper">
-    <app-navigation/>
-    <div class="content-wrapper">
-        <h1>Добавить товар</h1>
-        <label class="input-field category-choise">Категория
-            <select @change="setCategory($event.target.value)">
-                <option :value="option.value" v-for="option in optionCategories" :key="option">{{option.name}}</option>
-            </select>
-        </label>
+    <div class="wrapper">
+        <app-navigation/>
+        <div class="centered">
+            <div class="content-wrapper contain">
+                <h1>Добавить товар</h1>
+                <label class="input-field category-choise">Категория
+                    <select @change="setCategory($event.target.value)">
+                        <option :value="option.value" v-for="(option, index) in optionCategories" :key="option+index">{{option.name}}</option>
+                    </select>
+                </label>
 
-        <label class="input-field" v-if="category">
-            <span class="input-type-checkbox">
-                <input
-                    v-model="withOptions"
-                    type="radio"
-                    name="optionChoise"
-                    value="true"
-                    @change="setWithoutOptions($event.target.value)"
-                />
-                <span class="check-mark"></span>
-            </span>
-            Без опций
-        </label>
+                <label class="input-field" v-if="category">
+                    <span class="input-type-checkbox">
+                        <input
+                            v-model="withOptions"
+                            type="radio"
+                            name="optionChoise"
+                            value="true"
+                            @change="setWithoutOptions($event.target.value)"
+                        />
+                        <span class="check-mark"></span>
+                    </span>
+                    Без опций
+                </label>
 
-        <label class="input-field" v-if="category">
-            <span class="input-type-checkbox">
-                <input
-                    v-model="withOptions"
-                    type="radio"
-                    name="optionChoise"
-                    value="false"
-                    @change="setWithoutOptions($event.target.value)"
-                />
-                <span class="check-mark"></span>
-            </span>
-            С опциями
-        </label>
+                <label class="input-field" v-if="category">
+                    <span class="input-type-checkbox">
+                        <input
+                            v-model="withOptions"
+                            type="radio"
+                            name="optionChoise"
+                            value="false"
+                            @change="setWithoutOptions($event.target.value)"
+                        />
+                        <span class="check-mark"></span>
+                    </span>
+                    С опциями
+                </label>
 
-        <add-default-product-form v-if="withOptions === 'true'" :selectedCategory="category"/>
+                <add-default-product-form v-if="withOptions === 'true'" :selectedCategory="category"/>
 
-        <add-iphone v-if="withOptions === 'false' && category==='iphone'" :selectedCategory="category"/>
-        <add-apple-watch v-if="withOptions === 'false' && category==='appleWatch'" :selectedCategory="category"/>
-        <add-i-pad v-if="withOptions === 'false' && category==='ipad'" :selectedCategory="category"/>
-        <add-mac v-if="withOptions === 'false' && category==='mac'" :selectedCategory="category"/>
-        <add-macbook v-if="withOptions === 'false' && category==='macbook'" :selectedCategory="category"/>
-        <add-accessories v-if="withOptions === 'false' && category==='accessories'" :selectedCategory="category"/>
+                <add-iphone v-if="withOptions === 'false' && category==='iphone'" :selectedCategory="category"/>
+                <add-apple-watch v-if="withOptions === 'false' && category==='appleWatch'" :selectedCategory="category"/>
+                <add-i-pad v-if="withOptions === 'false' && category==='ipad'" :selectedCategory="category"/>
+                <add-mac v-if="withOptions === 'false' && category==='mac'" :selectedCategory="category"/>
+                <add-macbook v-if="withOptions === 'false' && category==='macbook'" :selectedCategory="category"/>
+                <add-accessories v-if="withOptions === 'false' && category==='accessories'" :selectedCategory="category"/>
+
+                <div class="clear"></div>
+                <div class="push"></div>
+            </div>
+        </div>
+        <app-footer class="footer"/>
     </div>
-
-    <app-footer class="footer"/>
-</div>
 </template>
 
 <script>
@@ -114,10 +118,10 @@ export default {
         AppNavigation,
         AppFooter,
     },
-        computed: {
-        user () {
-            return this.$store.getters.user
-        }
+    computed: {
+    user () {
+        return this.$store.getters.user
+    }
     },
     methods: {
         setCategory(value) {
@@ -139,6 +143,10 @@ h1 {
     font-weight: 400;
 }
 
+.centered {
+    text-align: center;
+}
+
 .category-choise {
     display: block;
 }
@@ -152,7 +160,6 @@ h1 {
 @media (max-device-width: 600px) {
     .content-wrapper {
         margin: 40px 0;
-        display: block;
         width: 100%;
         padding-left: 32px;
         padding-right: 32px;

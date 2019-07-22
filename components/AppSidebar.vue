@@ -8,7 +8,7 @@
         </div>
         <ul class="items-list" :style='{"display": (isActive? "none" : "block" ), "height": (isActive? "0" : "auto" )}'>
 
-          <li class="list-item" v-for="link in links" :key="link.id">
+          <li class="list-item" v-for="(link, index) in links" :key="link+index">
             <nuxt-link :to="{ path:`${link.url}`, query: { category: link.name }}">
               {{ link.name }}
             </nuxt-link>
@@ -48,7 +48,7 @@ export default {
           },
           {
             name: 'Airpods',
-            url: '/airpods' 
+            url: '/airpods'
           },
           {
             name: 'Аксессуары',
