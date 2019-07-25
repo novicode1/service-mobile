@@ -16,8 +16,10 @@
 <script>
 
 export default {
-    data: {
-        data: [],
+    data() {
+        return {
+            data: [],
+        } 
     },
     name: 'TheSearchbar',
     methods: {

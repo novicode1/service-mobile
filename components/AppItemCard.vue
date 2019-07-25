@@ -58,7 +58,13 @@
       }}"
       class="item-name"
     >{{ item.name | truncate(48, ' ...')}}</nuxt-link>
-    <p class="item-price">{{ item.price | usdollar }}</p>
+
+    <p class="item-price">
+      {{ item.price | usdollar }}
+      <span class="price-in-uah">
+        {{priceInUah}}<small>грн</small>
+      </span>
+    </p>
 
     <div class="item-stock">
       <div class="in-stock" v-if="item.inStock === true">
@@ -92,7 +98,11 @@ export default {
       required: true
     }
   },
-
+  computed: {
+    priceInUah() {
+      return this.$store.getters.usd.toFixed() * this.item.price
+    }
+  },
   filters: {
     usdollar: function(value) {
       return `$${value}`;
@@ -222,6 +232,12 @@ export default {
   margin-bottom: 12px;
   color: #2e3142;
   margin-top: 9px;
+}
+
+.item-price .price-in-uah {
+  font-weight: 400;
+  font-size: 0.9em;
+  color: #808080;
 }
 
 .item .item-add-btn {

@@ -38,6 +38,14 @@
                     С опциями
                 </label>
 
+                <form @submit.prevent="onUsdToUahChange" novalidate class="usd-to-uah-form">
+                    <label class="input-field">
+                        <span class="label-text">Курс доллара</span>
+                        <input v-model="editedUsd" :placeholder="currentUsd" :maxlength="inputMaxLength" type="number"/>
+                        <button class="submit-button" type="submit">Обновить</button>
+                    </label>
+                </form>
+
                 <add-default-product-form v-if="withOptions === 'true'" :selectedCategory="category"/>
 
                 <add-iphone v-if="withOptions === 'false' && category==='iphone'" :selectedCategory="category"/>
@@ -72,6 +80,8 @@ import AppNavigation from './../components/AppNavigation'
 export default {
     data() {
         return {
+            editedUsd: null,
+            inputMaxLength: 5,
             category: 'iphone',
             withOptions: null,
             optionCategories: [
@@ -119,9 +129,12 @@ export default {
         AppFooter,
     },
     computed: {
-    user () {
-        return this.$store.getters.user
-    }
+        user () {
+            return this.$store.getters.user
+        },
+        currentUsd () {
+            return this.$store.getters.usd
+        }
     },
     methods: {
         setCategory(value) {
@@ -130,6 +143,17 @@ export default {
 
         setWithoutOptions(value) {
             this.withOptions = value
+        },
+
+        onUsdToUahChange() {
+            if (/-?(\d+|\d+\.\d+|\.\d+)([eE][-+]?\d+)?/.test(this.editedUsd)) {
+                this.editedUsd.replace(/,/, '.')
+            }
+            else if (this.editedUsd === null) {
+                return
+            }
+
+            this.$store.dispatch('changeUsdToUah', this.editedUsd)
         }
     }
 }
@@ -145,6 +169,7 @@ h1 {
 
 .centered {
     text-align: center;
+    position: relative;
 }
 
 .category-choise {
@@ -157,24 +182,51 @@ h1 {
     margin: 80px 100px;
 }
 
+.usd-to-uah-form {
+    position: absolute;
+    top: 40px;
+    right: 6%;
+}
+
+.usd-to-uah-form .input-field {
+    width: 160px;
+    position: relative;
+}
+
+.usd-to-uah-form button {
+    display: inline-block;
+    text-align: center;
+    position: absolute;
+    padding: 6px 8px;
+    font-weight: 500;
+    font-size: 14px;
+    height: 36px;
+    box-sizing: border-box;
+    right: 1px;
+    top: 19px;
+}
+
 @media (max-device-width: 600px) {
     .content-wrapper {
         margin: 40px 0;
         width: 100%;
+        padding-top: 80px;
         padding-left: 32px;
         padding-right: 32px;
     }
 }
 
 @media (max-device-width: 518px) {
-    .content-wrapper .content-wrapper {
+    .content-wrapper {
         width: 100%;
-        padding-left: 20px;
-        padding-right: 20px;
+        padding: 120px 32px 20px; 
         box-sizing: border-box;
     }
     .content-wrapper .input-field {
         width: 100%;
+    }
+    .usd-to-uah-form .input-field {
+        width: 160px;
     }
 }
 </style>

@@ -67,13 +67,32 @@
             </label>
 
 
-            <div class="option-add" v-if="used === true">
+            <div class="option-add used" v-if="used === true">
                 <h2>Опции</h2>
                 <div class="sub-option" v-for="(option, index) in imagesUsed" :key="option+index">
                     <label class="input-field">
-                        <span class="label-text">Картинка:</span>
-                        <input @change="setImageUsedUrl($event.target.value, index)" placeholder="https://image.png"/>
+                        фото товара:
+                        <div class="input-type-file">
+                            <div class="input-wrapper">
+                                <input
+                                    type="file"
+                                    @change="setImageUsedUrl($event, index)"
+                                    accept="image/x-png,image/gif,image/jpeg,image/jpg"
+                                >
+                                <button type="button" tabindex="-1">Выберите файл</button>
+                            </div>
+                        </div>
                     </label>
+                    <img
+                        :src="imageUrlUsed[index]"
+                        width="240"
+                        style="display: block; margin-bottom: 20px;"
+                        height="auto"
+                        alt="Превью фото"
+                        accept="image/*"
+                        class="promo-picked-image"
+                    >
+
                     <span @click="deleteOption(index)" class="delete-option">Удалить</span>
                 </div>
                 <button @click="addOption" class="add-option" type="button">+</button>
@@ -106,9 +125,8 @@ export default {
             category: this.selectedCategory,
             code: '',
             imageUrl: '',
-            imagesUsed: [
-                ''
-            ]
+            imageUrlUsed: [],
+            imagesUsed: [{}]
         }
     },
     validations: {
@@ -127,11 +145,12 @@ export default {
 
     methods: {
         addOption() {
-            this.imagesUsed.unshift('')
+            this.imagesUsed.push({})
         },
 
         deleteOption(index) {
             this.imagesUsed.splice(index, 1)
+            this.imageUrlUsed.splice(index, 1)
         },
 
         setName(value) {
@@ -145,7 +164,23 @@ export default {
         },
 
         setImageUsedUrl(value, index) {
-            this.imagesUsed[index] = value
+            const files = event.target.files
+            let filename = files[0].name
+
+            if (filename.lastIndexOf('.') <= 0) {
+                return alert('Ваш файл не подходит. Произошла ошибка')
+            }
+
+            const fileReader = new FileReader()
+
+            fileReader.addEventListener('load', () => {
+                this.imageUrlUsed[index] = fileReader.result
+                this.$forceUpdate();
+            })
+
+            fileReader.readAsDataURL(files[0])
+
+            this.imagesUsed[index] = files[0]
         },
 
         setUsed(value) {
@@ -195,7 +230,7 @@ export default {
         onCreateProduct () {
             let fileType = this.image.type
             if ((!this.image) || (fileType === 'image/webp')) {
-                alert("Вы загрузили неверную картинку. Формат должен быть в .jpg или .jpeg или .png")
+                alert("Вы загрузили неверную картинку. Формат должен быть в .jpg или .jpeg или .png. Видимо, вы взяли ее с Цитруса")
                 return
             }
 
@@ -209,7 +244,19 @@ export default {
                 sale: this.sale
             }
 
-            if ((this.imagesUsed[0] !== '') && (this.used === true)) {
+            console.log(this.imagesUsed)
+
+            if ((this.imagesUsed[0] !== {}) && (this.used === true)) {
+                for (let i = 0; i < this.imagesUsed.length; i++) {
+                    if (!this.imagesUsed[i].name) {
+                        alert("Вы загрузили не все кратинки")
+                        return
+                    }
+                    else if (this.imagesUsed[i].type === 'image/webp') {
+                        alert("Вы загрузили неверную картинку. Формат должен быть в .jpg или .jpeg или .png. Видимо, вы взяли ее с Цитруса)")
+                        return
+                    }
+                }
                 productData.imagesUsed = this.imagesUsed
             }
 
@@ -294,6 +341,18 @@ h2 {
     color: rgb(255, 179, 198);
 }
 
+.option-add.used .delete-option:hover:after {
+    display: none;
+}
+
+.option-add.used .delete-option {
+    margin-left: 0;
+}
+
+.option-add.used .input-field {
+    padding-left: 0;
+}
+
 
 .delete-option:hover::after {
     content: '';
@@ -334,8 +393,9 @@ h2 {
 }
 
 .sub-option {
-    margin-bottom: 28px;
+    margin-bottom: 38px;
     position: relative;
+    overflow: auto;
 }
 
 .sub-option .input-field {

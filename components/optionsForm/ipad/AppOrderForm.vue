@@ -87,7 +87,7 @@ export default {
         onCreateProduct () {
             let options = ''
             if (this.productDetails.name) {
-                options = '<strong>Опции:</strong>' + '\n- Название: ' + this.productName + '\n- Цена: ' + this.productDetails.currentPrice + '$' + '\n- Цвет: ' + this.productDetails.color + '\n- Память: ' + this.productDetails.name
+                options = '<strong>Опции:</strong>' + '\n- Название: ' + this.productName + '\n- Цена: ' + this.productDetails.currentPrice + '$ ' + this.$store.getters.usd.toFixed() * this.productDetails.currentPrice + 'грн' +  '\n- Цвет: ' + this.productDetails.color + '\n- Память: ' + this.productDetails.name
             }
 
             let comment = 'Новый заказ 🎉\n\n<strong>Телефон:</strong> ' + this.tel + '\n<strong>Комментарий:</strong> ' + this.comment + '\n\n' + options + '\n\n<strong>Код товара:</strong> ' + this.code + '\n\n' + window.location.href

@@ -284,7 +284,11 @@ input[type='range'].slider:focus::-ms-fill-upper {
     float: right;
   }
 }
-
+.price-in-uah {
+  font-weight: 400;
+  font-size: 0.7em;
+  color: #808080;
+}
 
 /*
 @media (max-width: 992px) {

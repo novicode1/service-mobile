@@ -28,7 +28,12 @@
                 <img src="./../../images/icons/apple-logo.svg" alt="Apple logo">
                 <h1>{{ product.name }}</h1>
                 <span class="product-price" v-if="!product.options">
-                    <small>Цена: </small>${{ product.price }}
+                    <small>Цена: </small>
+                    <span class="price-in-usd"></span>${{ product.price }}
+
+                    <span class="price-in-uah">
+                        {{priceInUah.toFixed()}}<small>грн</small>
+                    </span>
                 </span>
                 <p>С нашей программой Trade In вы можете получить скидку на новую технику, для этого просто свяжитесь с менеджером. </p>
                 <p role="note">* Это полезно для вас и всей нашей планеты <span class="emoji-congartulation">🥳</span></p>
@@ -161,6 +166,9 @@ export default {
         },
         user() {
             return this.$store.getters.user
+        },
+        priceInUah() {
+            return this.$store.getters.usd * this.product.price
         }
     },
     filters: {
@@ -366,6 +374,9 @@ export default {
     color: #888888;
     letter-spacing: -0.01px;
     text-align: left;
+}
+
+.price-in-usd {
     display: block;
 }
 

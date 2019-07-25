@@ -16,6 +16,7 @@ export default {
     if (this.$store) {
       try {
         this.$store.dispatch('nuxtServerInit')
+        this.$store.dispatch("getUsdValue")
       } catch (err) {
         console.debug('Error occurred when calling nuxtServerInit: ', err.message)
         throw err

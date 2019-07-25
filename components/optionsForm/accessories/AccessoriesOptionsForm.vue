@@ -35,6 +35,9 @@
             <div class="price-section">
                 <span class="option-price">
                     <span class="option-price-text">Цена</span>${{ lastSelectedOption.currentPrice }}
+                    <span class="price-in-uah">
+                        {{ lastSelectedOption.currentPrice * priceInUah }}<small>грн</small>
+                    </span>
                 </span>
                 <a href="#order-form-anchor" class="link-to-form-mobile">
                     Быстрый заказ
@@ -81,7 +84,11 @@ export default {
             }
         }
     },
-
+    computed: {
+        priceInUah() {
+            return this.$store.getters.usd.toFixed()
+        }
+    },
     methods: {
         changeOptionPrice(option, index, name) {
             this.lastSelectedOption.currentPrice = parseInt(option.price, 10)

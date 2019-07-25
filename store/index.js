@@ -13,7 +13,8 @@ const store = () => new Vuex.Store({
 		user: null,
 		status: null,
 		loading: false,
-		error: null
+		error: null,
+		usd: null
 	},
 	actions: {
 		async nuxtServerInit ({ dispatch, state }) {
@@ -51,6 +52,24 @@ const store = () => new Vuex.Store({
 			.catch(error => console.log(error))
 		},
 
+		getUsdValue ({commit}) {
+			this.$firestore.collection('utils').doc('currencies')
+			.get()
+			.then(doc => {
+				commit('setUsdValue', doc.data().usd)
+			})
+			.catch(error => console.log(error))
+		},
+
+		changeUsdToUah ({commit}, payload) {
+			commit('setLoading', true)
+			let usdValue = Number(payload)
+			this.$firestore.collection('utils').doc('currencies').update({usd: usdValue}).then(() => {
+				commit('setUsd', usdValue)
+				commit('setLoading', false)
+			})
+		},
+
 		createProduct ({commit, getters, state}, payload) {
 			const product = {
 				name: payload.name,
@@ -62,49 +81,61 @@ const store = () => new Vuex.Store({
 				inStock: true
 			}
 			commit('setLoading', true)
+
 			if (payload.options) {
 				product.options = payload.options
-			}
-
-			if (payload.imagesUsed) {
-				product.imagesUsed = payload.imagesUsed
 			}
 
 			let key
 			this.$firestore.collection('products').add(product)
 			.then(data => {
 				key = data.id
+				commit('setCreatedProductKey', key)
 				return key
 			})
 			.then(key => {
 				const filename = payload.image.name
 				const ext = filename.slice(filename.lastIndexOf('.'))
-				commit('setCreatedProductKey', key)
 				return this.$storage.ref('products/' + key + ext).put(payload.image)
 			})
 			.then(fileData => {
 				let fullPath = fileData.metadata.fullPath
-				return this.$storage.ref(fullPath).getDownloadURL()
+				let downloadUrl = this.$storage.ref(fullPath).getDownloadURL()
+
+				return downloadUrl
 			})
-			.then(URL => {
-				let imageUrl = URL
+			.then(imageUrl => {
 				let key = getters.createdProductKey
+				if (payload.imagesUsed) {
+					let imagesUsedList = []
+					for (let i = 0; i < payload.imagesUsed.length; i++) {
+						let promise = new Promise((resolve, reject) => {
+							const filename = payload.imagesUsed[i].name
+							const ext = filename.slice(filename.lastIndexOf('.'))
+							let key = getters.createdProductKey
+							let fileData = this.$storage.ref('products/' + key + i + ext).put(payload.imagesUsed[i])
+							resolve(fileData)
+						})
+
+						promise.then(fileData => {
+							let fullPath = fileData.metadata.fullPath
+							this.$storage.ref(fullPath).getDownloadURL()
+							.then(data => {
+								imagesUsedList[i] = data
+								let key = getters.createdProductKey
+								this.$firestore.collection('products').doc(key).update({imagesUsed: imagesUsedList})
+							})
+							.catch((error) => {
+								console.log(error)
+							})
+						})
+					}
+				}
+				commit('setLoading', false)
 				return this.$firestore.collection('products').doc(key).update({imageUrl: imageUrl})
-			})
-			.then((imageUrl) => {
-				commit('createProduct', {
-					...product,
-					imageUrl: imageUrl,
-					id: key
-				})
 			})
 			.catch((error) => {
 				console.log(error)
-			})
-
-			commit('setLoading', false)
-			this.$router.push({
-				path: '/admin'
 			})
 		},
 		signUserIn ({commit}, payload) {
@@ -130,6 +161,10 @@ const store = () => new Vuex.Store({
 
 		setUser ({commit}, user) {
 			commit('setUser', user)
+		},
+
+		setUsdValue ({commit}, usd) {
+			commit('setUsdValue', usd)
 		},
 
 		updateProductData ({commit}, payload) {
@@ -183,6 +218,9 @@ const store = () => new Vuex.Store({
 		status (state) {
 			return state.status
 		},
+		usd (state) {
+			return state.usd
+		},
 		user (state) {
 			return state.user
 		},
@@ -199,9 +237,6 @@ const store = () => new Vuex.Store({
 	mutations: {
 		setProducts (state, products) {
 			state.products = products
-		},
-		createProduct (state, payload) {
-			state.products.push(payload)
 		},
 		switchSale: state => {
 			state.sale = !state.sale
@@ -230,6 +265,13 @@ const store = () => new Vuex.Store({
 		},
 		setUser (state, payload) {
 			state.user = payload
+		},
+		setUsd (state, payload) {
+			state.usd = payload
+		},
+
+		setUsdValue (state, payload) {
+			state.usd = payload
 		},
 		removeUser (state) {
 			state.user = null

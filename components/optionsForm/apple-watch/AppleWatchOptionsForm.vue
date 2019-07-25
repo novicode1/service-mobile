@@ -36,6 +36,9 @@
                     <span class="option-price">
                         ${{ getCurrentPrice(index) }}
                     </span>
+                    <span class="price-in-uah" v-if="lastSelectedOption.currentPrice">
+                        {{ getCurrentPrice(index) * priceInUah }}<small>грн</small>
+                    </span>
                     <a href="#order-form-anchor" class="link-to-form">
                         Купить
                     </a>
@@ -84,6 +87,12 @@ export default {
         }
     },
 
+    computed: {
+        priceInUah() {
+            return this.$store.getters.usd.toFixed()
+        }
+    },
+
     methods: {
         changeOptionPrice(optionItem, index, name) {
             this.lastSelectedOption.currentPrice = parseInt(optionItem.price, 10)
@@ -112,6 +121,10 @@ export default {
 </script>
 
 <style scoped>
+.price-section .price-in-uah {
+    font-size: 1em;
+}
+
 .option-field {
     overflow: visible;
     white-space: nowrap;

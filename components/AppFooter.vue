@@ -7,7 +7,7 @@
     </div>
 
     <div class="telephone-number">
-      <a href="tel:096-866-73-32" class="tel-call-link">
+      <a href="tel:+380633339993" class="tel-call-link">
         <img src="../images/icons/telephone-call.svg" alt="Рабочие часы">
         +380 63–333–99–93
       </a>
@@ -21,7 +21,7 @@
     </div>
 
     <div class="copyright">
-      © 2019 Service Mobile. All rights reserved. 
+      © 2019 Service Mobile. All rights reserved.
     </div>
 
   </footer>

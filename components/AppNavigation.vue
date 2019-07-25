@@ -9,7 +9,7 @@
     <nav class="mainmenu " :class="{ 'responsive' : isActive }" role="nav">
       <ul class="menu-list">
         <li class="menu-item telephone">
-          <a href="tel:+380968667332" class="tel-call-link">
+          <a href="tel:+380633339993" class="tel-call-link">
             <img src="../images/icons/telephone-call.svg" alt="Иконка номера для звонка">
             +38 063-333-99-93
           </a>
