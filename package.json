@@ -23,7 +23,7 @@
     "fs": "0.0.1-security",
     "gsap": "^1.20.3",
     "lodash": "^4.17.14",
-    "node-sass": "^4.7.2",
+    "node-sass": "^4.13.1",
     "nuxt": "^1.0.0-rc11",
     "roboto-fontface": "^0.10.0",
     "sass-loader": "^6.0.6",
