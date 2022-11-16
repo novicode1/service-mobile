@@ -24,7 +24,7 @@
     "gsap": "^1.20.3",
     "lodash": "^4.17.14",
     "node-sass": "^4.7.2",
-    "nuxt": "^1.0.0-rc11",
+    "nuxt": "^3.0.0",
     "roboto-fontface": "^0.10.0",
     "sass-loader": "^6.0.6",
     "vue-affix": "^0.5.2",
